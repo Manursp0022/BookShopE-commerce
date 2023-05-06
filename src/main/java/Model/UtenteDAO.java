@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UtenteDAO {
-    public Utente doRetrieveByUsernamePassword(String email, String password){
+    public Utente doRetrieveByEmailPassword(String email, String password){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT email, username, pswrd, telefono, via, citta, CAP, isAdmin FROM Utente WHERE email = ? AND pswrd =SHA1(?)");
@@ -19,7 +19,7 @@ public class UtenteDAO {
                 user.setPassword(rs.getString(3));
                 user.setTelefono(rs.getString(4));
                 user.setVia(rs.getString(5));
-                user.setCittà(rs.getString(6));
+                user.setCitta(rs.getString(6));
                 user.setCAP(rs.getString(7));
                 user.setAdmin(rs.getBoolean(8));
                 return user;
@@ -40,7 +40,7 @@ public class UtenteDAO {
             ps.setString(3, utente.getPassword());
             ps.setString(4,utente.getTelefono());
             ps.setString(5, utente.getVia());
-            ps.setString(6, utente.getCittà());
+            ps.setString(6, utente.getCitta());
             ps.setString(7, utente.getCAP());
             ps.setBoolean(8, utente.isAdmin());
 
@@ -65,7 +65,7 @@ public class UtenteDAO {
                 user.setPassword(rs.getString(3));
                 user.setTelefono(rs.getString(4));
                 user.setVia(rs.getString(5));
-                user.setCittà(rs.getString(6));
+                user.setCitta(rs.getString(6));
                 user.setCAP(rs.getString(7));
                 user.setAdmin(rs.getBoolean(8));
                 utenti.add(user);
