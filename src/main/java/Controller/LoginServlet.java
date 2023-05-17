@@ -10,12 +10,26 @@ import Model.Utente;
 import Model.UtenteDAO;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 @WebServlet (value = "/login-servlet")
 public class LoginServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        try {
+            MessageDigest digest =
+                    MessageDigest.getInstance("SHA-1");
+            digest.reset();
+            digest.update(password.getBytes(StandardCharsets.UTF_8));
+            password = String.format("%040x", new
+                    BigInteger(1, digest.digest()));
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
         UtenteDAO utenteDAO = new UtenteDAO();
         Utente utente = utenteDAO.doRetrieveByEmailPassword(email, password);
         if (utente == null){
