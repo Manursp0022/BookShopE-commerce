@@ -45,7 +45,7 @@
 
             <div class="HeaderQuick">
                 <a class="noDec" href="#"><button class="forButton">PREFERITI</button></a>
-                <a class="noDec" href="Login.jsp"><button class="forButton">LOG-IN</button></a>
+                <a class="noDec" href="Registrazione.jsp"><button class="forButton">LOG-IN</button></a>
                 <a class="noDec" href="#"><button class="forButton">CARRELLO</button></a>
             </div>
 
