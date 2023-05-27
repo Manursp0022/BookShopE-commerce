@@ -16,15 +16,15 @@
 <body>
 <body>
 <div class="container">
-  <div class="form signup">
+    <form class="form signup" action="login-servlet">
     <h2>Accesso</h2>
     <div class="inputBox">
-      <input type="text" id="email" required="required">
+      <input type="text" name="email" required="required">
       <ion-icon name="mail-outline"></ion-icon>
       <span>Indirizzo E-Mail</span>
     </div>
     <div class="inputBox">
-      <input type="password" id="password" required="required">
+      <input type="password" name="password" required="required">
       <ion-icon name="lock-closed-outline"></ion-icon>
       <span>Inserisci Password</span>
     </div>
@@ -32,10 +32,7 @@
       <input type="submit"  value="Create Account">
     </div>
     <p>Non sei ancora registrato? <a href="Registrazione.jsp" class="login">Registrati</a></p>
-  </div>
-  <div class="form signin">
-
-  </div>
+    </form>
 </div>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
