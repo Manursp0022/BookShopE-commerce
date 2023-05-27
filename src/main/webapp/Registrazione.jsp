@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Log-In</title>
+    <title>Registrazione</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="logPage.css">
@@ -17,31 +17,51 @@
 <body>
 <div class="container">
     <div class="form signup">
-        <h2>Sign Up</h2>
+        <h2>Registrazione</h2>
         <div class="inputBox">
-            <input type="text" required="required">
+            <input type="text" id="username" required="required">
             <ion-icon name="person-outline"></ion-icon>
             <span>Username</span>
         </div>
         <div class="inputBox">
-            <input type="text" required="required">
+            <input type="text" id="email" required="required">
             <ion-icon name="mail-outline"></ion-icon>
-            <span>E-mail Address</span>
+            <span>Indirizzo E-Mail</span>
         </div>
         <div class="inputBox">
-            <input type="password" required="required">
+            <input type="password" id="password" required="required">
             <ion-icon name="lock-closed-outline"></ion-icon>
-            <span>createPassword</span>
+            <span>Inserisci Password</span>
         </div>
         <div class="inputBox">
-            <input type="password" required="required">
+            <input type="password" id="passwordrep" required="required">
             <ion-icon name="lock-closed-outline"></ion-icon>
-            <span>ConfirmPassword</span>
+            <span>Conferma Password</span>
+        </div>
+        <div class="inputBox">
+            <input type="text" id="via" required="required">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>Via</span>
+        </div>
+        <div class="inputBox">
+            <input type="text" id="citta" required="required">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>Città</span>
+        </div>
+        <div class="inputBox">
+            <input type="text" id="CAP" required="required">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>CAP</span>
+        </div>
+        <div class="inputBox">
+            <input type="text" id="telefono" required="required">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>Telefono</span>
         </div>
         <div class="inputBox">
             <input type="submit"  value="Create Account">
         </div>
-        <p>Already a member ? <a href="" class="login">Log in</a></p>
+        <p>Sei già registrato? <a href="Login.jsp" class="login">Accesso</a></p>
     </div>
     <div class="form signin">
 
