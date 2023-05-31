@@ -1,0 +1,181 @@
+* {
+    box-sizing: border-box;
+}
+
+.header{
+    background-color: #f1f1f1;
+    width: 100%;
+
+}
+
+body {
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    overflow-x: scroll;
+}
+
+
+.HeaderfirstDiv {
+    background-color: #f1f1f1;
+    height: 170px;
+    width: 100%;
+}
+
+/* CSS FOR LOGO */
+
+.homeElement{
+    width: 25%;
+    text-decoration: none;
+    display: flex;
+    justify-content: right;
+    align-items: flex-end;
+}
+
+.interEl{
+    padding-top: 15%;
+    padding-left: 50%;
+}
+
+
+/* CLOSE CSS FOR LOGO */
+
+
+.SonFirstDiv{
+    background-color: #f1f1f1;
+    display: flex;
+    width: 100%;
+    height: 80px;
+}
+/*
+.navigationMenu{
+    border: 1px solid yellow;
+    margin-top: 46px;
+}*/
+
+.nav{
+    margin-top: 55px;
+    text-align: center;
+
+}
+
+.nav li{
+    display: inline-block;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.menuItem{
+    color: royalblue;
+    text-decoration: none;
+}
+
+li a:hover{
+    border-bottom: 2px solid royalblue;
+    transition: transform 0.5s;
+    padding-bottom: 2px;
+}
+
+ul{
+    list-style-type: none;
+}
+
+/* CSS for Blue Panel on top*/
+
+
+
+.headerDivTop {
+    background-color: royalblue;
+    width: 100%;
+    height: 100%; /* imposto 100% per dargli in lunghezza l'intera misura del div che la contiene in modo da poter
+    colorare di bianco sucessivamente tutto il background del primo elemento*/
+    line-height: 2.00;
+}
+
+.movein{
+    display: flex;
+    height: 100%;
+    margin-left: 7%;
+    align-items: center;
+}
+
+a.writec{
+    color: #f1f1f1;
+    font-weight: bold; /* Grassetto*/
+    text-decoration: none;
+    padding: 7px;
+}
+
+a.writec:first-child { /* parametri impostati solo per il primo figlio degli elementi a con classe "writec"*/
+    background-color: #f1f1f1;
+    color: royalblue;
+}
+
+
+/* Finished Blue Panel CSS */
+
+/* CSS SEARCH PANEL */
+
+.formSearch{
+    width: 40%;
+    margin-left: 18%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.searchpanel {
+    border-radius: 14px;
+    border: 2px solid royalblue;
+    width: 90%;
+    height: 40px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+}
+
+/* CLOSE CSS SEARCH PANEL */
+
+
+.cc-icon{
+    display: block;
+    width: 100px;
+    height: 60px;
+    margin-right: 120px;
+}
+
+/* CSS per bottoni log-in, carrello ecc*/
+
+.HeaderQuick{
+    margin-left: 15%; /* Distanza dal margine destro degli elementi del div*/
+    margin-right: 3.5%;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.forButton {
+    border-radius: 14px;
+    height: 35px;
+    border: 2px solid royalblue;
+    background: transparent;
+    color: royalblue;
+    white-space: nowrap; /* non andra a cpo il testo*/
+    cursor: pointer; /* quando passo sul bottone il puntatore si trasforma in una mano*/
+    transition: .4s; /* vado a rendere piu fluida l'animazione cambiando gradualmente il backgound-color nell'hover*/
+    text-align: center; /* testo nel bottpne allineato al centro */
+    text-decoration: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.forButton:hover{
+    background-color: royalblue;
+    color: #f1f1f1;
+}
+
+.noDec{
+    text-decoration: none;
+    padding-left: 7%;
+    padding-right: 7%;
+    align-self: flex-end; /* proprietà che viene data agli elementi all'interno */
+}
