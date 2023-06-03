@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LibroElettronicoDAO {
-    public LibroElettronico doRetrieveByUsernamePassword(String codice){
+    public LibroElettronico doRetrieveByCode(String codice){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT codice,titolo,autore,prezzo,genere,formato FROM Libro_Elettronico WHERE codice = ?");
@@ -59,6 +59,29 @@ public class LibroElettronicoDAO {
             List<LibroElettronico> libri = new ArrayList<>();
             while (rs.next()) {
                LibroElettronico libro = new LibroElettronico();
+                libro.setCodice(rs.getString(1));
+                libro.setTitolo(rs.getString(2));
+                libro.setAutore(rs.getString(3));
+                libro.setPrezzo(rs.getDouble(4));
+                libro.setGenere(rs.getString(5));
+                libro.setFormato(rs.getString(6));
+                libri.add(libro);
+            }
+            return libri;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public  List<LibroElettronico> doRetrieveAllByGender(String genere){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT * FROM Libro_Elettronico WHERE genere = ?");
+            ps.setString(1,genere);
+            ResultSet rs = ps.executeQuery();
+            List<LibroElettronico> libri = new ArrayList<>();
+            while (rs.next()) {
+                LibroElettronico libro = new LibroElettronico();
                 libro.setCodice(rs.getString(1));
                 libro.setTitolo(rs.getString(2));
                 libro.setAutore(rs.getString(3));

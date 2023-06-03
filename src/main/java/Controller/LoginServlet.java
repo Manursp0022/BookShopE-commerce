@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
         Utente utente = utenteDAO.doRetrieveByEmailPassword(email, password);
         if (utente == null){
             request.setAttribute("error","utente not found");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/headers.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");
             dispatcher.forward(request,response);
         }
         synchronized (this) {
@@ -43,8 +43,8 @@ public class LoginServlet extends HttpServlet {
                 request.getSession().setAttribute("mode",1);
             else
                 request.getSession().setAttribute("mode",2);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("homepage.jsp");
+            dispatcher.forward(request,response);
         }
-        String address = "http://localhost:8080/InitCategorie_war_exploded/";
-        response.sendRedirect(address);
     }
 }

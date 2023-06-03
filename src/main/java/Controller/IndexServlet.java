@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "IndexServlet", value = "/index", loadOnStartup = 0)
+@WebServlet(name = "IndexServlet", value = "/indexServlet", loadOnStartup = 0)
 public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -14,7 +14,8 @@ public class IndexServlet extends HttpServlet {
             if(request.getSession(false) == null)
                 request.getSession().setAttribute("mode",3);
         }
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/homepage.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
+        rd.forward(request,response);
     }
 
     @Override

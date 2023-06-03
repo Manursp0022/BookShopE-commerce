@@ -11,7 +11,7 @@
     <title>Registrazione</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/logPage.css">
+    <link rel="stylesheet" href="CSS/logPage.css">
 </head>
 <body>
 <body>
@@ -63,7 +63,7 @@
         </div>
         <p>Sei già registrato? <a href="Login.jsp" class="login">Accesso</a></p>
             <label for="passwordrep" id="confirm" style="color:red; display: none">
-                Le password non corrispondono.
+                Le password non corrispondono
             </label>
         </form>
 </div>

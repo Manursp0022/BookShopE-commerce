@@ -1,6 +1,7 @@
 package Model;
 
 import Model.Bean.LibroCartaceo;
+import Model.Bean.LibroElettronico;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class LibroCartaceoDAO {
                 cartaceo.setAutore(rs.getString(3));
                 cartaceo.setPrezzo(rs.getDouble(4));
                 cartaceo.setGenere(rs.getString(5));
-                cartaceo.setQuantitàDisp(rs.getInt(6));
+                cartaceo.setQuantitaDisp(rs.getInt(6));
                 return cartaceo;
             }else
                 return null;
@@ -40,7 +41,7 @@ public class LibroCartaceoDAO {
             ps.setString(3, cartaceo.getAutore());
             ps.setDouble(4, cartaceo.getPrezzo());
             ps.setString(5, cartaceo.getGenere());
-            ps.setInt(6, cartaceo.getQuantitàDisp());
+            ps.setInt(6, cartaceo.getQuantitaDisp());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
@@ -63,7 +64,7 @@ public class LibroCartaceoDAO {
                 cartaceo.setAutore(rs.getString(3));
                 cartaceo.setPrezzo(rs.getDouble(4));
                 cartaceo.setGenere(rs.getString(5));
-                cartaceo.setQuantitàDisp(rs.getInt(6));
+                cartaceo.setQuantitaDisp(rs.getInt(6));
                 cartacei.add(cartaceo);
             }
             return cartacei;
@@ -71,6 +72,26 @@ public class LibroCartaceoDAO {
             throw new RuntimeException(e);
         }
     }
-
-
+    public  List<LibroCartaceo> doRetrieveAllByGender(String genere){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT * FROM Libro_Cartaceo WHERE genere = ?");
+            ps.setString(1,genere);
+            ResultSet rs = ps.executeQuery();
+            List<LibroCartaceo> libri = new ArrayList<>();
+            while (rs.next()) {
+                LibroCartaceo libro = new LibroCartaceo();
+                libro.setCodice(rs.getString(1));
+                libro.setTitolo(rs.getString(2));
+                libro.setAutore(rs.getString(3));
+                libro.setPrezzo(rs.getDouble(4));
+                libro.setGenere(rs.getString(5));
+                libro.setQuantitaDisp(rs.getInt(6));
+                libri.add(libro);
+            }
+            return libri;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

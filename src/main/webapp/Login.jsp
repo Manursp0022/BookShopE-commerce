@@ -11,9 +11,8 @@
   <title>Accesso</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../CSS/logPage.css">
+  <link rel="stylesheet" href="CSS/logPage.css">
 </head>
-<body>
 <body>
 <div class="container">
     <form class="form signup" action="login-servlet">
@@ -24,17 +23,25 @@
       <span>Indirizzo E-Mail</span>
     </div>
     <div class="inputBox">
-      <input type="password" name="password" required="required">
+      <input type="password" id="password" name="password" required="required">
       <ion-icon name="lock-closed-outline"></ion-icon>
       <span>Inserisci Password</span>
     </div>
     <div class="inputBox">
-      <input type="submit"  value="Create Account">
+      <input type="submit"  value="Accedi">
     </div>
     <p>Non sei ancora registrato? <a href="Registrazione.jsp" class="login">Registrati</a></p>
+        <label for="password" id="confirm" style="color:red; display: none">
+            Email o password errate
+        </label>
+        <script>
+            let err = '${error}';
+            if (err === "utente not found"){
+                document.getElementById("confirm").style.display="block";
+            }
+        </script>
     </form>
 </div>
-</body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

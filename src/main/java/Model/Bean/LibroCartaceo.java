@@ -7,7 +7,7 @@ public class LibroCartaceo {
     private String autore;
     private Double prezzo;
     private String genere;
-    private int quantitàDisp;
+    private int quantitaDisp;
 
     public LibroCartaceo() {
 
@@ -53,11 +53,11 @@ public class LibroCartaceo {
         this.genere = genere;
     }
 
-    public int getQuantitàDisp() {
-        return quantitàDisp;
+    public int getQuantitaDisp() {
+        return quantitaDisp;
     }
 
-    public void setQuantitàDisp(int quantitàDisp) {
-        this.quantitàDisp = quantitàDisp;
+    public void setQuantitaDisp(int quantitaDisp) {
+        this.quantitaDisp = quantitaDisp;
     }
 }

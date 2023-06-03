@@ -36,7 +36,7 @@ public class RegistrazioneServlet extends HttpServlet {
         synchronized (this){
             request.getSession().setAttribute("utente", utente);
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");
         dispatcher.forward(request, response);
     }
 }
