@@ -1,12 +1,17 @@
-package Model;
+package Model.Bean;
 
-public class LibroElettronico {
+public class LibroCartaceo {
+
     private String codice;
     private String titolo;
     private String autore;
-    private double prezzo;
+    private Double prezzo;
     private String genere;
-    private String formato;
+    private int quantitàDisp;
+
+    public LibroCartaceo() {
+
+    }
 
     public String getCodice() {
         return codice;
@@ -32,11 +37,11 @@ public class LibroElettronico {
         this.autore = autore;
     }
 
-    public double getPrezzo() {
+    public Double getPrezzo() {
         return prezzo;
     }
 
-    public void setPrezzo(double prezzo) {
+    public void setPrezzo(Double prezzo) {
         this.prezzo = prezzo;
     }
 
@@ -48,11 +53,11 @@ public class LibroElettronico {
         this.genere = genere;
     }
 
-    public String getFormato() {
-        return formato;
+    public int getQuantitàDisp() {
+        return quantitàDisp;
     }
 
-    public void setFormato(String formato) {
-        this.formato = formato;
+    public void setQuantitàDisp(int quantitàDisp) {
+        this.quantitàDisp = quantitàDisp;
     }
 }

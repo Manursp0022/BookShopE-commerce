@@ -1,4 +1,6 @@
 package Model;
+import Model.Bean.Carrello;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

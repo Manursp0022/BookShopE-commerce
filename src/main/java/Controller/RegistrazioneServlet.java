@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Utente;
+import Model.Bean.Utente;
 import Model.UtenteDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -21,7 +21,7 @@ public class RegistrazioneServlet extends HttpServlet {
         String CAP = request.getParameter("CAP");
         String telefono = request.getParameter("telefono");
         String email = request.getParameter("email");
-        boolean admin = Boolean.parseBoolean(request.getParameter("amministratore"));
+        boolean admin = false;
         UtenteDAO utenteDAO = new UtenteDAO();
         Utente utente = new Utente();
         utente.setUsername(username);
@@ -33,8 +33,10 @@ public class RegistrazioneServlet extends HttpServlet {
         utente.setAdmin(admin);
         utente.setTelefono(telefono);
         utenteDAO.doSave(utente);
-        request.getSession().setAttribute("utente", utente);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/headers.jsp");
+        synchronized (this){
+            request.getSession().setAttribute("utente", utente);
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
         dispatcher.forward(request, response);
     }
 }

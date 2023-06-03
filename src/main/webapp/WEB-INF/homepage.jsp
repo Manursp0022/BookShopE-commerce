@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../CSS/styles.css">
     <title>E-CommerceBook</title>
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
@@ -26,7 +26,7 @@
         <div class="SonFirstDiv">
 
             <div class="homeElement">
-                <a href="index.jsp">
+                <a href="homepage.jsp">
                     <lord-icon
                             class="interEl"
                             src="https://cdn.lordicon.com/kipaqhoz.json"

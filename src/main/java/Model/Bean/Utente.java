@@ -1,4 +1,4 @@
-package Model;
+package Model.Bean;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
