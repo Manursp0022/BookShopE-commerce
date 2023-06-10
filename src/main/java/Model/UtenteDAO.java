@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Bean.Utente;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

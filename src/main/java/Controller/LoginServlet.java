@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import Model.Utente;
+import Model.Bean.Utente;
 import Model.UtenteDAO;
 
 import java.io.IOException;
@@ -34,11 +34,17 @@ public class LoginServlet extends HttpServlet {
         Utente utente = utenteDAO.doRetrieveByEmailPassword(email, password);
         if (utente == null){
             request.setAttribute("error","utente not found");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/headers.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");
             dispatcher.forward(request,response);
         }
-        request.getSession().setAttribute("utente",utente);
-        String address = "http://localhost:8080/InitCategorie_war_exploded/";
-        response.sendRedirect(address);
+        synchronized (this) {
+            request.getSession().setAttribute("utente",utente);
+            if(utente.isAdmin())
+                request.getSession().setAttribute("mode",1);
+            else
+                request.getSession().setAttribute("mode",2);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("homepage.jsp");
+            dispatcher.forward(request,response);
+        }
     }
 }

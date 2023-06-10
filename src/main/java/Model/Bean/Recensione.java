@@ -1,4 +1,4 @@
-package Model;
+package Model.Bean;
 
 public class Recensione {
     private String emailUtente;

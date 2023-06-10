@@ -11,13 +11,13 @@
     <title>Registrazione</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="logPage.css">
+    <link rel="stylesheet" href="CSS/logPage.css">
 </head>
 <body>
-
+<body>
 <div class="container">
-    <form class="form signup" name="reg" method="post" action="registrazione-servlet">
-        <h2>Sign Up</h2>
+        <form class="form signup" name="reg" method="post" action="registrazione-servlet">
+        <h2>Registrazione</h2>
         <div class="inputBox">
             <input type="text" name="username" required="required">
             <ion-icon name="person-outline"></ion-icon>
@@ -62,14 +62,10 @@
             <input type="submit"  id="bottone" value="Create Account">
         </div>
         <p>Sei già registrato? <a href="Login.jsp" class="login">Accesso</a></p>
-        <label for="passwordrep" id="confirm" style="color:red; display: none">
-            Le password non corrispondono.
-        </label>
-    </form>
-</div>
-
-<div class="returnDiv">
-    <a class="noDec2" href="index.jsp"><button class="forButton2">RETURN TO HOME</button></a>
+            <label for="passwordrep" id="confirm" style="color:red; display: none">
+                Le password non corrispondono
+            </label>
+        </form>
 </div>
 
 </body>
@@ -91,4 +87,5 @@
     }
     }
 </script>
+</body>
 </html>
