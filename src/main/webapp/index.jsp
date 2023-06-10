@@ -64,12 +64,12 @@
 
         <nav>
             <ul class="nav">
-                <li><a  href="#" class="menuItem">Libri</a></li>
-                <li><a href="#" class="menuItem">Bambini e Ragazzi</a></li>
-                <li><a href="#" class="menuItem">Fumetti e manga</a></li>
-                <li><a href="#" class="menuItem">Libri Vintage</a></li>
-                <li><a href="#" class="menuItem">E-Book</a></li>
-                <li><a href="#" class="menuItem">Libri in Inglese</a></li>
+                <li><a  href="MostraLibriServlet?id=1"class="menuItem">Libri</a></li>
+                <li><a href="MostraLibriServlet?id=2" class="menuItem">Bambini e Ragazzi</a></li>
+                <li><a href="MostraLibriServlet?id=3" class="menuItem">Fumetti e manga</a></li>
+                <li><a href="MostraLibriServlet?id=4" class="menuItem">Libri Vintage</a></li>
+                <li><a href="MostraLibriServlet?id=5" class="menuItem">E-Book</a></li>
+                <li><a href="MostraLibriServlet?id=6" class="menuItem">Libri in Inglese</a></li>
             </ul>
         </nav>
 
