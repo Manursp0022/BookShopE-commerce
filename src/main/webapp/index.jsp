@@ -10,6 +10,8 @@
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 </head>
 <body>
+
+
 <header class="header">
 
     <div class="headerDivTop">
@@ -22,6 +24,7 @@
     </div>
 
     <div class="HeaderfirstDiv">
+
 
         <div class="SonFirstDiv">
 
@@ -45,12 +48,19 @@
 
             <div class="HeaderQuick">
                 <a class="noDec" href="#"><button class="forButton">PREFERITI</button></a>
-                <a class="noDec" href="Registrazione.jsp"><button class="forButton">LOG-IN</button></a>
+                <a class="noDec" href="Registrazione.jsp"><button class="forButton">SIGN-UP</button></a>
                 <a class="noDec" href="#"><button class="forButton">CARRELLO</button></a>
             </div>
 
-        </div>
+            <div class="hamburger" id="openBr">
+                <div class="HambIcon">
+                    <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
+                </div>
+            </div>
 
+        </div>
 
         <nav>
             <ul class="nav">
@@ -63,7 +73,27 @@
             </ul>
         </nav>
 
+        <div class="openWindow" id="openNav">
+
+
+        </div>
+
+
     </div>
+
 </header>
+
 </body>
+<script>
+    let div = document.getElementById("openBr");
+
+    div.addEventListener('click',function (){
+        document.getElementById("openNav").style.width = "25%"
+    })
+
+    function closeNav() {
+        document.getElementById("openNav").style.width = "0";
+    }
+
+</script>
 </html>

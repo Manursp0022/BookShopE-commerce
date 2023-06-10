@@ -9,19 +9,20 @@
 
 body{
     min-height: 100vh;
+    background: royalblue ;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(25deg, #f1f1f1 50%, royalblue 50%);
+    /* royalblue */
 }
 
-
-
+.external{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    width: 45%;
+}
 
 .container{
     padding: 40px;
-    background-color: royalblue;
-    height: 80%;
     border: 8px solid royalblue;
     border-radius: 20px;
     box-shadow: -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.35),
@@ -120,20 +121,19 @@ specificato solo quando clicco su gli elementi e quindi li "valido" , ma l'eleme
     border-right: 1px solid #fff;
 }
 
-
 .returnDiv{
     display: inline-flex;
     height: 40px;
     position: fixed;
-    left: 4%;
-    bottom: 12%;
+    bottom: 19.5%;
+    left: 3%;
 }
 
 .forButton2 {
     border-radius: 14px;
     height: 40px;
     border: 2px solid royalblue;
-    background: transparent;
+    background: #f1f1f1;
     color: royalblue;
     white-space: nowrap; /* non andra a cpo il testo*/
     cursor: pointer; /* quando passo sul bottone il puntatore si trasforma in una mano*/
@@ -155,8 +155,3 @@ specificato solo quando clicco su gli elementi e quindi li "valido" , ma l'eleme
     padding-right: 7%;
     align-self: flex-end; /* proprietà che viene data agli elementi all'interno */
 }
-
-
-
-
-

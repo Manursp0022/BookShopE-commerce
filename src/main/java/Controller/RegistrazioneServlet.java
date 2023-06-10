@@ -21,7 +21,6 @@ public class RegistrazioneServlet extends HttpServlet {
         String CAP = request.getParameter("CAP");
         String telefono = request.getParameter("telefono");
         String email = request.getParameter("email");
-        boolean admin = Boolean.parseBoolean(request.getParameter("amministratore"));
         UtenteDAO utenteDAO = new UtenteDAO();
         Utente utente = new Utente();
         utente.setUsername(username);
@@ -30,11 +29,10 @@ public class RegistrazioneServlet extends HttpServlet {
         utente.setCitta(citta);
         utente.setCAP(CAP);
         utente.setEmail(email);
-        utente.setAdmin(admin);
         utente.setTelefono(telefono);
         utenteDAO.doSave(utente);
         request.getSession().setAttribute("utente", utente);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/headers.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/login.jsp");
         dispatcher.forward(request, response);
     }
 }

@@ -15,25 +15,33 @@
 </head>
 <body>
 <body>
-<div class="container">
-    <form class="form signup" action="login-servlet">
-    <h2>Accesso</h2>
-    <div class="inputBox">
-      <input type="text" name="email" required="required">
-      <ion-icon name="mail-outline"></ion-icon>
-      <span>Indirizzo E-Mail</span>
+
+<div class="external">
+    <div class="container">
+        <form class="form signup" action="login-servlet">
+            <h2>Log In</h2>
+            <div class="inputBox">
+                <input type="text" name="email" required="required">
+                <ion-icon name="mail-outline"></ion-icon>
+                <span>Indirizzo E-Mail</span>
+            </div>
+            <div class="inputBox">
+                <input type="password" name="password" required="required">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                <span>Inserisci Password</span>
+            </div>
+            <div class="inputBox">
+                <input type="submit"  value="Sign In">
+            </div>
+            <p>Non sei ancora registrato? <a href="Registrazione.jsp" class="login">Registrati</a></p>
+        </form>
     </div>
-    <div class="inputBox">
-      <input type="password" name="password" required="required">
-      <ion-icon name="lock-closed-outline"></ion-icon>
-      <span>Inserisci Password</span>
-    </div>
-    <div class="inputBox">
-      <input type="submit"  value="Create Account">
-    </div>
-    <p>Non sei ancora registrato? <a href="Registrazione.jsp" class="login">Registrati</a></p>
-    </form>
 </div>
+
+<div class="returnDiv">
+    <a class="noDec2" href="index.jsp"><button class="forButton2">RETURN TO HOME</button></a>
+</div>
+
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
