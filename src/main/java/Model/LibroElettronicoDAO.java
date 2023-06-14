@@ -19,7 +19,7 @@ public class LibroElettronicoDAO {
                 libro.setCodice(rs.getString(1));
                 libro.setTitolo(rs.getString(2));
                 libro.setAutore(rs.getString(3));
-                libro.setPrezzo(rs.getDouble(4));
+                libro.setPrezzo(rs.getFloat(4));
                 libro.setGenere(rs.getString(5));
                 libro.setFormato(rs.getString(6));
 
@@ -62,7 +62,7 @@ public class LibroElettronicoDAO {
                 libro.setCodice(rs.getString(1));
                 libro.setTitolo(rs.getString(2));
                 libro.setAutore(rs.getString(3));
-                libro.setPrezzo(rs.getDouble(4));
+                libro.setPrezzo(rs.getFloat(4));
                 libro.setGenere(rs.getString(5));
                 libro.setFormato(rs.getString(6));
                 libri.add(libro);
@@ -85,7 +85,7 @@ public class LibroElettronicoDAO {
                 libro.setCodice(rs.getString(1));
                 libro.setTitolo(rs.getString(2));
                 libro.setAutore(rs.getString(3));
-                libro.setPrezzo(rs.getDouble(4));
+                libro.setPrezzo(rs.getFloat(4));
                 libro.setGenere(rs.getString(5));
                 libro.setFormato(rs.getString(6));
                 libri.add(libro);

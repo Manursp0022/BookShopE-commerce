@@ -5,7 +5,7 @@ public class LibroCartaceo {
     private String codice;
     private String titolo;
     private String autore;
-    private Double prezzo;
+    private float prezzo;
     private String genere;
     private int quantitaDisp;
 
@@ -37,11 +37,11 @@ public class LibroCartaceo {
         this.autore = autore;
     }
 
-    public Double getPrezzo() {
+    public float getPrezzo() {
         return prezzo;
     }
 
-    public void setPrezzo(Double prezzo) {
+    public void setPrezzo(float prezzo) {
         this.prezzo = prezzo;
     }
 

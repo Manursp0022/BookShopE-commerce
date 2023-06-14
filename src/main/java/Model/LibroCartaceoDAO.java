@@ -20,7 +20,7 @@ public class LibroCartaceoDAO {
                 cartaceo.setCodice(rs.getString(1));
                 cartaceo.setTitolo(rs.getString(2));
                 cartaceo.setAutore(rs.getString(3));
-                cartaceo.setPrezzo(rs.getDouble(4));
+                cartaceo.setPrezzo(rs.getFloat(4));
                 cartaceo.setGenere(rs.getString(5));
                 cartaceo.setQuantitaDisp(rs.getInt(6));
                 return cartaceo;
@@ -62,7 +62,7 @@ public class LibroCartaceoDAO {
                 cartaceo.setCodice(rs.getString(1));
                 cartaceo.setTitolo(rs.getString(2));
                 cartaceo.setAutore(rs.getString(3));
-                cartaceo.setPrezzo(rs.getDouble(4));
+                cartaceo.setPrezzo(rs.getFloat(4));
                 cartaceo.setGenere(rs.getString(5));
                 cartaceo.setQuantitaDisp(rs.getInt(6));
                 cartacei.add(cartaceo);
@@ -84,7 +84,7 @@ public class LibroCartaceoDAO {
                 libro.setCodice(rs.getString(1));
                 libro.setTitolo(rs.getString(2));
                 libro.setAutore(rs.getString(3));
-                libro.setPrezzo(rs.getDouble(4));
+                libro.setPrezzo(rs.getFloat(4));
                 libro.setGenere(rs.getString(5));
                 libro.setQuantitaDisp(rs.getInt(6));
                 libri.add(libro);

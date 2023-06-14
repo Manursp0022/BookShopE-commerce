@@ -15,7 +15,7 @@ public class CarrelloDAO {
                 Carrello carrello = new Carrello();
                 carrello.setUtente(rs.getString(1));
                 carrello.setnLibri(rs.getInt(2));
-                carrello.setTotale(rs.getDouble(3));
+                carrello.setTotale(rs.getFloat(3));
                 return carrello;
             }else
                 return null;
@@ -50,7 +50,7 @@ public class CarrelloDAO {
                 Carrello carrello = new Carrello();
                 carrello.setUtente(rs.getString(1));
                 carrello.setnLibri(rs.getInt(2));
-                carrello.setTotale(rs.getDouble(3));
+                carrello.setTotale(rs.getFloat(3));
                 carrellos.add(carrello);
             }
             return carrellos;

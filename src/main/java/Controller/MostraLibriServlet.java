@@ -71,6 +71,8 @@ public class MostraLibriServlet extends HttpServlet {
                 break;
             }
         }
+        RequestDispatcher rd = request.getRequestDispatcher("MostraLibri.jsp");
+        rd.forward(request,response);
     }
 
     @Override

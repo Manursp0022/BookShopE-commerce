@@ -1,99 +1,18 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html lang="it">
+<%--
+  Created by IntelliJ IDEA.
+  User: deeecaaa
+  Date: 14/06/23
+  Time: 16:34
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>E-CommerceBook</title>
-    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+    <title>INDEX</title>
 </head>
 <body>
-
-
-<header class="header">
-
-    <div class="headerDivTop">
-        <!--  Comments      -->
-        <div class="movein">
-            <a href="#" class="writec ok2">HOME</a>
-            <a href="#" class="writec ok2">FAQ & INFO</a>
-            <a href="#" class="writec ok2">CONVENZIONI</a>
-        </div>
-    </div>
-
-    <div class="HeaderfirstDiv">
-
-
-        <div class="SonFirstDiv">
-
-            <div class="homeElement">
-                <a href="index.jsp">
-                    <lord-icon
-                            class="interEl"
-                            src="https://cdn.lordicon.com/kipaqhoz.json"
-                            trigger="morph"
-                            colors="primary:royalblue"
-                            style="width:60px;height:60px">
-                    </lord-icon>
-                </a>
-            </div>
-
-
-            <form class="formSearch" action="/search">
-                <input class="searchpanel" type="text" name="search" placeholder="Cerca tra milioni di prodotti.... " >
-            </form>
-
-
-            <div class="HeaderQuick">
-                <a class="noDec" href="#"><button class="forButton">PREFERITI</button></a>
-                <a class="noDec" href="Registrazione.jsp"><button class="forButton">SIGN-UP</button></a>
-                <a class="noDec" href="#"><button class="forButton">CARRELLO</button></a>
-            </div>
-
-            <div class="hamburger" id="openBr">
-                <div class="HambIcon">
-                    <span class="bar1"></span>
-                    <span class="bar2"></span>
-                    <span class="bar3"></span>
-                </div>
-            </div>
-
-        </div>
-
-        <nav>
-            <ul class="nav">
-                <li><a  href="MostraLibriServlet?id=1"class="menuItem">Libri</a></li>
-                <li><a href="MostraLibriServlet?id=2" class="menuItem">Bambini e Ragazzi</a></li>
-                <li><a href="MostraLibriServlet?id=3" class="menuItem">Fumetti e manga</a></li>
-                <li><a href="MostraLibriServlet?id=4" class="menuItem">Libri Vintage</a></li>
-                <li><a href="MostraLibriServlet?id=5" class="menuItem">E-Book</a></li>
-                <li><a href="MostraLibriServlet?id=6" class="menuItem">Libri in Inglese</a></li>
-            </ul>
-        </nav>
-
-        <div class="openWindow" id="openNav">
-
-
-        </div>
-
-
-    </div>
-
-</header>
-
-</body>
 <script>
-    let div = document.getElementById("openBr");
-
-    div.addEventListener('click',function (){
-        document.getElementById("openNav").style.width = "25%"
-    })
-
-    function closeNav() {
-        document.getElementById("openNav").style.width = "0";
-    }
-
+  window.location.replace("indexServlet");
 </script>
+</body>
 </html>

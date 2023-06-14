@@ -3,7 +3,7 @@ package Model.Bean;
 public class Carrello {
     private String utente;
     private int nLibri = 0;
-    private double totale = 0;
+    private float totale = 0;
 
     public String getUtente() {
         return utente;
@@ -21,11 +21,11 @@ public class Carrello {
         this.nLibri = nLibri;
     }
 
-    public double getTotale() {
+    public float getTotale() {
         return totale;
     }
 
-    public void setTotale(double totale) {
+    public void setTotale(float totale) {
         this.totale = totale;
     }
 }

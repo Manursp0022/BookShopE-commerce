@@ -49,6 +49,14 @@
                 <a class="noDec" href="#"><button class="forButton">CARRELLO</button></a>
             </div>
 
+            <div class="hamburger" id="openBr">
+                <div class="HambIcon">
+                    <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
+                </div>
+            </div>
+
         </div>
 
 
@@ -65,6 +73,14 @@
 
     </div>
 </header>
+<div class="banner">
+    <div class="bannerimage">img</div>
+    <div class="bannercopy">
+    <h3>Banner Title</h3>
+        <h4>Banner Subtitle</h4>
+        <p>Esempippopiopopoi</p>
+    </div>
+</div>
 </body>
 <script>
     let div = document.getElementById("openBr");

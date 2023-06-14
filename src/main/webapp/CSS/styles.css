@@ -225,6 +225,10 @@ a.writec:first-child { /* parametri impostati solo per il primo figlio degli ele
     z-index: 2;
 }
 
+.banner{background: red; height: 50%;}
+.bannerimage{width:30%; float: left; height: 100%;}
+.bannercopy{width:70%; float: left; height: 100%;}
+
 @media screen and (max-width: 1180px) {
 
     .homeElement{

@@ -4,7 +4,7 @@ public class LibroElettronico {
     private String codice;
     private String titolo;
     private String autore;
-    private double prezzo;
+    private float prezzo;
     private String genere;
     private String formato;
 
@@ -32,11 +32,11 @@ public class LibroElettronico {
         this.autore = autore;
     }
 
-    public double getPrezzo() {
+    public float getPrezzo() {
         return prezzo;
     }
 
-    public void setPrezzo(double prezzo) {
+    public void setPrezzo(float prezzo) {
         this.prezzo = prezzo;
     }
 
