@@ -66,4 +66,16 @@
     </div>
 </header>
 </body>
+<script>
+    let div = document.getElementById("openBr");
+
+    div.addEventListener('click',function (){
+        document.getElementById("openNav").style.width = "25%"
+    })
+
+    function closeNav() {
+        document.getElementById("openNav").style.width = "0";
+    }
+
+</script>
 </html>
