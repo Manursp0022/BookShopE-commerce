@@ -39,4 +39,9 @@ public class RegistrazioneServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");
         dispatcher.forward(request, response);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req,resp);
+    }
 }

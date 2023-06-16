@@ -1,3 +1,4 @@
+<%@ page import="Model.Bean.Carrello" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="it">
@@ -10,6 +11,16 @@
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 </head>
 <body>
+<%
+    Carrello cart = (Carrello) request.getSession(false).getAttribute("cart");
+    int nprod;
+    if(cart == null){
+        nprod = 0;
+    }
+    else{
+        nprod = cart.getnLibri();
+    }
+%>
 <header class="header">
 
     <div class="headerDivTop">
@@ -46,7 +57,7 @@
             <div class="HeaderQuick">
                 <a class="noDec" href="#"><button class="forButton">PREFERITI</button></a>
                 <a class="noDec" href="Registrazione.jsp"><button class="forButton">LOG-IN</button></a>
-                <a class="noDec" href="#"><button class="forButton">CARRELLO</button></a>
+                <a class="noDec" href="#"><button class="forButton">CARRELLO(<%=nprod%>)</button></a>
             </div>
 
             <div class="hamburger" id="openBr">

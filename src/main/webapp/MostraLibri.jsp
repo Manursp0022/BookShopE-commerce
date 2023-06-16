@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Model.Bean.LibroCartaceo" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="Model.Bean.Carrello" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="it">
@@ -16,6 +17,16 @@
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 </head>
 <body>
+<%
+    Carrello cart = (Carrello) request.getSession(false).getAttribute("cart");
+    int nprod;
+    if(cart == null){
+        nprod = 0;
+    }
+    else{
+        nprod = cart.getnLibri();
+    }
+%>
 <header class="header">
 
     <div class="headerDivTop">
@@ -52,7 +63,7 @@
             <div class="HeaderQuick">
                 <a class="noDec" href="#"><button class="forButton">PREFERITI</button></a>
                 <a class="noDec" href="Registrazione.jsp"><button class="forButton">LOG-IN</button></a>
-                <a class="noDec" href="#"><button class="forButton">CARRELLO</button></a>
+                <a class="noDec" href="#"><button class="forButton">CARRELLO(<%=nprod%>)</button></a>
             </div>
 
             <div class="hamburger" id="openBr">
@@ -87,6 +98,7 @@
     int i = 0;
     if(cartaceos != null)
     for (LibroCartaceo c: cartaceos) {
+        String codice = c.getCodice();
         String titolo = c.getTitolo();
         float prezzo = c.getPrezzo();
         titoli.add(titolo);
@@ -102,7 +114,7 @@
         <%=titolo%>
         <%=" "%>
         <%=prezzo + "€"%>
-        <button class="add">Aggiungi al carrello</button>
+        <button class="add" onclick="addtocart(<%=codice%>)">Aggiungi al carrello</button>
     </span>
         </td>
     <%
@@ -113,6 +125,7 @@
     i = 0;
     if(elettronicos != null)
     for (LibroElettronico c: elettronicos) {
+        String codice = c.getCodice();
         String titolo = c.getTitolo();
         float prezzo = c.getPrezzo();
         if (titoli.contains(c.getTitolo())) {
@@ -130,7 +143,7 @@
         <%=titolo%>
         <%=" "%>
         <%=prezzo + "€"%>
-        <button class="add">Aggiungi al carrello</button>
+        <button class="add" onclick="addtocart(<%=codice%>)">Aggiungi al carrello</button>
     </span>
         </td>
 
@@ -144,4 +157,21 @@
 
 </div>
 </body>
+<script>
+    function addtocart(codice) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.status == 200 && this.readyState == 4) {
+                let s = this.responseText;
+                if (s === "-1") {
+                    alert("Utente non loggato. Impossibile aggiungere al carrello.")
+                } else {
+                    <% nprod++ ;%>
+                }
+            }
+        }
+        xhttp.open("GET", "carrelloservlet?codice=codice");
+        xhttp.send();
+    }
+</script>
 </html>

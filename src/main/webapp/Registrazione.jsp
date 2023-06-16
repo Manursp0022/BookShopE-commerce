@@ -49,7 +49,7 @@
             <span>Città</span>
         </div>
         <div class="inputBox">
-            <input type="text" name="CAP" required="required" maxlength="5" pattern="[0-9]">
+            <input type="text" name="CAP" required="required" maxlength="5" pattern="[0-9]{5}">
             <ion-icon name="person-outline"></ion-icon>
             <span>CAP</span>
         </div>

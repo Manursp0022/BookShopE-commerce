@@ -7,18 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContenereEDAO {
-    public ContenereE doRetrieveByCarrello(String carrello){
+    public ArrayList<ContenereE> doRetrieveByCarrello(String carrello){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT carrello, libro_elettronico, n_copie FROM Contenere_E WHERE carrello = ? ");
             ps.setString(1, carrello);
             ResultSet rs = ps.executeQuery();
+            ArrayList<ContenereE> contenereE = new ArrayList<>();
             if(rs.next()) {
                 ContenereE contenere = new ContenereE();
                 contenere.setCarrello(rs.getString(1));
                 contenere.setLibroElettronico(rs.getString(2));
                 contenere.setNumCopie(rs.getInt(3));
-                return contenere;
+                contenereE.add(contenere);
+                return contenereE;
             }else
                 return null;
         } catch (SQLException e) {

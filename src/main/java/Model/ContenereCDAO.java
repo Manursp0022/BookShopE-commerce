@@ -8,18 +8,20 @@ import java.util.List;
 
 public class ContenereCDAO {
 
-    public ContenereC doRetrieveByCart(String carrello){
+    public ArrayList<ContenereC> doRetrieveByCart(String carrello){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT carrello,libro_cartaceo,n_copie FROM Contenere_C WHERE carrello = ?");
             ps.setString(1, carrello);
             ResultSet rs = ps.executeQuery();
+            ArrayList<ContenereC> contenereC = new ArrayList<>();
             if(rs.next()) {
                 ContenereC contenere = new ContenereC();
                 contenere.setCarrello(rs.getString(1));
                 contenere.setLibroCartaceo(rs.getString(2));
                 contenere.setNumCopie(rs.getInt(3));
-                return contenere;
+                contenereC.add(contenere);
+                return contenereC;
             }else
                 return null;
         } catch (SQLException e) {
