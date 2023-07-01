@@ -15,6 +15,7 @@
     <title>E-CommerceBook</title>
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+    <script src="JavaScript/jquery-3.7.0.js"></script>
 </head>
 <body>
 <%
@@ -63,7 +64,7 @@
             <div class="HeaderQuick">
                 <a class="noDec" href="#"><button class="forButton">PREFERITI</button></a>
                 <a class="noDec" href="Registrazione.jsp"><button class="forButton">LOG-IN</button></a>
-                <a class="noDec" href="#"><button class="forButton">CARRELLO(<%=nprod%>)</button></a>
+                <a class="noDec" href="#"><button class="forButton">CARRELLO(<span id="num_prod"><%=nprod%></span>)</button></a>
             </div>
 
             <div class="hamburger" id="openBr">
@@ -114,7 +115,7 @@
         <%=titolo%>
         <%=" "%>
         <%=prezzo + "€"%>
-        <button class="add" onclick="addtocart(<%=codice%>)">Aggiungi al carrello</button>
+        <button class="add" onclick="addCart()" value="<%=codice%>">Aggiungi al carrello</button>
     </span>
         </td>
     <%
@@ -143,11 +144,9 @@
         <%=titolo%>
         <%=" "%>
         <%=prezzo + "€"%>
-        <button class="add" onclick="addtocart(<%=codice%>)">Aggiungi al carrello</button>
+        <button class="add" onclick="addCart()" value="<%=codice%>">Aggiungi al carrello</button>
     </span>
         </td>
-
-
     <%
                 }
     }
@@ -158,7 +157,8 @@
 </div>
 </body>
 <script>
-    function addtocart(codice) {
+    $(".add").click(function addCart() {
+        let codice = $(this).val();
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.status == 200 && this.readyState == 4) {
@@ -166,12 +166,13 @@
                 if (s === "-1") {
                     alert("Utente non loggato. Impossibile aggiungere al carrello.")
                 } else {
-                    <% nprod++ ;%>
+                    document.getElementById("num_prod").innerHTML = s;
                 }
             }
         }
-        xhttp.open("GET", "carrelloservlet?codice=codice");
-        xhttp.send();
-    }
+        xhttp.open("POST", "carrelloservlet");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send("codice=" + codice);
+    })
 </script>
 </html>

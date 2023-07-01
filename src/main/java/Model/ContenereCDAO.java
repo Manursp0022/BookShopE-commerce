@@ -64,5 +64,18 @@ public class ContenereCDAO {
             throw new RuntimeException(e);
         }
     }
-
+    public void doUpdate(ContenereC contenere){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "UPDATE Contenere_C SET n_copie = ? WHERE libro_cartaceo = ?",
+                    Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, contenere.getNumCopie());
+            ps.setString(2,contenere.getLibroCartaceo());
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("UPDATE error.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

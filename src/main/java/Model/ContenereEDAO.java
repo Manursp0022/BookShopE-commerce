@@ -1,5 +1,6 @@
 package Model;
 
+import Model.Bean.ContenereC;
 import Model.Bean.ContenereE;
 
 import java.sql.*;
@@ -58,6 +59,20 @@ public class ContenereEDAO {
                 contenereES.add(contenereE);
             }
             return contenereES;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void doUpdate(ContenereE contenere){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "UPDATE Contenere_C SET n_copie = ? WHERE libro_elettronico = ?",
+                    Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, contenere.getNumCopie());
+            ps.setString(2,contenere.getLibroElettronico());
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("UPDATE error.");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
