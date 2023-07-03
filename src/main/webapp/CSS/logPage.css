@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', SansSerif;
+    font-family: 'Rubik', sans-serif;
 }
 
 body{
@@ -27,6 +27,7 @@ body{
     box-shadow: -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.35),
     inset -5px -5px 15px rgba(255,255,255,0.1),
     inset 5px 5px 15px rgba(0,0,0,0.35);
+    overflow-y: scroll;
 }
 
 .container .form {
@@ -59,7 +60,7 @@ body{
     border: 1px solid rgba(0,0,0,0.1);
     color: #fff;
     font-weight: 300;
-    border-radius: 25px;
+    border-radius: 18px;
     font-size: 1em;
     box-shadow: -5px -5px 15px rgba(255,255,255,0.1),
     5px 5px 15px rgba(0,0,0,0.35);
@@ -88,7 +89,7 @@ body{
     font-size: 0.6em; /* di base em imposta la grandezza in percentuale della font-size del padre più vicino se non trova nessuna size specificata ,
     1em equivarrà alla dimensione del font di default del browser, che solitamente è 16px. Quindi, 0.6em sarebbe il 60% di questa dimensione, ovvero 9.6px. */
     padding: 0 8px;
-    border-radius: 10px;
+    border-radius: 5px;
     letter-spacing: 0.1em;
 }
 
@@ -130,7 +131,7 @@ specificato solo quando clicco su gli elementi e quindi li "valido" , ma l'eleme
 }
 
 .forButton2 {
-    border-radius: 14px;
+    border-radius: 17px;
     height: 40px;
     border: 2px solid royalblue;
     background: transparent;
@@ -155,6 +156,8 @@ specificato solo quando clicco su gli elementi e quindi li "valido" , ma l'eleme
     padding-right: 7%;
     align-self: flex-end; /* proprietà che viene data agli elementi all'interno */
 }
+
+
 
 
 

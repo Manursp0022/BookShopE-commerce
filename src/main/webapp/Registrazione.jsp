@@ -12,6 +12,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/logPage.css">
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@1,700&family=Rubik:ital,wght@1,300&display=swap" rel="stylesheet">
 </head>
 <body>
 <body>
@@ -66,6 +70,10 @@
                 Le password non corrispondono
             </label>
         </form>
+</div>
+
+<div class="returnDiv">
+    <a class="noDec2" href="homepage.jsp"><button class="forButton2">Home</button></a>
 </div>
 
 </body>

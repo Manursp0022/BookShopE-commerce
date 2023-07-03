@@ -6,9 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>E-CommerceBook</title>
+
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@1,700&family=Rubik:ital,wght@1,300&display=swap" rel="stylesheet">
+
 </head>
 <body>
 <%
@@ -50,7 +55,7 @@
 
 
             <form class="formSearch" action="/search">
-                <input class="searchpanel" type="text" name="search" placeholder="Cerca tra milioni di prodotti.... " >
+                <input class="searchpanel" type="text" name="search" >
             </form>
 
 
@@ -61,10 +66,45 @@
             </div>
 
             <div class="hamburger" id="openBr">
-                <div class="HambIcon">
+                <div class="HambIcon"> <!-- come se fosse <i> -->
                     <span class="bar1"></span>
                     <span class="bar2"></span>
                     <span class="bar3"></span>
+                </div>
+            </div>
+
+            <div id="mobileMenu" class="mobileMenu">
+                <i id="closeMenu" class="closeIcon">X</i>
+                <div class="nav2">
+                    <a href="MostraLibriServlet?id=1" class="menuItem2">
+                        <button class="forButton3">Libri</button>
+                        <span  class="Arrow material-symbols-outlined">arrow_forward_ios</span>
+                    </a>
+                    <a href="MostraLibriServlet?id=2" class="menuItem2">
+                        <button class="forButton3">Bambini e Ragazzi</button>
+                        <span class="Arrow material-symbols-outlined">arrow_forward_ios</span>
+                    </a>
+                    <a href="MostraLibriServlet?id=3" class="menuItem2">
+                        <button class="forButton3">Fumetti e manga</button>
+                        <span class="Arrow material-symbols-outlined">arrow_forward_ios</span>
+                    </a>
+                    <a href="MostraLibriServlet?id=4" class="menuItem2">
+                        <button class="forButton3">Libri Vintage</button>
+                        <span class="Arrow material-symbols-outlined">arrow_forward_ios</span>
+                    </a>
+                    <a href="MostraLibriServlet?id=5" class="menuItem2">
+                        <button class="forButton3">E-Book</button>
+                        <span class="Arrow material-symbols-outlined">arrow_forward_ios</span>
+                    </a>
+                    <a href="MostraLibriServlet?id=6" class="menuItem2">
+                        <button class="forButton3">Libri in Inglese</button>
+                        <span class="Arrow material-symbols-outlined">arrow_forward_ios</span>
+                    </a>
+                </div>
+                <div class="HeaderQuick2">
+                    <a class="noDec2" href="#"><button class="forButton2">CARRELLO(<%=nprod%>)</button></a>
+                    <a class="noDec2" href="Registrazione.jsp"><button class="forButton2">LOG-IN</button></a>
+                    <a class="noDec2" href="#"><button class="forButton2">PREFERITI</button></a>
                 </div>
             </div>
 
@@ -84,25 +124,37 @@
 
     </div>
 </header>
-<div class="banner">
-    <div class="bannerimage">img</div>
-    <div class="bannercopy">
-    <h3>Banner Title</h3>
-        <h4>Banner Subtitle</h4>
-        <p>Esempippopiopopoi</p>
-    </div>
+<div class="Slider">
+    <figure class="figure">
+        <div class="slide">
+            <img id="slide1" src="CSS/BookWallp.png" alt="BOOKSS">
+            <p class="slide-text1">I MIGLIORI LIBRI</p>
+            <p class="slide-text2">Del PANORAMA Artistico</p>
+        </div>
+        <div class="slide">
+            <img id="slide2" src="CSS/BookWallp.png" alt="BOOKSS">
+            <p class="slide-text">Testo per la seconda immagine</p>
+        </div>
+        <div class="slide">
+            <img id="slide3" src="CSS/BookWallp.png" alt="BOOKSS">
+            <p class="slide-text">Testo per la terza immagine</p>
+        </div>
+    </figure>
 </div>
+
 </body>
 <script>
-    let div = document.getElementById("openBr");
+    let hamburger = document.querySelector(".HambIcon");
+    let closeIcon = document.getElementById("closeMenu");
+    let mobileMenu = document.getElementById("mobileMenu");
 
-    div.addEventListener('click',function (){
-        document.getElementById("openNav").style.width = "25%"
-    })
+    hamburger.addEventListener("click", function() {
+        mobileMenu.style.transform = 'translateX(0)'; // sposta il menu a destra
+    });
 
-    function closeNav() {
-        document.getElementById("openNav").style.width = "0";
-    }
-
+    closeIcon.addEventListener("click", function() {
+        mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
+    });
 </script>
+
 </html>
