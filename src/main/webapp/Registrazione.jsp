@@ -20,7 +20,7 @@
 <body>
 <body>
 <div class="container">
-        <form class="form signup" name="reg" method="post" action="registrazione-servlet">
+    <form class="form signup" name="reg" method="post" action="registrazione-servlet">
         <h2>Registrazione</h2>
         <div class="inputBox">
             <input type="text" name="username" required="required">
@@ -66,10 +66,10 @@
             <input type="submit"  id="bottone" value="Create Account">
         </div>
         <p>Sei già registrato? <a href="Login.jsp" class="login">Accesso</a></p>
-            <label for="passwordrep" id="confirm" style="color:red; display: none">
-                Le password non corrispondono
-            </label>
-        </form>
+        <label for="passwordrep" id="confirm" style="color:red; display: none">
+            Le password non corrispondono
+        </label>
+    </form>
 </div>
 
 <div class="returnDiv">
@@ -82,17 +82,17 @@
 <script>
 
     function registration(){
-    let button = document.getElementById("bottone");
-    let passrep = document.forms["reg"]["passwordrep"].value;
-    let pass = document.forms["reg"]["password"].value;
-    if( pass.localeCompare(passrep) !== 0) {
-        document.getElementById("confirm").style.display="block";
-        button.disabled = true;
-    }
-    else{
-        document.getElementById("confirm").style.display="none";
-        button.disabled = false;
-    }
+        let button = document.getElementById("bottone");
+        let passrep = document.forms["reg"]["passwordrep"].value;
+        let pass = document.forms["reg"]["password"].value;
+        if( pass.localeCompare(passrep) !== 0) {
+            document.getElementById("confirm").style.display="block";
+            button.disabled = true;
+        }
+        else{
+            document.getElementById("confirm").style.display="none";
+            button.disabled = false;
+        }
     }
 </script>
 </body>
