@@ -56,6 +56,7 @@ public class CarrelloServlet extends HttpServlet {
                                 if(l.getCodice().equals(c.getLibroCartaceo())){
                                     c.setNumCopie(c.getNumCopie() + 1);
                                     trovatoC = true;
+                                    contenereCDAO.doUpdate(c);
                                     break;
                                 }
                             }
@@ -74,6 +75,7 @@ public class CarrelloServlet extends HttpServlet {
                                 if(l.getCodice().equals(e.getLibroElettronico())){
                                     e.setNumCopie(e.getNumCopie() + 1);
                                     trovatoE = true;
+                                    contenereEDAO.doUpdate(e);
                                     break;
                                 }
                             }
