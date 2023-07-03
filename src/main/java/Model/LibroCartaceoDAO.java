@@ -34,7 +34,7 @@ public class LibroCartaceoDAO {
     public void doSave(LibroCartaceo cartaceo){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO LibroCartaceo (codice,titolo,autore,prezzo,genere,quantita_disp) VALUES(?,?,?,?,?,?)",
+                    "INSERT INTO Libro_Cartaceo (codice,titolo,autore,prezzo,genere,quantita_disp) VALUES(?,?,?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, cartaceo.getCodice());
             ps.setString(2,cartaceo.getTitolo());
@@ -90,6 +90,22 @@ public class LibroCartaceoDAO {
                 libri.add(libro);
             }
             return libri;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void doUpdate(LibroCartaceo cartaceo){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "UPDATE Libro_Cartaceo SET quantita_disp = ? WHERE codice = ?",
+                    Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, cartaceo.getQuantitaDisp());
+            ps.setString(2,cartaceo.getCodice());
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("Update error.");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

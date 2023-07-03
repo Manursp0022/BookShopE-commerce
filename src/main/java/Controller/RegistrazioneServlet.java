@@ -1,6 +1,8 @@
 package Controller;
 
+import Model.Bean.Carrello;
 import Model.Bean.Utente;
+import Model.CarrelloDAO;
 import Model.UtenteDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -33,6 +35,10 @@ public class RegistrazioneServlet extends HttpServlet {
         utente.setAdmin(admin);
         utente.setTelefono(telefono);
         utenteDAO.doSave(utente);
+        Carrello cart = new Carrello();
+        cart.setUtente(email);
+        CarrelloDAO carrelloDAO = new CarrelloDAO();
+        carrelloDAO.doSave(cart);
         synchronized (this){
             request.getSession().setAttribute("utente", utente);
         }

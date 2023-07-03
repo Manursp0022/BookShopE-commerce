@@ -1,10 +1,7 @@
 package Controller;
 
+import Model.*;
 import Model.Bean.*;
-import Model.ContenereCDAO;
-import Model.ContenereEDAO;
-import Model.LibroCartaceoDAO;
-import Model.LibroElettronicoDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,7 +27,7 @@ public class CarrelloServlet extends HttpServlet {
                     scrivi.print("-1");
                 } else {
                     Carrello cart = (Carrello) sessione.getAttribute("cart");
-                    cart.setnLibri(cart.getnLibri() + 1);
+                    CarrelloDAO carrelloDAO = new CarrelloDAO();
                     String codice = req.getParameter("codice");
                     LibroCartaceoDAO libroCartaceoDAO = new LibroCartaceoDAO();
                     LibroElettronicoDAO libroElettronicoDAO = new LibroElettronicoDAO();
@@ -41,52 +38,134 @@ public class CarrelloServlet extends HttpServlet {
                     List<String> codiciContc = new ArrayList<>();
                     boolean trovatoC = false;
                     boolean trovatoE = false;
-                    for (ContenereC cont : contenereC) {
-                        codiciContc.add(cont.getLibroCartaceo());
+                    boolean outOfStock = false;
+                    if(contenereC != null) {
+                        for (ContenereC cont : contenereC) {
+                            codiciContc.add(cont.getLibroCartaceo());
+                        }
+                        for (LibroCartaceo l : libri) {
+                            if (codice.equals(l.getCodice())) {
+                                for(ContenereC c: contenereC){
+                                    if(l.getCodice().equals(c.getLibroCartaceo())){
+                                        if(l.getQuantitaDisp() > 0){
+                                            l.setQuantitaDisp(l.getQuantitaDisp() - 1);
+                                            libroCartaceoDAO.doUpdate(l);
+                                            c.setNumCopie(c.getNumCopie() + 1);
+                                            trovatoC = true;
+                                            contenereCDAO.doUpdate(c);
+                                            cart.setnLibri(cart.getnLibri() + 1);
+                                            cart.setTotale(cart.getTotale() + l.getPrezzo());
+                                            sessione.setAttribute("cart",cart);
+                                            carrelloDAO.doUpdate(cart);
+                                            break;
+                                        }else{
+                                            outOfStock = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if(!trovatoC){
+                                    if(l.getQuantitaDisp() > 0) {
+                                        l.setQuantitaDisp(l.getQuantitaDisp() - 1);
+                                        libroCartaceoDAO.doUpdate(l);
+                                        ContenereC nuovoC = new ContenereC();
+                                        nuovoC.setLibroCartaceo(codice);
+                                        nuovoC.setNumCopie(1);
+                                        nuovoC.setCarrello(cart.getUtente());
+                                        contenereCDAO.doSave(nuovoC);
+                                        cart.setnLibri(cart.getnLibri() + 1);
+                                        cart.setTotale(cart.getTotale() + l.getPrezzo());
+                                        sessione.setAttribute("cart",cart);
+                                        carrelloDAO.doUpdate(cart);
+                                        break;
+                                    }else{
+                                        outOfStock = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        for(LibroCartaceo l : libri){
+                            if(codice.equals(l.getCodice())){
+                                if(l.getQuantitaDisp() > 0) {
+                                    l.setQuantitaDisp(l.getQuantitaDisp() - 1);
+                                    libroCartaceoDAO.doUpdate(l);
+                                    ContenereC nuovoC = new ContenereC();
+                                    nuovoC.setLibroCartaceo(codice);
+                                    nuovoC.setNumCopie(1);
+                                    nuovoC.setCarrello(cart.getUtente());
+                                    contenereCDAO.doSave(nuovoC);
+                                    cart.setnLibri(cart.getnLibri() + 1);
+                                    cart.setTotale(cart.getTotale() + l.getPrezzo());
+                                    sessione.setAttribute("cart",cart);
+                                    carrelloDAO.doUpdate(cart);
+                                    break;
+                                }else{
+                                    outOfStock = true;
+                                    break;
+                                }
+                            }
+                        }
                     }
                     ContenereEDAO contenereEDAO = new ContenereEDAO();
                     List<ContenereE> contenereE = contenereEDAO.doRetrieveByCarrello(cart.getUtente());
                     List<String> codiciConte = new ArrayList<>();
-                    for (ContenereE cont : contenereE) {
-                        codiciConte.add(cont.getLibroElettronico());
-                    }
-                    for (LibroCartaceo l : libri) {
-                        if (codice.equals(l.getCodice())) {
-                            for(ContenereC c: contenereC){
-                                if(l.getCodice().equals(c.getLibroCartaceo())){
-                                    c.setNumCopie(c.getNumCopie() + 1);
-                                    trovatoC = true;
+                    if (contenereE != null){
+                        for (ContenereE cont : contenereE) {
+                            codiciConte.add(cont.getLibroElettronico());
+                        }
+                        for (LibroElettronico l : libriE) {
+                            if (codice.equals(l.getCodice())) {
+                                for (ContenereE e : contenereE) {
+                                    if (l.getCodice().equals(e.getLibroElettronico())) {
+                                        e.setNumCopie(e.getNumCopie() + 1);
+                                        trovatoE = true;
+                                        contenereEDAO.doUpdate(e);
+                                        cart.setnLibri(cart.getnLibri() + 1);
+                                        cart.setTotale(cart.getTotale() + l.getPrezzo());
+                                        sessione.setAttribute("cart",cart);
+                                        carrelloDAO.doUpdate(cart);
+                                        break;
+                                    }
+                                }
+                                if (!trovatoE) {
+                                    ContenereE nuovoE = new ContenereE();
+                                    nuovoE.setLibroElettronico(codice);
+                                    nuovoE.setNumCopie(1);
+                                    nuovoE.setCarrello(cart.getUtente());
+                                    contenereEDAO.doSave(nuovoE);
+                                    cart.setnLibri(cart.getnLibri() + 1);
+                                    cart.setTotale(cart.getTotale() + l.getPrezzo());
+                                    sessione.setAttribute("cart",cart);
+                                    carrelloDAO.doUpdate(cart);
                                     break;
                                 }
-                            }
-                            if(!trovatoC){
-                                ContenereC nuovoC = new ContenereC();
-                                nuovoC.setLibroCartaceo(codice);
-                                nuovoC.setNumCopie(1);
-                                nuovoC.setCarrello(cart.getUtente());
-                                contenereCDAO.doSave(nuovoC);
                             }
                         }
                     }
-                    for (LibroElettronico l : libriE) {
-                        if (codice.equals(l.getCodice())) {
-                            for(ContenereE e: contenereE){
-                                if(l.getCodice().equals(e.getLibroElettronico())){
-                                    e.setNumCopie(e.getNumCopie() + 1);
-                                    trovatoE = true;
-                                    break;
-                                }
-                            }
-                            if(!trovatoE){
+                    else{
+                        for(LibroElettronico l : libriE){
+                            if(codice.equals(l.getCodice())){
                                 ContenereE nuovoE = new ContenereE();
                                 nuovoE.setLibroElettronico(codice);
                                 nuovoE.setNumCopie(1);
                                 nuovoE.setCarrello(cart.getUtente());
                                 contenereEDAO.doSave(nuovoE);
+                                cart.setnLibri(cart.getnLibri() + 1);
+                                cart.setTotale(cart.getTotale() + l.getPrezzo());
+                                sessione.setAttribute("cart",cart);
+                                carrelloDAO.doUpdate(cart);
+                                break;
                             }
                         }
                     }
-                    scrivi.print(cart.getnLibri());
+                    if (outOfStock) {
+                        scrivi.print("-2");
+                    }else {
+                        scrivi.print(cart.getnLibri());
+                    }
                 }
             }
         }

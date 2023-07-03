@@ -58,4 +58,19 @@ public class CarrelloDAO {
             throw new RuntimeException(e);
         }
     }
+    public void doUpdate(Carrello carrello){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "UPDATE Carrello SET n_libri = ?, totale = ? WHERE utente = ?",
+                    Statement.RETURN_GENERATED_KEYS);
+            ps.setString(3, carrello.getUtente());
+            ps.setInt(1, carrello.getnLibri());
+            ps.setDouble(2, carrello.getTotale());
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("Update error.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
