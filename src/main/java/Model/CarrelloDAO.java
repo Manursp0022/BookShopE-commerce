@@ -63,9 +63,9 @@ public class CarrelloDAO {
             PreparedStatement ps = con.prepareStatement(
                     "UPDATE Carrello SET n_libri = ?, totale = ? WHERE utente = ?",
                     Statement.RETURN_GENERATED_KEYS);
-            ps.setString(3, carrello.getUtente());
             ps.setInt(1, carrello.getnLibri());
             ps.setDouble(2, carrello.getTotale());
+            ps.setString(3, carrello.getUtente());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("Update error.");
             }

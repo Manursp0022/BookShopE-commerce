@@ -15,15 +15,14 @@ public class ContenereCDAO {
             ps.setString(1, carrello);
             ResultSet rs = ps.executeQuery();
             ArrayList<ContenereC> contenereC = new ArrayList<>();
-            if(rs.next()) {
+            while(rs.next()) {
                 ContenereC contenere = new ContenereC();
                 contenere.setCarrello(rs.getString(1));
                 contenere.setLibroCartaceo(rs.getString(2));
                 contenere.setNumCopie(rs.getInt(3));
                 contenereC.add(contenere);
-                return contenereC;
-            }else
-                return null;
+            }
+            return contenereC;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -32,7 +31,7 @@ public class ContenereCDAO {
     public void doSave(ContenereC contenere){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Contenere_C (carrello,libro_cartaceo,n_copie) VALUES(?,?,?)",
+                    "INSERT INTO Contenere_C (carrello,libro_cartaceo,n_copie) VALUES (?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, contenere.getCarrello());
             ps.setString(2,contenere.getLibroCartaceo());
@@ -67,10 +66,11 @@ public class ContenereCDAO {
     public void doUpdate(ContenereC contenere){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "UPDATE Contenere_C SET n_copie = ? WHERE libro_cartaceo = ?",
+                    "UPDATE Contenere_C SET n_copie = ? WHERE libro_cartaceo = ? AND carrello = ?",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, contenere.getNumCopie());
             ps.setString(2,contenere.getLibroCartaceo());
+            ps.setString(3,contenere.getCarrello());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("UPDATE error.");
             }

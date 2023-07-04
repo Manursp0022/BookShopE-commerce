@@ -15,15 +15,14 @@ public class ContenereEDAO {
             ps.setString(1, carrello);
             ResultSet rs = ps.executeQuery();
             ArrayList<ContenereE> contenereE = new ArrayList<>();
-            if(rs.next()) {
+            while (rs.next()) {
                 ContenereE contenere = new ContenereE();
                 contenere.setCarrello(rs.getString(1));
                 contenere.setLibroElettronico(rs.getString(2));
                 contenere.setNumCopie(rs.getInt(3));
                 contenereE.add(contenere);
-                return contenereE;
-            }else
-                return null;
+            }
+            return contenereE;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -66,10 +65,11 @@ public class ContenereEDAO {
     public void doUpdate(ContenereE contenere){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "UPDATE Contenere_C SET n_copie = ? WHERE libro_elettronico = ?",
+                    "UPDATE Contenere_E SET n_copie = ? WHERE libro_elettronico = ? AND carrello = ?",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, contenere.getNumCopie());
             ps.setString(2,contenere.getLibroElettronico());
+            ps.setString(3,contenere.getCarrello());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("UPDATE error.");
             }

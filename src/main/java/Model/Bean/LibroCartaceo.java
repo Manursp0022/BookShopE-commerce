@@ -60,4 +60,16 @@ public class LibroCartaceo {
     public void setQuantitaDisp(int quantitaDisp) {
         this.quantitaDisp = quantitaDisp;
     }
+
+    @Override
+    public String toString() {
+        return "LibroCartaceo{" +
+                "codice='" + codice + '\'' +
+                ", titolo='" + titolo + '\'' +
+                ", autore='" + autore + '\'' +
+                ", prezzo=" + prezzo +
+                ", genere='" + genere + '\'' +
+                ", quantitaDisp=" + quantitaDisp +
+                '}';
+    }
 }

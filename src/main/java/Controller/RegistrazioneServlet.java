@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet (value = "/registrazione-servlet")
 public class RegistrazioneServlet extends HttpServlet {
@@ -25,6 +26,7 @@ public class RegistrazioneServlet extends HttpServlet {
         String email = request.getParameter("email");
         boolean admin = false;
         UtenteDAO utenteDAO = new UtenteDAO();
+        List<Utente> utenti = utenteDAO.doRetrieveAll();
         Utente utente = new Utente();
         utente.setUsername(username);
         utente.setPassword(password);
@@ -34,12 +36,21 @@ public class RegistrazioneServlet extends HttpServlet {
         utente.setEmail(email);
         utente.setAdmin(admin);
         utente.setTelefono(telefono);
+        String errore;
+        for(Utente u:utenti) {
+            if (u.getEmail().equals(utente.getEmail())) {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("Registrazione.jsp");
+                errore = "true";
+                request.setAttribute("errore", errore);
+                dispatcher.forward(request, response);
+            }
+        }
         utenteDAO.doSave(utente);
         Carrello cart = new Carrello();
         cart.setUtente(email);
         CarrelloDAO carrelloDAO = new CarrelloDAO();
         carrelloDAO.doSave(cart);
-        synchronized (this){
+        synchronized (this) {
             request.getSession().setAttribute("utente", utente);
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");

@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet (name = "CarrelloServlet", value = "/carrelloservlet")
@@ -30,19 +29,12 @@ public class CarrelloServlet extends HttpServlet {
                     CarrelloDAO carrelloDAO = new CarrelloDAO();
                     String codice = req.getParameter("codice");
                     LibroCartaceoDAO libroCartaceoDAO = new LibroCartaceoDAO();
-                    LibroElettronicoDAO libroElettronicoDAO = new LibroElettronicoDAO();
                     List<LibroCartaceo> libri = libroCartaceoDAO.doRetrieveAll();
-                    List<LibroElettronico> libriE = libroElettronicoDAO.doRetrieveAll();
                     ContenereCDAO contenereCDAO = new ContenereCDAO();
                     List<ContenereC> contenereC = contenereCDAO.doRetrieveByCart(cart.getUtente());
-                    List<String> codiciContc = new ArrayList<>();
                     boolean trovatoC = false;
-                    boolean trovatoE = false;
                     boolean outOfStock = false;
                     if(contenereC != null) {
-                        for (ContenereC cont : contenereC) {
-                            codiciContc.add(cont.getLibroCartaceo());
-                        }
                         for (LibroCartaceo l : libri) {
                             if (codice.equals(l.getCodice())) {
                                 for(ContenereC c: contenereC){
@@ -109,17 +101,16 @@ public class CarrelloServlet extends HttpServlet {
                             }
                         }
                     }
+                    LibroElettronicoDAO libroElettronicoDAO = new LibroElettronicoDAO();
+                    List<LibroElettronico> libriE = libroElettronicoDAO.doRetrieveAll();
                     ContenereEDAO contenereEDAO = new ContenereEDAO();
                     List<ContenereE> contenereE = contenereEDAO.doRetrieveByCarrello(cart.getUtente());
-                    List<String> codiciConte = new ArrayList<>();
+                    boolean trovatoE = false;
                     if (contenereE != null){
-                        for (ContenereE cont : contenereE) {
-                            codiciConte.add(cont.getLibroElettronico());
-                        }
                         for (LibroElettronico l : libriE) {
                             if (codice.equals(l.getCodice())) {
                                 for (ContenereE e : contenereE) {
-                                    if (l.getCodice().equals(e.getLibroElettronico())) {
+                                    if (codice.equals(e.getLibroElettronico())) {
                                         e.setNumCopie(e.getNumCopie() + 1);
                                         trovatoE = true;
                                         contenereEDAO.doUpdate(e);

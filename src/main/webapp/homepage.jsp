@@ -25,6 +25,7 @@
     else{
         nprod = cart.getnLibri();
     }
+    int mode = (int) request.getSession().getAttribute("mode");
 %>
 <header class="header">
 
@@ -61,7 +62,10 @@
 
             <div class="HeaderQuick">
                 <a class="noDec" href="#"><button class="forButton">PREFERITI</button></a>
-                <a class="noDec" href="Registrazione.jsp"><button class="forButton">LOG-IN</button></a>
+                <%
+                    if(mode == 2 || mode == 1){%>
+                        <a class="noDec" href="LogOutServlet"><button class="forButton">LOG-OUT</button></a>
+                    <%}else{%><a class="noDec" href="Login.jsp"><button class="forButton">LOG-IN</button></a><%}%>
                 <a class="noDec" href="#"><button class="forButton">CARRELLO(<%=nprod%>)</button></a>
             </div>
 
@@ -103,7 +107,10 @@
                 </div>
                 <div class="HeaderQuick2">
                     <a class="noDec2" href="#"><button class="forButton2">CARRELLO(<%=nprod%>)</button></a>
-                    <a class="noDec2" href="Registrazione.jsp"><button class="forButton2">LOG-IN</button></a>
+                    <%
+                        if(mode == 2 || mode == 1){%>
+                            <a class="noDec2" href="LogOutServlet"><button class="forButton2">LOG-OUT</button></a>
+                                <%}else{%><a class="noDec2" href="Login.jsp"><button class="forButton2">LOG-IN</button></a><%}%>
                     <a class="noDec2" href="#"><button class="forButton2">PREFERITI</button></a>
                 </div>
             </div>

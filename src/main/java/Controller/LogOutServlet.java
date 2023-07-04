@@ -6,19 +6,17 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "IndexServlet", value = "/indexServlet", loadOnStartup = 0)
-public class IndexServlet extends HttpServlet {
+@WebServlet(name = "LogOutServlet", value = "/LogOutServlet")
+public class LogOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        synchronized (this){
-            request.getSession().setAttribute("mode",3);
-        }
-        RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
-        rd.forward(request,response);
+        request.getSession().invalidate();
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doGet(request,response);
+        this.doGet(request, response);
     }
 }

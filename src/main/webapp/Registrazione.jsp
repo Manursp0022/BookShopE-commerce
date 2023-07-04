@@ -69,6 +69,14 @@
         <label for="passwordrep" id="confirm" style="color:red; display: none">
             Le password non corrispondono
         </label>
+        <p style="color: red">
+            <%
+                String errore = (String) request.getAttribute("errore");
+                if(errore != null){%>
+                <%="Utente già registrato"%>
+            <%}
+            %>
+        </p>
     </form>
 </div>
 
