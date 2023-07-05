@@ -56,7 +56,7 @@
             </ul>
 
 
-            <form class="formSearch" action="/search">
+            <form class="formSearch" action="search-servlet">
                 <input class="searchpanel" type="text" name="search" placeholder="Cerca">
                 <div class="divForSearch">
                     <lord-icon
@@ -132,63 +132,70 @@
 <div class="libri">
     <table>
         <tr>
-    <% List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
-    List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
-    List<String> titoli= new ArrayList<>();
-    int i = 0;
-    if(cartaceos != null)
-    for (LibroCartaceo c: cartaceos) {
-        String codice = c.getCodice();
-        String titolo = c.getTitolo();
-        float prezzo = c.getPrezzo();
-        titoli.add(titolo);
-        if(i == 3) { %>
-    </tr>
-    <tr>
-    <%
-        i = 0; }
-        i++;
-        %>
-        <td>
+            <% List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
+                List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
+                List<String> titoli= new ArrayList<>();
+                int i = 0;
+                if(cartaceos != null)
+                    for (LibroCartaceo c: cartaceos) {
+                        String codice = c.getCodice();
+                        String titolo = c.getTitolo();
+                        float prezzo = c.getPrezzo();
+                        titoli.add(titolo);
+                        if(i == 3) { %>
+        </tr>
+        <tr>
+            <%
+                    i = 0; }
+                i++;
+            %>
+            <td>
     <span class="libro">
         <%=titolo%>
         <%=" "%>
         <%=prezzo + "€"%>
         <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
     </span>
-        </td>
-    <%
-    }
-    %>
+            </td>
+            <%
+                    }
+            %>
         </tr>
         <%
-    i = 0;
-    if(elettronicos != null)
-    for (LibroElettronico c: elettronicos) {
-        String codice = c.getCodice();
-        String titolo = c.getTitolo();
-        float prezzo = c.getPrezzo();
-        if (titoli.contains(c.getTitolo())) {
-        }
-        else{
-            if(i == 3) { %>
-    </tr>
+            i = 0;
+            if(elettronicos != null)
+                for (LibroElettronico c: elettronicos) {
+                    String codice = c.getCodice();
+                    String titolo = c.getTitolo();
+                    float prezzo = c.getPrezzo();
+                    if (titoli.contains(c.getTitolo())) {
+                    }
+                    else{
+                        if(i == 3) { %>
+        </tr>
         <tr>
-    <%
+                <%
         i = 0;}
             i++;
     %>
-        <td>
+            <td>
     <span class="libro">
         <%=titolo%>
         <%=" "%>
         <%=prezzo + "€"%>
         <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
     </span>
-        </td>
-    <%
+            </td>
+                <%
                 }
     }
+            if((elettronicos == null) && (cartaceos == null)){
+                %>
+                    <div style="align-content: center; color: red; font-size: large">
+                        Nessun libro trovato.
+                    </div>
+                    <% }
+
     %>
 
     </table>
