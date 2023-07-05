@@ -1,7 +1,11 @@
 package Controller;
 
 import Model.Bean.Carrello;
+import Model.Bean.PreferitoC;
+import Model.Bean.PreferitoE;
 import Model.CarrelloDAO;
+import Model.PreferitoCDAO;
+import Model.PreferitoEDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,6 +20,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 @WebServlet (value = "/login-servlet")
 public class LoginServlet extends HttpServlet {
@@ -32,9 +37,15 @@ public class LoginServlet extends HttpServlet {
         else {
             CarrelloDAO carrelloDAO = new CarrelloDAO();
             Carrello cart = carrelloDAO.doRetrieveByEmail(utente.getEmail());
+            PreferitoEDAO preferitoEDAO = new PreferitoEDAO();
+            List<PreferitoE> preferitiE = preferitoEDAO.doRetrieveByUtente(utente.getEmail());
+            PreferitoCDAO preferitoCDAO = new PreferitoCDAO();
+            List<PreferitoC> preferitiC = preferitoCDAO.doRetrieveByUtente(utente.getEmail());
             synchronized (this) {
                 request.getSession().setAttribute("utente", utente);
                 request.getSession().setAttribute("cart", cart);
+                request.getSession().setAttribute("prefC", preferitiC);
+                request.getSession().setAttribute("prefE", preferitiE);
                 if (utente.isAdmin())
                     request.getSession().setAttribute("mode", 1);
                 else

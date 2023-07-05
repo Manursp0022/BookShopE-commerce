@@ -278,16 +278,18 @@
 <script>
     $(".pref").click(function addPref() {
         let codice = $(this).val();
-        let button = $(this).innerHTML;
+        let button = $(this);
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.status == 200 && this.readyState == 4) {
                 let s = this.responseText;
                 if(s === "1"){
-                    button = "Rimuovi dai preferiti";
+                    console.log("inserito");
+                    button.html("Rimuovi dai preferiti");
                 }
                 else if (s === "-1"){
-                    button = "Aggiungi ai preferiti";
+                    console.log("rimosso");
+                    button.html("Aggiungi ai preferiti");
                 }
                 }
             }
