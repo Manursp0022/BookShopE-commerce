@@ -56,7 +56,7 @@
             </ul>
 
 
-            <form class="formSearch" action="/search">
+            <form class="formSearch" action="search-servlet">
                 <input class="searchpanel" type="text" name="search" placeholder="Cerca">
                 <div class="divForSearch">
                     <lord-icon

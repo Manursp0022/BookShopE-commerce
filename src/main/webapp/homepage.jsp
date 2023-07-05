@@ -40,16 +40,16 @@
                 </a>
             </div>
 
-                <ul class="nav">
-                    <li><a href="MostraLibriServlet?id=1" class="menuItem">Libri</a></li>
-                    <li><a href="MostraLibriServlet?id=2" class="menuItem">Bambini e Ragazzi</a></li>
-                    <li><a href="MostraLibriServlet?id=3" class="menuItem">Fumetti e manga</a></li>
-                    <li><a href="MostraLibriServlet?id=4" class="menuItem">Libri Vintage</a></li>
-                    <li><a href="MostraLibriServlet?id=5" class="menuItem">E-Book</a></li>
-                </ul>
+            <ul class="nav">
+                <li><a href="MostraLibriServlet?id=1" class="menuItem">Libri</a></li>
+                <li><a href="MostraLibriServlet?id=2" class="menuItem">Bambini e Ragazzi</a></li>
+                <li><a href="MostraLibriServlet?id=3" class="menuItem">Fumetti e manga</a></li>
+                <li><a href="MostraLibriServlet?id=4" class="menuItem">Libri Vintage</a></li>
+                <li><a href="MostraLibriServlet?id=5" class="menuItem">E-Book</a></li>
+            </ul>
 
 
-            <form class="formSearch" action="/search">
+            <form class="formSearch" action="search-servlet">
                 <input class="searchpanel" type="text" name="search" placeholder="Cerca">
                 <div class="divForSearch">
                     <lord-icon
