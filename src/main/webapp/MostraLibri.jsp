@@ -1,9 +1,8 @@
-<%@ page import="Model.Bean.LibroElettronico" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Model.Bean.LibroCartaceo" %>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="Model.Bean.Carrello" %>
+<%@ page import="javax.swing.*" %>
+<%@ page import="Model.Bean.*" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="it">
@@ -34,6 +33,19 @@
         nprod = cart.getnLibri();
     }
     int mode = (int) request.getSession(false).getAttribute("mode");
+    List<PreferitoC> prefC = (ArrayList<PreferitoC>) request.getSession().getAttribute("prefC");
+    List<PreferitoE> prefE = (ArrayList<PreferitoE>) request.getSession().getAttribute("prefE");
+    List<String> codici = new ArrayList<>();
+    if(prefC != null){
+    for(PreferitoC pref : prefC){
+        codici.add(pref.getLibroCartaceo());
+        }
+    }
+    if(prefE != null) {
+        for (PreferitoE pref : prefE) {
+            codici.add(pref.getLibroElettronico());
+        }
+    }
 %>
 <header class="header">
 
@@ -132,63 +144,94 @@
 <div class="libri">
     <table>
         <tr>
-    <% List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
-    List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
-    List<String> titoli= new ArrayList<>();
-    int i = 0;
-    if(cartaceos != null)
-    for (LibroCartaceo c: cartaceos) {
-        String codice = c.getCodice();
-        String titolo = c.getTitolo();
-        float prezzo = c.getPrezzo();
-        titoli.add(titolo);
-        if(i == 3) { %>
-    </tr>
-    <tr>
-    <%
-        i = 0; }
-        i++;
-        %>
-        <td>
+            <% List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
+                List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
+                List<String> titoli= new ArrayList<>();
+                int i = 0;
+                if(cartaceos != null)
+                    for (LibroCartaceo c: cartaceos) {
+                        String codice = c.getCodice();
+                        String titolo = c.getTitolo();
+                        float prezzo = c.getPrezzo();
+                        titoli.add(titolo);
+                        if(i == 3) { %>
+        </tr>
+        <tr>
+            <%
+                    i = 0; }
+                i++;
+            %>
+            <td>
     <span class="libro">
         <%=titolo%>
         <%=" "%>
         <%=prezzo + "€"%>
         <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
+        <%
+            if(codici != null && codici.contains(codice)){
+        %>
+        <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
+        <%
+            }
+            else{
+                %>
+        <button class="pref" value="<%=codice%>">Aggiungi ai preferiti</button>
+        <%
+            }
+        %>
     </span>
-        </td>
-    <%
-    }
-    %>
+            </td>
+            <%
+                    }
+            %>
         </tr>
         <%
-    i = 0;
-    if(elettronicos != null)
-    for (LibroElettronico c: elettronicos) {
-        String codice = c.getCodice();
-        String titolo = c.getTitolo();
-        float prezzo = c.getPrezzo();
-        if (titoli.contains(c.getTitolo())) {
-        }
-        else{
-            if(i == 3) { %>
-    </tr>
+            i = 0;
+            if(elettronicos != null)
+                for (LibroElettronico c: elettronicos) {
+                    String codice = c.getCodice();
+                    String titolo = c.getTitolo();
+                    float prezzo = c.getPrezzo();
+                    if (titoli.contains(c.getTitolo())) {
+                    }
+                    else{
+                        if(i == 3) { %>
+        </tr>
         <tr>
-    <%
+                <%
         i = 0;}
             i++;
     %>
-        <td>
+            <td>
     <span class="libro">
         <%=titolo%>
         <%=" "%>
         <%=prezzo + "€"%>
         <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
+        <%
+            if(codici != null && codici.contains(codice)){
+        %>
+        <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
+        <%
+        }
+        else{
+        %>
+        <button class="pref" value="<%=codice%>">Aggiungi ai preferiti</button>
+        <%
+            }
+        %>
     </span>
-        </td>
-    <%
+            </td>
+                <%
                 }
     }
+            if((elettronicos == null) && (cartaceos == null)){
+                %>
+                    <div style="align-content: center; color: red; font-size: large">
+                        Nessun libro trovato.
+                    </div>
+                    <% }
+
     %>
 
     </table>
@@ -231,5 +274,26 @@
     closeIcon.addEventListener("click", function() {
         mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
     });
+</script>
+<script>
+    $(".pref").click(function addPref() {
+        let codice = $(this).val();
+        let button = $(this).innerHTML;
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.status == 200 && this.readyState == 4) {
+                let s = this.responseText;
+                if(s === "1"){
+                    button = "Rimuovi dai preferiti";
+                }
+                else if (s === "-1"){
+                    button = "Aggiungi ai preferiti";
+                }
+                }
+            }
+        xhttp.open("POST", "preferito-servlet");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send("codice=" + codice);
+    })
 </script>
 </html>
