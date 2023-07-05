@@ -9,39 +9,37 @@
 .header{
     width: 100%;
     background-color: white;
-    position: relative;
+    height: 65px;
 }
 
 body {
     font-size: 14px;
     margin: 0;
     padding: 0;
-    position: relative;
 }
 
 
 .HeaderfirstDiv {
+    position: relative;
     background-color: white;
-    height: 170px;
+    height: 100%;
     width: 100%;
-    border-bottom: 1px royalblue;
 }
 
 /* CSS FOR LOGO */
 
 .homeElement{
     position: relative;
-    width: 20%;
+    width: 10%;
     text-decoration: none;
-    display: flex;
-    justify-content: right;
-    align-items: flex-end;
 }
 
-.interEl{
+.logoc{
     position: absolute;
-    left: 43%;
-    top: 30%;
+    left: 37%;
+    top: 20px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 
@@ -51,8 +49,8 @@ body {
 .SonFirstDiv{
     background-color: white;
     display: flex;
-    width: 100%;
-    height: 80px;
+    justify-content: space-between;
+    height: 100%;
 }
 /*
 .navigationMenu{
@@ -61,14 +59,17 @@ body {
 }*/
 
 .nav{
-    margin-top: 55px;
-    text-align: center;
-
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+    display: flex;
+    white-space: nowrap; /* non andra a capo il testo*/
+    gap: 20px;
 }
 
 .nav li{
-    display: inline-block;
-    padding: 10px;
+    position: relative;
     font-size: 15px;
 }
 
@@ -87,58 +88,41 @@ ul{
     list-style-type: none;
 }
 
-/* CSS for Blue Panel on top*/
-
-
-
-.headerDivTop {
-    background-color: royalblue;
-    width: 100%;
-    height: 100%; /* imposto 100% per dargli in lunghezza l'intera misura del div che la contiene in modo da poter
-    colorare di bianco sucessivamente tutto il background del primo elemento*/
-    line-height: 2.00;
-}
-
-.movein{
-    display: flex;
-    height: 100%;
-    margin-left: 7%;
-    align-items: center;
-}
-
-a.writec{
-    color: #f1f1f1;
-    font-weight: bold; /* Grassetto*/
-    text-decoration: none;
-    padding: 7px;
-}
-
-a.writec:first-child { /* parametri impostati solo per il primo figlio degli elementi a con classe "writec"*/
-    background-color: white;
-    color: royalblue;
-}
-
-
-/* Finished Blue Panel CSS */
 
 /* CSS SEARCH PANEL */
 
 .formSearch{
-    width: 40%;
-    margin-left: 10%;
+    position: relative;
+    width: 25%;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .searchpanel {
+    position: relative;
     border-radius: 14px;
-    border: 2px solid royalblue;
+    background-color: #f1f1f1;
     width: 90%;
-    height: 40px;
+    height: 33px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    color: royalblue;
+    border: none;
+    display: flex;
+    align-items: center;
+    padding-left: 10%;
 }
+
+.divForSearch{
+    position: absolute;
+    border-radius: 90px;
+    left: 10%;
+}
+
+.divForSearch:hover{
+    background-color: lightgrey;
+}
+
+
 
 /* CLOSE CSS SEARCH PANEL */
 
@@ -153,25 +137,26 @@ a.writec:first-child { /* parametri impostati solo per il primo figlio degli ele
 /* CSS per bottoni log-in, carrello ecc*/
 
 .HeaderQuick{
-    margin-left: 10%; /* Distanza dal margine destro degli elementi del div*/
-    margin-right: 3.5%;
+     /* Distanza dal margine destro degli elementi del div*/
     width: 20%;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
+    gap: 4%;
 }
+
 
 .forButton {
     padding: 2px;
     border-radius: 14px;
-    height: 35px;
-    border: 2px solid royalblue;
+    height: 33px;
+    border: 1.3px solid royalblue;
     background: transparent;
     color: royalblue;
-    white-space: nowrap; /* non andra a cpo il testo*/
+    white-space: nowrap; /* non andra a capo il testo*/
     cursor: pointer; /* quando passo sul bottone il puntatore si trasforma in una mano*/
     transition: .4s; /* vado a rendere piu fluida l'animazione cambiando gradualmente il backgound-color nell'hover*/
-    text-align: center; /* testo nel bottpne allineato al centro */
+    text-align: center; /* testo nel bottone allineato al centro */
     text-decoration: none;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
@@ -182,11 +167,10 @@ a.writec:first-child { /* parametri impostati solo per il primo figlio degli ele
 }
 
 .noDec{
+    position: relative;
     text-decoration: none;
-    padding-left: 7%;
-    padding-right: 7%;
-    align-self: flex-end; /* proprietà che viene data agli elementi all'interno */
 }
+/* CSS Hamburgher Menu */
 
 .hamburger{
     display: none;
@@ -249,7 +233,7 @@ a.writec:first-child { /* parametri impostati solo per il primo figlio degli ele
     display: block;
     position: fixed;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     top: 0;
     left: 0;
     background-color: white;
@@ -260,6 +244,7 @@ a.writec:first-child { /* parametri impostati solo per il primo figlio degli ele
     flex-direction: column;
     transform: translateX(-100%); /* traslato tutto a sinistra */
     transition: transform 0.5s; /* transizione su transform */
+    overflow-y: scroll;
 }
 
 .closeIcon {
@@ -274,7 +259,7 @@ a.writec:first-child { /* parametri impostati solo per il primo figlio degli ele
 /* BANNER CSS */
 
 .Slider{
-    position: absolute;
+    position: relative;
     margin-top: 0;
     width: 100%;
     height: 600px;
@@ -290,14 +275,13 @@ a.writec:first-child { /* parametri impostati solo per il primo figlio degli ele
 }
 
 .slide{
-    flex: 1 0 auto;
+    flex: 1;
     position: relative;
 }
 
 .figure img{
     width: 100%;
     height: 100%;
-    border-radius: 12px;
 }
 
 .slide-text {
@@ -305,16 +289,55 @@ a.writec:first-child { /* parametri impostati solo per il primo figlio degli ele
     left: 20px;
     bottom: 20px;
     color: white;
-    font-size: 24px;
+    font-size: 3vw;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .slide-text1{
     position: absolute;
-    left: 18%;
-    top: 37%;
+    left: 6.8%;
+    top: 30%;
     color: white;
-    font-size: 4em;
+    font-size: 3vw;
+}
+
+.slide-text2{
+    position: absolute;
+    left: 9%;
+    top: 40%;
+    color: white;
+    font-size: 2.7vw;
+}
+
+.linkButt{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.ScopriButt{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    color: white;
+    border: 2px solid white;
+    background-color: transparent;
+    border-radius: 13px;
+    transition: .4s;
+}
+
+.ScopriButt:hover{
+    background-color: rgb(62, 63, 64);
+    color: white;
+}
+
+.InnerSlide{
+    position: absolute;
+    left: 12%;
+    top: 53%;
+    width: 9%;
+    height: 34px;
+
 }
 
 @keyframes slide {
@@ -325,7 +348,6 @@ a.writec:first-child { /* parametri impostati solo per il primo figlio degli ele
     66% { left: -200%; }
     94% { left: -200%; }
 }
-
 
 @media screen and (max-width: 1180px) {
 
@@ -428,6 +450,25 @@ a.writec:first-child { /* parametri impostati solo per il primo figlio degli ele
         color: cornflowerblue;
     }
 
+    .Slider{
+       height: 400px;
+    }
 
+    .Slider, .slide img {
+        width: 100vw;
+    }
+
+    .InnerSlide{
+        width: 12%;
+        height: 30px;
+    }
+
+    .slide-text2{
+        font-size: 3vw;
+        left: 10%;
+    }
 
 }
+
+
+
