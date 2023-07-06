@@ -83,7 +83,7 @@
             </form>
 
             <div class="HeaderQuick">
-                <a class="noDec" href="#"><button class="forButton">PREFERITI</button></a>
+                <a class="noDec" href="MostraPreferitiServlet"><button class="forButton">PREFERITI</button></a>
                 <%
                     if(mode == 2 || mode == 1){%>
                 <a class="noDec" href="LogOutServlet"><button class="forButton">LOG-OUT</button></a>

@@ -72,9 +72,26 @@
         <p style="color: red">
             <%
                 String errore = (String) request.getAttribute("errore");
-                if(errore != null){%>
+                if(errore != null && errore == "1"){%>
                 <%="Utente già registrato"%>
             <%}
+                else if(errore != null && errore == "2"){ %>
+            <%="Le password non corrispondono"%>
+            <%
+                }
+                else if(errore != null && errore == "3"){ %>
+            <%="L'email non è corretta"%>
+            <%
+                }else if(errore != null && errore == "4"){ %>
+            <%="CAP non corretto"%>
+            <%
+                }else if(errore != null && errore == "5"){ %>
+            <%="Il telefono non è corretto"%>
+            <%
+                }else if(errore != null && errore == "6"){ %>
+            <%="Campo/i mancante/i"%>
+            <%
+                }
             %>
         </p>
     </form>
