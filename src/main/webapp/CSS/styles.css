@@ -34,12 +34,18 @@ body {
     text-decoration: none;
 }
 
-.logoc{
-    position: absolute;
-    left: 37%;
-    top: 20px;
+.homeElement a{
+    position: relative;
     text-decoration: none;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.imgOptions{
+    width: 150px;
 }
 
 
@@ -49,7 +55,6 @@ body {
 .SonFirstDiv{
     background-color: white;
     display: flex;
-    justify-content: space-between;
     height: 100%;
 }
 
@@ -88,14 +93,14 @@ ul{
 
 .formSearch{
     position: relative;
-    width: 25%;
+    width: 30%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
 .searchpanel {
-    position: relative;
+    position: absolute;
     border-radius: 14px;
     background-color: #f1f1f1;
     width: 90%;
@@ -107,14 +112,19 @@ ul{
     padding-left: 10%;
 }
 
+.searchpanel:active{
+    border: 2px solid royalblue;
+}
+
 .divForSearch{
     position: absolute;
-    border-radius: 90px;
+    border-radius: 100px;
     left: 10%;
+
 }
 
 .divForSearch:hover{
-    background-color: lightgrey;
+    background-color: rgb(232, 232, 232);;
 }
 
 
@@ -161,10 +171,6 @@ ul{
     color: #f1f1f1;
 }
 
-.noDec{
-    position: relative;
-    text-decoration: none;
-}
 /* CSS Hamburgher Menu */
 
 .hamburger{
@@ -172,48 +178,29 @@ ul{
     width: 30%;
     cursor: pointer;
     position: relative;
-    margin: 0;
 }
 
 .HambIcon{
-    position: relative;
     height: 38px;
     width: 45px;
-    top: 50%;
-    left: 55%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 7px;
+    border-radius: 100px;
+    left: 5%;
 }
 
-
-.HambIcon span{
-    position: absolute;
-    display: block;
-    width: 90%;
-    height: 6.7px;
-    background: transparent;
-    border: 2px solid royalblue;
-    border-radius: 18px;
+.HambIcon img{
+    height: 28px;
+    width: 28px;
 }
 
-.HambIcon span:hover{
-    position: absolute;
-    display: block;
-    width: 80%;
-    height: 6.7px;
-    background: transparent;
-    border: 2px solid royalblue;
-    border-radius: 18px;
+.HambIcon:hover{
+    background-color: rgb(232, 232, 232);
 }
 
-.HambIcon span:nth-child(1){
-    top: 6px; /* primo figlio distanza dall'alto 6px*/
-}
-
-.HambIcon span:nth-child(2){
-    bottom: 6px; /* seconfo figlo distanza dal basso 6px*/
+.PrefersResp{
+    display: none;
 }
 
 .openWindow{
@@ -242,6 +229,8 @@ ul{
     overflow-y: scroll;
 }
 
+
+
 .closeIcon {
     position: absolute;
     top: 20px;
@@ -250,6 +239,48 @@ ul{
     color: royalblue;
     font-size: 30px;
 }
+
+.forButton3{
+    margin-top: 10px;
+    width: 100%;
+    background-color: transparent;
+    color: royalblue;
+    border: none;
+    border-bottom: 1px solid royalblue;
+    height: 60px;
+    font-size: 18px;
+}
+
+.Arrow{
+    position: absolute;
+    right: 0;
+    color: royalblue;
+}
+
+.Arrow:hover{
+    color: cornflowerblue;
+}
+
+.HeaderQuick3{
+    position: absolute;
+    border-top: 3px solid royalblue;
+    width: 100%;
+    top: 630px;
+    height: 300px;
+}
+
+.HeaderQuick3 div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.HeaderQuick3 div a{
+    color: royalblue;
+    font-size: 13px;
+}
+
 
 /* BANNER CSS */
 
@@ -289,6 +320,7 @@ ul{
 }
 
 .slide-text1{
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
     position: absolute;
     left: 6.8%;
     top: 30%;
@@ -297,6 +329,7 @@ ul{
 }
 
 .slide-text2{
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
     position: absolute;
     left: 9%;
     top: 40%;
@@ -319,6 +352,7 @@ ul{
     background-color: transparent;
     border-radius: 13px;
     transition: .4s;
+    font-size: 15px;
 }
 
 .ScopriButt:hover{
@@ -330,82 +364,131 @@ ul{
     position: absolute;
     left: 12%;
     top: 53%;
-    width: 9%;
+    width: 15%;
     height: 34px;
 
 }
 
-@keyframes slide {
-    0%, 100% { left: 0; }
-    28% { left: 0; }
-    33% { left: -100%; }
-    61% { left: -100%; }
-    66% { left: -200%; }
-    94% { left: -200%; }
+
+ /* @keyframes slide {*/
+    /* 0%, 100% { left: 0; } /* allo 0% del tempo(45s) e al 100% ritorna alla left 0, cioe vedremo la prima immagine */
+    /*28% { left: 0; } /* per il 28% vedremo la prima immagine perche la left è a 0 */
+    /*33% { left: -100%; } /* all 33% del tempo (45s) , la left andrà a -100(cioe lo spazio intero di un immaggine), quindi shiftiamo l'intera immagine e vedremo la seconda slide*/
+    /* 61% { left: -100%; } /* La seconda slide sarà visibile dal 33% del tempo fino al 61% contando il tempo fino al cambio sarà visibile fino a 65%*/
+    /* 66% { left: -200%; } /* al 66% shifeteremo verso sinistra questa volta di 200 (Grandezza di due slide) per vedere la terza (slide)*/
+    /* 94% { left: -200%; }
+} */
+
+.HeaderQuick2{
+    display: none;
 }
+
+
 
 @media screen and (max-width: 1180px) {
 
-    .homeElement{
-        width: 20%;
-        text-decoration: none;
-        display: flex;
-        justify-content: right;
-        align-items: flex-end;
-    }
-
-    .formSearch{
-        width: 50%;
-        margin-left: 10%;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-    }
-
-    .hamburger{
-        display: block;
-        width: 20%;
-        cursor: pointer;
-        position: relative;
-        margin: 0;
+    .SonFirstDiv{
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
 
     .header{
-        background-color: #f1f1f1;
+        height: 110px;
     }
 
+    .homeElement{
+        order: 2;
+        width: 33.33%;
+        height: 50%;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .homeElement a{
+        display: flex;
+        align-items: center;
+    }
+
+    .hamburger{
+        height: 50%;
+        order: 1;
+        width: 30%;
+        display: flex;
+        align-items: center;
+        gap: 6.2%;
+    }
+
+
+    .PrefersResp{
+        display: flex;
+        align-items: center;
+        height: 70%;
+        border-radius: 100%;
+    }
+
+    .PrefersResp:hover{
+        background-color: rgb(232, 232, 232);
+    }
+
+    .PrefersResp img {
+        width: 28px;
+        height: 28px
+    }
+
+    .cartDirect{
+        height: 10px;
+        width: 10px;
+    }
     .HeaderQuick{
         display: none;
     }
 
     .HeaderQuick2 {
+        height: 50%;
+        order: 3;
         position: relative;
-        top: 30%;
-        height: 65px;
+        width:36.67%;
+        display: flex;
+        align-items: center;
+        gap: 10%;
     }
 
-    .noDec2{
-        text-decoration: none;
-        width: 100%;
-        height: 65px;
-    }
-
-    .forButton2{
+    .HeaderQuick2 > :first-child{
+        height: 40px;
+        position: absolute;
+        right: 0;
+        width: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100%;
-        height: 65px;
-        border: 1px solid royalblue;
-        background-color: transparent;
-        color: royalblue;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-        border-radius: 6px;
-        opacity: 0.75;
+        border-radius: 50px;
     }
 
-    .forButton2:hover{
-        opacity: 1;
+    .HeaderQuick2 > :nth-child(2){
+        height: 40px;
+        position: absolute;
+        right: 50px;
+        width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px;
+    }
+
+    .HeaderQuick2 > :nth-child(2):hover{
+        background-color: rgb(232, 232, 232);
+    }
+
+    .HeaderQuick2 > :first-child:hover{
+        background-color: rgb(232, 232, 232);
+    }
+
+
+    .HeaderQuick2 img {
+        width: 28px;
+        height: 28px
     }
 
     .nav{
@@ -423,30 +506,10 @@ ul{
         display: flex;
         align-items: center;
     }
-
-
-    .forButton3{
-        margin-top: 10px;
-        width: 100%;
-        background-color: transparent;
-        color: royalblue;
-        border: none;
-        border-bottom: 1px solid royalblue;
-        height: 40px;
-    }
-
-    .Arrow{
-        color: royalblue;
-        position: absolute;
-        right: 5px;
-    }
-
-    .Arrow:hover{
-        color: cornflowerblue;
-    }
+    /* Slider Banner */
 
     .Slider{
-       height: 400px;
+        height: 400px;
     }
 
     .Slider, .slide img {
@@ -454,13 +517,42 @@ ul{
     }
 
     .InnerSlide{
-        width: 12%;
+        width: 16%;
         height: 30px;
     }
 
+    .slide-text1{
+        font-size: 25px;
+        left: 8%;
+    }
+
     .slide-text2{
-        font-size: 3vw;
+        font-size: 25px;
         left: 10%;
+    }
+
+    /* SearchPanel in tablet*/
+
+    .formSearch{
+        height: 50%;
+        width: 100%;
+        order: 4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .searchpanel{
+        width: 75%;
+        padding-left: 8%;
+    }
+
+    .searchpanel:active{
+        border: 1px solid royalblue;
+    }
+
+    .divForSearch{
+        left: 12.7%;
     }
 
 }
