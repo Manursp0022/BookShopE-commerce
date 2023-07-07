@@ -22,32 +22,22 @@ public class MostraPreferitiServlet extends HttpServlet {
         List<PreferitoE> prefE = (List<PreferitoE>) request.getSession().getAttribute("prefE");
         LibroCartaceoDAO libroCartaceoDAO = new LibroCartaceoDAO();
         LibroElettronicoDAO libroElettronicoDAO = new LibroElettronicoDAO();
-        List<LibroCartaceo> libroCartaceos = libroCartaceoDAO.doRetrieveAll();
-        List<LibroElettronico> libroElettronicos = libroElettronicoDAO.doRetrieveAll();
         List<LibroCartaceo> send1 = new ArrayList<>();
         List<LibroElettronico> send2 = new ArrayList<>();
         if(prefC != null){
             for(PreferitoC pref : prefC){
-                for(LibroCartaceo libro : libroCartaceos){
-                    if(libro.getCodice().equals(pref.getLibroCartaceo()))
-                        send1.add(libro);
-                    break;
-                }
+                send1.add(libroCartaceoDAO.doRetrieveByCode(pref.getLibroCartaceo()));
             }
-            request.getSession().setAttribute("libri", send1);
+            request.setAttribute("libri", send1);
         }
         if(prefE != null){
             for(PreferitoE pref : prefE){
-                for(LibroElettronico libro : libroElettronicos){
-                    if(libro.getCodice().equals(pref.getLibroElettronico()))
-                        send2.add(libro);
-                    break;
-                }
+                send2.add(libroElettronicoDAO.doRetrieveByCode(pref.getLibroElettronico()));
             }
-            request.getSession().setAttribute("libriE", send2);
+            request.setAttribute("libriE", send2);
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("MostraLibri.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("MostraPreferiti.jsp");
         rd.forward(request,response);
     }
 

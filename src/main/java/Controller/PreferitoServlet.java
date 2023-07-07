@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 
 @WebServlet(name = "PreferitoServlet", value = "/preferito-servlet")
 public class PreferitoServlet extends HttpServlet {
@@ -25,7 +23,6 @@ public class PreferitoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            Logger logger = Logger.getLogger("log");
             HttpSession session = request.getSession(false);
             int mode = (int) session.getAttribute("mode");
             String codice = request.getParameter("codice");
@@ -39,7 +36,6 @@ public class PreferitoServlet extends HttpServlet {
             List<LibroElettronico> libriE = libroElettronicoDAO.doRetrieveAll();
             boolean rimosso = false;
             if(mode == 3){
-                logger.log(Level.INFO,"primo if");
                 if(prefC == null){
                 for(LibroCartaceo l : libriC){
                     if(codice.equals(l.getCodice())){
@@ -50,7 +46,6 @@ public class PreferitoServlet extends HttpServlet {
                         prefC.add(pref);
                         session.setAttribute("prefC", prefC);
                         stampa.print("1");
-                        logger.log(Level.INFO,"aggiunto ai pref");
                         break;
                         }
                     }
@@ -64,7 +59,11 @@ public class PreferitoServlet extends HttpServlet {
                             prefC.remove(prefs);
                             session.setAttribute("prefC", prefC);
                             stampa.print("-1");
-                            logger.log(Level.INFO, "rimosso dai preferiti");
+                            if(prefC.isEmpty() && prefE == null){
+                                stampa.print("-2");
+                            } else if (prefC.isEmpty() && prefE.isEmpty()) {
+                                stampa.print("-2");
+                            }
                             rimosso = true;
                             break;
                         }
@@ -75,7 +74,6 @@ public class PreferitoServlet extends HttpServlet {
                                 prefC.add(pref);
                                 session.setAttribute("prefC", prefC);
                                 stampa.print("1");
-                                logger.log(Level.INFO, "aggiunto ai preferiti se esiste");
                                 break;
                             }
                         }
@@ -91,7 +89,6 @@ public class PreferitoServlet extends HttpServlet {
                             prefE.add(pref);
                             session.setAttribute("prefE", prefE);
                             stampa.print("1");
-                            logger.log(Level.INFO,"aggiunto ai pref ele");
                             break;
                         }
                     }
@@ -105,7 +102,11 @@ public class PreferitoServlet extends HttpServlet {
                             prefE.remove(prefs);
                             session.setAttribute("prefE", prefE);
                             stampa.print("-1");
-                            logger.log(Level.INFO, "rimosso dai preferiti");
+                            if(prefE.isEmpty() && prefC == null){
+                                stampa.print("-2");
+                            } else if (prefC.isEmpty() && prefE.isEmpty()) {
+                                stampa.print("-2");
+                            }
                             rimosso = true;
                             break;
                         }
@@ -116,7 +117,6 @@ public class PreferitoServlet extends HttpServlet {
                                 prefE.add(pref);
                                 session.setAttribute("prefE", prefE);
                                 stampa.print("1");
-                                logger.log(Level.INFO, "aggiunto ai pref ele se esiste");
                                 break;
                             }
                         }
@@ -126,7 +126,6 @@ public class PreferitoServlet extends HttpServlet {
                 PreferitoCDAO preferitoCDAO = new PreferitoCDAO();
                 PreferitoEDAO preferitoEDAO = new PreferitoEDAO();
                 Utente utente = (Utente) session.getAttribute("utente");
-                logger.log(Level.INFO,"secondo if");
                 if(prefC == null){
                     for(LibroCartaceo l : libriC){
                         if(codice.equals(l.getCodice())){
@@ -138,7 +137,6 @@ public class PreferitoServlet extends HttpServlet {
                             preferitoCDAO.doSave(pref);
                             session.setAttribute("prefC", prefC);
                             stampa.print("1");
-                            logger.log(Level.INFO,"aggiunto ai pref");
                             break;
                         }
                     }
@@ -153,7 +151,11 @@ public class PreferitoServlet extends HttpServlet {
                             preferitoCDAO.doDelete(pref);
                             session.setAttribute("prefC", prefC);
                             stampa.print("-1");
-                            logger.log(Level.INFO, "rimosso dai preferiti");
+                            if(prefC.isEmpty() && prefE == null){
+                                stampa.print("-2");
+                            } else if (prefC.isEmpty() && prefE.isEmpty()) {
+                                stampa.print("-2");
+                            }
                             rimosso = true;
                             break;
                         }
@@ -165,7 +167,6 @@ public class PreferitoServlet extends HttpServlet {
                                 preferitoCDAO.doSave(pref);
                                 session.setAttribute("prefC", prefC);
                                 stampa.print("1");
-                                logger.log(Level.INFO, "aggiunto ai preferiti se esiste");
                                 break;
                             }
                         }
@@ -182,7 +183,6 @@ public class PreferitoServlet extends HttpServlet {
                             preferitoEDAO.doSave(pref);
                             session.setAttribute("prefE", prefE);
                             stampa.print("1");
-                            logger.log(Level.INFO,"aggiunto ai pref ele");
                             break;
                         }
                     }
@@ -197,7 +197,11 @@ public class PreferitoServlet extends HttpServlet {
                             preferitoEDAO.doDelete(pref);
                             session.setAttribute("prefE", prefE);
                             stampa.print("-1");
-                            logger.log(Level.INFO, "rimosso dai preferiti");
+                            if(prefE.isEmpty() && prefC == null){
+                                stampa.print("-2");
+                            } else if (prefC.isEmpty() && prefE.isEmpty()) {
+                                stampa.print("-2");
+                            }
                             rimosso = true;
                             break;
                         }
@@ -209,7 +213,6 @@ public class PreferitoServlet extends HttpServlet {
                                 preferitoEDAO.doSave(pref);
                                 session.setAttribute("prefE", prefE);
                                 stampa.print("1");
-                                logger.log(Level.INFO, "aggiunto ai pref ele se esiste");
                                 break;
                             }
                         }

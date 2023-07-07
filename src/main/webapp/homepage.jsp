@@ -51,7 +51,7 @@
                 </ul>
 
 
-            <form class="formSearch" action="/search">
+            <form class="formSearch" action="search-servlet">
                 <input class="searchpanel" type="text" name="search" placeholder="Cerca">
                 <div class="divForSearch">
                     <lord-icon
@@ -66,7 +66,7 @@
             </form>
 
             <div class="HeaderQuick">
-                <a class="noDec" href="#"><button class="forButton">PREFERITI</button></a>
+                <a class="noDec" href="MostraPreferitiServlet"><button class="forButton">PREFERITI</button></a>
                 <%
                     if(mode == 2 || mode == 1){%>
                 <a style="text-decoration: none" href="LogOutServlet"><button class="forButton">LOG-OUT</button></a>

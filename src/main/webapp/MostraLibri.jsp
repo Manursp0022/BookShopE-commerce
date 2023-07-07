@@ -35,15 +35,15 @@
     int mode = (int) request.getSession(false).getAttribute("mode");
     List<PreferitoC> prefC = (ArrayList<PreferitoC>) request.getSession().getAttribute("prefC");
     List<PreferitoE> prefE = (ArrayList<PreferitoE>) request.getSession().getAttribute("prefE");
-    List<String> codici = new ArrayList<>();
+    List<String> codiciPref = new ArrayList<>();
     if(prefC != null){
     for(PreferitoC pref : prefC){
-        codici.add(pref.getLibroCartaceo());
+        codiciPref.add(pref.getLibroCartaceo());
         }
     }
     if(prefE != null) {
         for (PreferitoE pref : prefE) {
-            codici.add(pref.getLibroElettronico());
+            codiciPref.add(pref.getLibroElettronico());
         }
     }
 %>
@@ -101,7 +101,7 @@
                     <a><img src="CSS/134216_menu_lines_hamburger_icon.svg"></a>
                 </div>
                 <div class="PrefersResp">
-                    <a href=""><img src="CSS/Heart3.svg"></a>
+                    <a href="MostraPreferitiServlet"><img src="CSS/Heart3.svg"></a>
                 </div>
             </div>
 
@@ -147,8 +147,8 @@
                         <a href="Registrazione.jsp">Log-in/Sign-Up</a><%}%>
                     </div>
                     <div>
-                        <a href=""><img style="width: 35px; height: 40px" src="CSS/Heart3.svg"></a>
-                        <a href="">Preferiti</a>
+                        <a href="MostraPreferitiServlet"><img style="width: 35px; height: 40px" src="CSS/Heart3.svg"></a>
+                        <a href="MostraPreferitiServlet">Preferiti</a>
                     </div>
                 </div>
                 <div class="bluBan"></div>
@@ -185,7 +185,7 @@
         <%=prezzo + "€"%>
         <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
         <%
-            if(codici != null && codici.contains(codice)){
+            if(codiciPref != null && codiciPref.contains(codice)){
         %>
         <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
         <%
@@ -226,7 +226,7 @@
         <%=prezzo + "€"%>
         <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
         <%
-            if(codici != null && codici.contains(codice)){
+            if(codiciPref != null && codiciPref.contains(codice)){
         %>
         <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
         <%
@@ -301,11 +301,9 @@
             if (this.status == 200 && this.readyState == 4) {
                 let s = this.responseText;
                 if(s === "1"){
-                    console.log("inserito");
                     button.html("Rimuovi dai preferiti");
                 }
                 else if (s === "-1"){
-                    console.log("rimosso");
                     button.html("Aggiungi ai preferiti");
                 }
                 }

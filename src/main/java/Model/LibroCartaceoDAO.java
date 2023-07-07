@@ -1,7 +1,6 @@
 package Model;
 
 import Model.Bean.LibroCartaceo;
-import Model.Bean.LibroElettronico;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ public class LibroCartaceoDAO {
     public LibroCartaceo doRetrieveByCode(String code){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT codice,titolo,autore,prezzo,genere,quantita_disp FROM LibroCartaceo WHERE codice = ?");
+                    con.prepareStatement("SELECT codice,titolo,autore,prezzo,genere,quantita_disp FROM Libro_Cartaceo WHERE codice = ?");
             ps.setString(1,code);
             ResultSet rs = ps.executeQuery();
             if(rs.next()) {
