@@ -88,7 +88,7 @@
                     if(mode == 2 || mode == 1){%>
                 <a style="text-decoration: none" href="LogOutServlet"><button class="forButton">LOG-OUT</button></a>
                 <%}else{%><a style="text-decoration: none" href="Login.jsp"><button class="forButton">LOG-IN</button></a><%}%>
-                <a style="text-decoration: none" href="#"><button class="forButton">CARRELLO(<%=nprod%>)</button></a>
+                <a style="text-decoration: none" href="#"><button class="forButton">CARRELLO(<span id="num_prod"><%=nprod%></span>)</button></a>
             </div>
 
             <div class="HeaderQuick2">
@@ -136,7 +136,7 @@
                 <div class="HeaderQuick3">
                     <div>
                         <a href=""><img style="width: 35px; height: 35px" src="CSS/ShopBag2.svg"></a>
-                        <a href="">Carrello(<%=nprod%>)</a>
+                        <a href="">Carrello(<span id="num_prod2"><%=nprod%></span>)</a>
                     </div>
                     <div>
                         <%
@@ -262,10 +262,8 @@
         xhttp.onreadystatechange = function () {
             if (this.status == 200 && this.readyState == 4) {
                 let s = this.responseText;
-                if (s === "-1") {
-                    alert("Utente non loggato. Impossibile aggiungere al carrello.")
-                }else if(s === "-2"){
-                    alert("Libro out of stock")
+                if(s === "-2"){
+                    alert("Quantità non disponibile")
                 }
                 else {
                     document.getElementById("num_prod").innerHTML = s;

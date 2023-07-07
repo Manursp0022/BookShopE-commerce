@@ -1,15 +1,14 @@
 package Controller;
 
-import Model.Bean.Carrello;
-import Model.Bean.Utente;
-import Model.CarrelloDAO;
-import Model.UtenteDAO;
+import Model.*;
+import Model.Bean.*;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -71,61 +70,79 @@ public class RegistrazioneServlet extends HttpServlet {
         utente.setEmail(email);
         utente.setAdmin(admin);
         utente.setTelefono(telefono);
-        String errore;
-        if((username == null) || (passwordrep == null) || (password == null) || (email == null) || (telefono == null) || (citta == null) || (CAP == null) || (via == null)){
-            RequestDispatcher dispatcher = request.getRequestDispatcher("Registrazione.jsp");
-            errore = "true";
-            request.setAttribute("6", errore);
-            dispatcher.forward(request, response);
+        String errore = "";
+        if((username.equals("")) || (passwordrep.equals("")) || (password.equals("")) || (email.equals("")) || (telefono.equals("")) || (citta.equals("")) || (CAP.equals("")) || (via.equals(""))){
+            errore = errore + "6,";
         }
         if (!patternMatchCAP || !lengthMatchCAP) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("Registrazione.jsp");
-            errore = "true";
-            request.setAttribute("4", errore);
-            dispatcher.forward(request, response);
+            errore = errore + "4,";
         }
         regexPattern = Pattern.compile(patternCELL);
         matcher = regexPattern.matcher(telefono);
         boolean patternMatchCELL = matcher.matches();
         boolean lengthMatchCELL = (telefono.length() == lengthCELL);
         if (!patternMatchCELL || !lengthMatchCELL) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("Registrazione.jsp");
-            errore = "true";
-            request.setAttribute("5", errore);
-            dispatcher.forward(request, response);
+            errore = errore + "5,";
         }
         if (!(passwordrep.equals(password))) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("Registrazione.jsp");
-            errore = "true";
-            request.setAttribute("2", errore);
-            dispatcher.forward(request, response);
+            errore = errore + "2,";
         }
         if (!(email.contains("@"))) {
             {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("Registrazione.jsp");
-                errore = "true";
-                request.setAttribute("3", errore);
-                dispatcher.forward(request, response);
+                errore = errore + "3,";
             }
         }
         for (Utente u : utenti) {
             if (u.getEmail().equals(utente.getEmail())) {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("Registrazione.jsp");
-                errore = "true";
-                request.setAttribute("1", errore);
-                dispatcher.forward(request, response);
+                errore = errore + "1,";
             }
         }
-        utenteDAO.doSave(utente);
-        Carrello cart = new Carrello();
-        cart.setUtente(email);
-        CarrelloDAO carrelloDAO = new CarrelloDAO();
-        carrelloDAO.doSave(cart);
-        synchronized (this) {
-            request.getSession().setAttribute("utente", utente);
+        if(errore.equals("")) {
+            HttpSession session = request.getSession();
+            utenteDAO.doSave(utente);
+            CarrelloDAO carrelloDAO = new CarrelloDAO();
+            ContenereCDAO contenereCDAO = new ContenereCDAO();
+            ContenereEDAO contenereEDAO = new ContenereEDAO();
+            synchronized (this) {
+                Carrello guestCart = (Carrello) session.getAttribute("cart");
+                guestCart.setUtente(email);
+                carrelloDAO.doSave(guestCart);
+                List<ContenereC> contenereC = (List<ContenereC>)session.getAttribute("contenereC");
+                for(ContenereC c: contenereC){
+                    c.setCarrello(email);
+                    contenereCDAO.doSave(c);
+                }
+                List<ContenereE> contenereE = (List<ContenereE>)session.getAttribute("contenereE");
+                for(ContenereE e: contenereE){
+                    e.setCarrello(email);
+                    contenereEDAO.doSave(e);
+                }
+                List<PreferitoC> prefC = (List<PreferitoC>) session.getAttribute("prefC");
+                PreferitoCDAO preferitoCDAO = new PreferitoCDAO();
+                if(prefC != null){
+                    for(PreferitoC pref : prefC){
+                        pref.setUtente(email);
+                        preferitoCDAO.doSave(pref);
+                    }
+                }
+                List<PreferitoE> prefE = (List<PreferitoE>) session.getAttribute("prefE");
+                PreferitoEDAO preferitoEDAO = new PreferitoEDAO();
+                if(prefE != null){
+                    for(PreferitoE pref : prefE){
+                        pref.setUtente(email);
+                        preferitoEDAO.doSave(pref);
+                    }
+                }
+                session.setAttribute("utente", utente);
+            }
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");
+            dispatcher.forward(request, response);
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");
-        dispatcher.forward(request, response);
+        else{
+            request.setAttribute("errore",errore);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Registrazione.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     @Override

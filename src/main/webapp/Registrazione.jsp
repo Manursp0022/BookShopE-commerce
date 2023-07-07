@@ -72,27 +72,29 @@
         <p style="color: red">
             <%
                 String errore = (String) request.getAttribute("errore");
-                if(errore != null && errore == "1"){%>
-                <%="Utente già registrato"%>
-            <%}
-                else if(errore != null && errore == "2"){ %>
-            <%="Le password non corrispondono"%>
-            <%
+                String[] strings;
+                String risposta = "";
+                if(errore != null) {
+                    strings = errore.split(",");
+                    for (String s : strings) {
+                        if (s.equals("1")) {
+                            risposta += "Utente già registrato<br>";
+                        } else if (s.equals("2")) {
+                            risposta += "Le password non corrispondono<br>";
+                        } else if (s.equals("3")) {
+                            risposta += "L'email non è corretta<br>";
+                        } else if (s.equals("4")) {
+                            risposta += "CAP non corretto<br>";
+                        } else if (s.equals("5")) {
+                            risposta += "Telefono non corretto<br>";
+                        } else if (s.equals("6")) {
+                            risposta += "Campo/i nullo/i<br>";
+                        }
+                    }
                 }
-                else if(errore != null && errore == "3"){ %>
-            <%="L'email non è corretta"%>
-            <%
-                }else if(errore != null && errore == "4"){ %>
-            <%="CAP non corretto"%>
-            <%
-                }else if(errore != null && errore == "5"){ %>
-            <%="Il telefono non è corretto"%>
-            <%
-                }else if(errore != null && errore == "6"){ %>
-            <%="Campo/i mancante/i"%>
-            <%
-                }
-            %>
+            if(!risposta.equals("")){%>
+                <%=risposta%>
+            <%}%>
         </p>
     </form>
 </div>

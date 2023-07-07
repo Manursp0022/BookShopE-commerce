@@ -1,19 +1,14 @@
 package Controller;
 
-import Model.Bean.Carrello;
-import Model.Bean.PreferitoC;
-import Model.Bean.PreferitoE;
-import Model.CarrelloDAO;
-import Model.PreferitoCDAO;
-import Model.PreferitoEDAO;
+import Model.*;
+import Model.Bean.*;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import Model.Bean.Utente;
-import Model.UtenteDAO;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -41,11 +36,18 @@ public class LoginServlet extends HttpServlet {
             List<PreferitoE> preferitiE = preferitoEDAO.doRetrieveByUtente(utente.getEmail());
             PreferitoCDAO preferitoCDAO = new PreferitoCDAO();
             List<PreferitoC> preferitiC = preferitoCDAO.doRetrieveByUtente(utente.getEmail());
+            ContenereCDAO contenereCDAO = new ContenereCDAO();
+            List<ContenereC> contenereC = contenereCDAO.doRetrieveByCart(utente.getEmail());
+            ContenereEDAO contenereEDAO = new ContenereEDAO();
+            List<ContenereE> contenereE = contenereEDAO.doRetrieveByCarrello(utente.getEmail());
             synchronized (this) {
-                request.getSession().setAttribute("utente", utente);
-                request.getSession().setAttribute("cart", cart);
-                request.getSession().setAttribute("prefC", preferitiC);
-                request.getSession().setAttribute("prefE", preferitiE);
+                HttpSession session = request.getSession();
+                session.setAttribute("utente", utente);
+                session.setAttribute("cart", cart);
+                session.setAttribute("prefC", preferitiC);
+                session.setAttribute("prefE", preferitiE);
+                session.setAttribute("contenereC",contenereC);
+                session.setAttribute("contenereE",contenereE);
                 if (utente.isAdmin())
                     request.getSession().setAttribute("mode", 1);
                 else
