@@ -142,9 +142,9 @@
                         <%
                             if(mode == 2 || mode == 1){%>
                         <a href="LogOutServlet"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
-                        <a href="Registrazione.jsp">Log-Out</a>
+                        <a href="LogOutServlet">Log-Out</a>
                         <%}else{%><a style="text-decoration: none" href="Login.jsp"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
-                        <a href="Registrazione.jsp">Log-in/Sign-Up</a><%}%>
+                        <a href="Login.jsp">Log-in/Sign-Up</a><%}%>
                     </div>
                     <div>
                         <a href="MostraPreferitiServlet"><img style="width: 35px; height: 40px" src="CSS/Heart3.svg"></a>
