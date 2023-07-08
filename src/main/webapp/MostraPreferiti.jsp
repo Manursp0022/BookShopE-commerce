@@ -85,15 +85,20 @@
       <div class="HeaderQuick">
         <a class="noDec" href="MostraPreferitiServlet"><button class="forButton">PREFERITI</button></a>
         <%
-          if(mode == 2 || mode == 1){%>
-        <a style="text-decoration: none" href="LogOutServlet"><button class="forButton">LOG-OUT</button></a>
-        <%}else{%><a style="text-decoration: none" href="Login.jsp"><button class="forButton">LOG-IN</button></a><%}%>
+          if(mode == 2){%>
+        <a style="text-decoration: none" href="profilo.jsp"><button class="forButton">PROFILO</button></a>
+        <%}else if(mode == 1) {%><a style="text-decoration: none" href="admin.jsp"><button class="forButton">ADMIN</button></a>
+        <%} else{%><a style="text-decoration: none" href="Login.jsp"><button class="forButton">LOG-IN</button></a><%}%>
         <a style="text-decoration: none" href="MostraCarrelloServlet"><button class="forButton">CARRELLO(<span id="num_prod"><%=nprod%></span>)</button></a>
       </div>
 
       <div class="HeaderQuick2">
-        <div><a href=""><img src="CSS/ShopBag2.svg"></a></div>
-        <div><a href="Login.jsp"><img src="CSS/Account.svg"></a></div>
+        <div><a href="MostraCarrelloServlet"><img src="CSS/ShopBag2.svg"></a></div>
+        <%
+          if(mode == 2){%>
+        <div><a href="profilo.jsp"><img src="CSS/Account.svg"></a></div>
+        <%}else if(mode == 1) {%><div><a href="admin.jsp"><img src="CSS/Account.svg"></a></div>
+        <%} else{%><div><a href="Login.jsp"><img src="CSS/Account.svg"></a></div><%}%>
       </div>
 
       <div class="hamburger" id="openBr">
@@ -140,11 +145,13 @@
           </div>
           <div>
             <%
-              if(mode == 2 || mode == 1){%>
-            <a href="LogOutServlet"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
-            <a href="Registrazione.jsp">Log-Out</a>
-            <%}else{%><a style="text-decoration: none" href="Login.jsp"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
-            <a href="Registrazione.jsp">Log-in/Sign-Up</a><%}%>
+              if(mode == 2){%>
+            <a style="text-decoration: none" href="profilo.jsp"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
+            <a href="profilo.jsp">Profilo</a>
+            <%}else if(mode == 1) {%><a style="text-decoration: none" href="admin.jsp"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
+            <a href="admin.jsp">Admin</a>
+            <%} else{%><a style="text-decoration: none" href="Login.jsp"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
+            <a href="Login.jsp">Log-In/Sign-in</a><%}%>
           </div>
           <div>
             <a href="MostraPreferitiServlet"><img style="width: 35px; height: 40px" src="CSS/Heart3.svg"></a>

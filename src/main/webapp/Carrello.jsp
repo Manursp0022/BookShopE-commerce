@@ -33,10 +33,6 @@
         nprod = cart.getnLibri();
     }
     int mode = (int) request.getSession(false).getAttribute("mode");
-    List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
-    List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
-    List<ContenereE> contenereE = (List<ContenereE>) request.getSession().getAttribute("contenereE");
-    List<ContenereC> contenereC = (List<ContenereC>) request.getSession().getAttribute("contenereC");
 %>
 <header class="header">
 
@@ -84,7 +80,11 @@
 
             <div class="HeaderQuick2">
                 <div><a href=""><img src="CSS/ShopBag2.svg"></a></div>
-                <div><a href="Login.jsp"><img src="CSS/Account.svg"></a></div>
+                <%
+                    if(mode == 2){%>
+                <div><a href="profilo.jsp"><img src="CSS/Account.svg"></a></div>
+                <%}else if(mode == 1) {%><div><a href="admin.jsp"><img src="CSS/Account.svg"></a></div>
+                <%} else{%><div><a href="Login.jsp"><img src="CSS/Account.svg"></a></div><%}%>
             </div>
 
             <div class="hamburger" id="openBr">
@@ -131,11 +131,13 @@
                     </div>
                     <div>
                         <%
-                            if(mode == 2 || mode == 1){%>
-                        <a href="LogOutServlet"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
-                        <a href="LogOutServlet">Log-Out</a>
-                        <%}else{%><a style="text-decoration: none" href="Login.jsp"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
-                        <a href="Login.jsp">Log-in/Sign-Up</a><%}%>
+                            if(mode == 2){%>
+                        <a style="text-decoration: none" href="profilo.jsp"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
+                        <a href="profilo.jsp">Profilo</a>
+                        <%}else if(mode == 1) {%><a style="text-decoration: none" href="admin.jsp"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
+                        <a href="admin.jsp">Admin</a>
+                        <%} else{%><a style="text-decoration: none" href="Login.jsp"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
+                        <a href="Login.jsp">Log-In/Sign-in</a><%}%>
                     </div>
                     <div>
                         <a href="MostraPreferitiServlet"><img style="width: 35px; height: 40px" src="CSS/Heart3.svg"></a>
@@ -149,6 +151,12 @@
 
     </div>
 </header>
+<%
+    List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
+    List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
+    List<ContenereE> contenereE = (List<ContenereE>) request.getSession().getAttribute("contenereE");
+    List<ContenereC> contenereC = (List<ContenereC>) request.getSession().getAttribute("contenereC");
+%>
 <div style="color: red" id="emptycart"></div>
 <%if(cart.getnLibri() == 0) {%>
 <div style="color: red" id="emptycart">Carrello vuoto</div>
@@ -244,5 +252,18 @@
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhttp.send("codice=" + codice);
     })
+</script>
+<script>
+    let hamburger = document.querySelector(".HambIcon");
+    let closeIcon = document.getElementById("closeMenu");
+    let mobileMenu = document.getElementById("mobileMenu");
+
+    hamburger.addEventListener("click", function() {
+        mobileMenu.style.transform = 'translateX(0)'; // sposta il menu a destra
+    });
+
+    closeIcon.addEventListener("click", function() {
+        mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
+    });
 </script>
 </html>

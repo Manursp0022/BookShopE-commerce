@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="container">
-    <form class="form signup" action="login-servlet">
+    <form class="form signup" action="login-servlet" method="post">
     <h2>Accesso</h2>
     <div class="inputBox">
       <input type="text" name="email" required="required">
