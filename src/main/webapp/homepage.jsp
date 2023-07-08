@@ -1,4 +1,3 @@
-
 <%@ page import="Model.Bean.Carrello" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -42,13 +41,13 @@
                 </a>
             </div>
 
-                <ul class="nav">
-                    <li><a href="MostraLibriServlet?id=1" class="menuItem">Libri</a></li>
-                    <li><a href="MostraLibriServlet?id=2" class="menuItem">Bambini e Ragazzi</a></li>
-                    <li><a href="MostraLibriServlet?id=3" class="menuItem">Fumetti e manga</a></li>
-                    <li><a href="MostraLibriServlet?id=4" class="menuItem">Libri Vintage</a></li>
-                    <li><a href="MostraLibriServlet?id=5" class="menuItem">E-Book</a></li>
-                </ul>
+            <ul class="nav">
+                <li><a href="MostraLibriServlet?id=1" class="menuItem">Libri</a></li>
+                <li><a href="MostraLibriServlet?id=2" class="menuItem">Bambini e Ragazzi</a></li>
+                <li><a href="MostraLibriServlet?id=3" class="menuItem">Fumetti e manga</a></li>
+                <li><a href="MostraLibriServlet?id=4" class="menuItem">Libri Vintage</a></li>
+                <li><a href="MostraLibriServlet?id=5" class="menuItem">E-Book</a></li>
+            </ul>
 
 
             <form class="formSearch" action="search-servlet">
@@ -117,22 +116,22 @@
                     </a>
                 </div>
                 <div class="HeaderQuick3">
-                        <div>
-                                <a href=""><img style="width: 35px; height: 35px" src="CSS/ShopBag2.svg"></a>
-                                <a href="">Carrello(<%=nprod%>)</a>
-                        </div>
-                        <div>
-                            <%
-                                if(mode == 2 || mode == 1){%>
-                            <a href="LogOutServlet"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
-                            <a href="Registrazione.jsp">Log-Out</a>
-                            <%}else{%><a style="text-decoration: none" href="Login.jsp"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
-                            <a href="Registrazione.jsp">Log-in/Sign-Up</a><%}%>
-                        </div>
-                        <div>
-                            <a href=""><img style="width: 35px; height: 40px" src="CSS/Heart3.svg"></a>
-                            <a href="">Preferiti</a>
-                        </div>
+                    <div>
+                        <a href=""><img style="width: 35px; height: 35px" src="CSS/ShopBag2.svg"></a>
+                        <a href="">Carrello(<%=nprod%>)</a>
+                    </div>
+                    <div>
+                        <%
+                            if(mode == 2 || mode == 1){%>
+                        <a href="LogOutServlet"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
+                        <a href="Registrazione.jsp">Log-Out</a>
+                        <%}else{%><a style="text-decoration: none" href="Login.jsp"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
+                        <a href="Registrazione.jsp">Log-in/Sign-Up</a><%}%>
+                    </div>
+                    <div>
+                        <a href=""><img style="width: 35px; height: 40px" src="CSS/Heart3.svg"></a>
+                        <a href="">Preferiti</a>
+                    </div>
                 </div>
                 <div class="bluBan"></div>
             </div>

@@ -44,10 +44,10 @@ public class ConPool {
     public static Connection getConnection() throws SQLException {
         if (datasource == null) {
             PoolProperties p = new PoolProperties();
-            p.setUrl("jdbc:mysql://localhost:3306/sito_libreria");
+            p.setUrl("jdbc:mysql://localhost:3306/libri");
             p.setDriverClassName("com.mysql.cj.jdbc.Driver");
             p.setUsername("root");
-            p.setPassword("root");
+            p.setPassword("pabloneruda16");
             p.setMaxActive(100);
             p.setInitialSize(10);
             p.setMinIdle(10);

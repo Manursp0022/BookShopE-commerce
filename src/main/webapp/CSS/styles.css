@@ -142,7 +142,7 @@ ul{
 /* CSS per bottoni log-in, carrello ecc*/
 
 .HeaderQuick{
-     /* Distanza dal margine destro degli elementi del div*/
+    /* Distanza dal margine destro degli elementi del div*/
     width: 20%;
     display: flex;
     justify-content: center;
@@ -370,13 +370,13 @@ ul{
 }
 
 
- /* @keyframes slide {*/
-    /* 0%, 100% { left: 0; } /* allo 0% del tempo(45s) e al 100% ritorna alla left 0, cioe vedremo la prima immagine */
-    /*28% { left: 0; } /* per il 28% vedremo la prima immagine perche la left è a 0 */
-    /*33% { left: -100%; } /* all 33% del tempo (45s) , la left andrà a -100(cioe lo spazio intero di un immaggine), quindi shiftiamo l'intera immagine e vedremo la seconda slide*/
-    /* 61% { left: -100%; } /* La seconda slide sarà visibile dal 33% del tempo fino al 61% contando il tempo fino al cambio sarà visibile fino a 65%*/
-    /* 66% { left: -200%; } /* al 66% shifeteremo verso sinistra questa volta di 200 (Grandezza di due slide) per vedere la terza (slide)*/
-    /* 94% { left: -200%; }
+/* @keyframes slide {*/
+/* 0%, 100% { left: 0; } /* allo 0% del tempo(45s) e al 100% ritorna alla left 0, cioe vedremo la prima immagine */
+/*28% { left: 0; } /* per il 28% vedremo la prima immagine perche la left è a 0 */
+/*33% { left: -100%; } /* all 33% del tempo (45s) , la left andrà a -100(cioe lo spazio intero di un immaggine), quindi shiftiamo l'intera immagine e vedremo la seconda slide*/
+/* 61% { left: -100%; } /* La seconda slide sarà visibile dal 33% del tempo fino al 61% contando il tempo fino al cambio sarà visibile fino a 65%*/
+/* 66% { left: -200%; } /* al 66% shifeteremo verso sinistra questa volta di 200 (Grandezza di due slide) per vedere la terza (slide)*/
+/* 94% { left: -200%; }
 } */
 
 .HeaderQuick2{
@@ -556,6 +556,4 @@ ul{
     }
 
 }
-
-
 

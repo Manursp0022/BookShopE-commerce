@@ -37,8 +37,8 @@
     List<PreferitoE> prefE = (ArrayList<PreferitoE>) request.getSession().getAttribute("prefE");
     List<String> codiciPref = new ArrayList<>();
     if(prefC != null){
-    for(PreferitoC pref : prefC){
-        codiciPref.add(pref.getLibroCartaceo());
+        for(PreferitoC pref : prefC){
+            codiciPref.add(pref.getLibroCartaceo());
         }
     }
     if(prefE != null) {
@@ -189,9 +189,9 @@
         %>
         <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
         <%
-            }
-            else{
-                %>
+        }
+        else{
+        %>
         <button class="pref" value="<%=codice%>">Aggiungi ai preferiti</button>
         <%
             }
@@ -244,10 +244,10 @@
     }
             if((elettronicos == null) && (cartaceos == null)){
                 %>
-                    <div style="align-content: center; color: red; font-size: large">
-                        Nessun libro trovato.
-                    </div>
-                    <% }
+            <div style="align-content: center; color: red; font-size: large">
+                Nessun libro trovato.
+            </div>
+                <% }
 
     %>
 
@@ -304,8 +304,8 @@
                 else if (s === "-1"){
                     button.html("Aggiungi ai preferiti");
                 }
-                }
             }
+        }
         xhttp.open("POST", "preferito-servlet");
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhttp.send("codice=" + codice);
