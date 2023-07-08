@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet (name = "CarrelloServlet", value = "/carrelloservlet")
 public class CarrelloServlet extends HttpServlet {
@@ -32,6 +34,7 @@ public class CarrelloServlet extends HttpServlet {
             boolean trovatoC = false;
             boolean trovatoE = false;
             boolean outOfStock = false;
+            int numCopie = 0;
             if(mode == 3) {
                 if(!contenereC.isEmpty()){
                     for (LibroCartaceo l : libri) {
@@ -45,6 +48,7 @@ public class CarrelloServlet extends HttpServlet {
                                             break;
                                         }
                                         c.setNumCopie(c.getNumCopie() + 1);
+                                        numCopie = c.getNumCopie();
                                         sessione.setAttribute("contenereC",contenereC);
                                         trovatoC = true;
                                         cart.setnLibri(cart.getnLibri() + 1);
@@ -59,6 +63,7 @@ public class CarrelloServlet extends HttpServlet {
                                     ContenereC nuovoC = new ContenereC();
                                     nuovoC.setLibroCartaceo(codice);
                                     nuovoC.setNumCopie(1);
+                                    numCopie = 1;
                                     nuovoC.setCarrello(cart.getUtente());
                                     contenereC.add(nuovoC);
                                     sessione.setAttribute("contenereC",contenereC);
@@ -77,6 +82,7 @@ public class CarrelloServlet extends HttpServlet {
                                 ContenereC nuovoC = new ContenereC();
                                 nuovoC.setLibroCartaceo(codice);
                                 nuovoC.setNumCopie(1);
+                                numCopie = 1;
                                 nuovoC.setCarrello(cart.getUtente());
                                 contenereC.add(nuovoC);
                                 sessione.setAttribute("contenereC",contenereC);
@@ -94,6 +100,7 @@ public class CarrelloServlet extends HttpServlet {
                             for (ContenereE e : contenereE) {
                                 if (codice.equals(e.getLibroElettronico())) {
                                     e.setNumCopie(e.getNumCopie() + 1);
+                                    numCopie = e.getNumCopie();
                                     trovatoE = true;
                                     sessione.setAttribute("contenereE",contenereE);
                                     cart.setnLibri(cart.getnLibri() + 1);
@@ -106,6 +113,7 @@ public class CarrelloServlet extends HttpServlet {
                                 ContenereE nuovoE = new ContenereE();
                                 nuovoE.setLibroElettronico(codice);
                                 nuovoE.setNumCopie(1);
+                                numCopie = 1;
                                 nuovoE.setCarrello(cart.getUtente());
                                 contenereE.add(nuovoE);
                                 sessione.setAttribute("contenereE",contenereE);
@@ -123,6 +131,7 @@ public class CarrelloServlet extends HttpServlet {
                             ContenereE nuovoE = new ContenereE();
                             nuovoE.setLibroElettronico(codice);
                             nuovoE.setNumCopie(1);
+                            numCopie = 1;
                             nuovoE.setCarrello(cart.getUtente());
                             contenereE.add(nuovoE);
                             sessione.setAttribute("contenereE",contenereE);
@@ -136,7 +145,8 @@ public class CarrelloServlet extends HttpServlet {
                 if (outOfStock) {
                     scrivi.print("-2");
                 }else {
-                    scrivi.print(cart.getnLibri());
+                    String risposta = cart.getnLibri() + "-" + numCopie;
+                    scrivi.print(risposta);
                 }
             }else {
                 CarrelloDAO carrelloDAO = new CarrelloDAO();
@@ -153,6 +163,7 @@ public class CarrelloServlet extends HttpServlet {
                                             break;
                                         }
                                         c.setNumCopie(c.getNumCopie() + 1);
+                                        numCopie = c.getNumCopie();
                                         trovatoC = true;
                                         contenereCDAO.doUpdate(c);
                                         sessione.setAttribute("contenereC",contenereC);
@@ -169,6 +180,7 @@ public class CarrelloServlet extends HttpServlet {
                                     ContenereC nuovoC = new ContenereC();
                                     nuovoC.setLibroCartaceo(codice);
                                     nuovoC.setNumCopie(1);
+                                    numCopie = 1;
                                     nuovoC.setCarrello(cart.getUtente());
                                     contenereCDAO.doSave(nuovoC);
                                     contenereC.add(nuovoC);
@@ -190,6 +202,7 @@ public class CarrelloServlet extends HttpServlet {
                                 ContenereC nuovoC = new ContenereC();
                                 nuovoC.setLibroCartaceo(codice);
                                 nuovoC.setNumCopie(1);
+                                numCopie = 1;
                                 nuovoC.setCarrello(cart.getUtente());
                                 contenereCDAO.doSave(nuovoC);
                                 contenereC.add(nuovoC);
@@ -210,6 +223,7 @@ public class CarrelloServlet extends HttpServlet {
                             for (ContenereE e : contenereE) {
                                 if (codice.equals(e.getLibroElettronico())) {
                                     e.setNumCopie(e.getNumCopie() + 1);
+                                    numCopie = e.getNumCopie();
                                     trovatoE = true;
                                     contenereEDAO.doUpdate(e);
                                     sessione.setAttribute("contenereE",contenereE);
@@ -224,6 +238,7 @@ public class CarrelloServlet extends HttpServlet {
                                 ContenereE nuovoE = new ContenereE();
                                 nuovoE.setLibroElettronico(codice);
                                 nuovoE.setNumCopie(1);
+                                numCopie = 1;
                                 nuovoE.setCarrello(cart.getUtente());
                                 contenereEDAO.doSave(nuovoE);
                                 contenereE.add(nuovoE);
@@ -243,6 +258,7 @@ public class CarrelloServlet extends HttpServlet {
                             ContenereE nuovoE = new ContenereE();
                             nuovoE.setLibroElettronico(codice);
                             nuovoE.setNumCopie(1);
+                            numCopie = 1;
                             nuovoE.setCarrello(cart.getUtente());
                             contenereEDAO.doSave(nuovoE);
                             contenereE.add(nuovoE);
@@ -258,7 +274,8 @@ public class CarrelloServlet extends HttpServlet {
                 if (outOfStock) {
                     scrivi.print("-2");
                 }else {
-                    scrivi.print(cart.getnLibri());
+                    String risposta = cart.getnLibri() + "-" + numCopie;
+                    scrivi.print(risposta);
                 }
             }
         }

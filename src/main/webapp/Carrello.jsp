@@ -1,4 +1,8 @@
-<%@ page import="Model.Bean.Carrello" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="javax.swing.*" %>
+<%@ page import="Model.Bean.*" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="it">
@@ -6,16 +10,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/visLibri.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>E-CommerceBook</title>
-
+    <script src="JavaScript/jquery-3.7.0.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@1,700&family=Rubik:ital,wght@1,300&display=swap" rel="stylesheet">
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@1,700&family=Rubik:ital,wght@1,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-
 </head>
 <body>
 <%
@@ -27,7 +32,11 @@
     else{
         nprod = cart.getnLibri();
     }
-    int mode = (int) request.getSession().getAttribute("mode");
+    int mode = (int) request.getSession(false).getAttribute("mode");
+    List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
+    List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
+    List<ContenereE> contenereE = (List<ContenereE>) request.getSession().getAttribute("contenereE");
+    List<ContenereC> contenereC = (List<ContenereC>) request.getSession().getAttribute("contenereC");
 %>
 <header class="header">
 
@@ -70,7 +79,7 @@
                     if(mode == 2 || mode == 1){%>
                 <a style="text-decoration: none" href="LogOutServlet"><button class="forButton">LOG-OUT</button></a>
                 <%}else{%><a style="text-decoration: none" href="Login.jsp"><button class="forButton">LOG-IN</button></a><%}%>
-                <a style="text-decoration: none" href="MostraCarrelloServlet"><button class="forButton">CARRELLO(<%=nprod%>)</button></a>
+                <a style="text-decoration: none" href="#"><button class="forButton">CARRELLO(<span id="num_prod"><%=nprod%></span>)</button></a>
             </div>
 
             <div class="HeaderQuick2">
@@ -83,7 +92,7 @@
                     <a><img src="CSS/134216_menu_lines_hamburger_icon.svg"></a>
                 </div>
                 <div class="PrefersResp">
-                    <a href=""><img src="CSS/Heart3.svg"></a>
+                    <a href="MostraPreferitiServlet"><img src="CSS/Heart3.svg"></a>
                 </div>
             </div>
 
@@ -117,8 +126,8 @@
                 </div>
                 <div class="HeaderQuick3">
                     <div>
-                        <a href="MostraCarrelloServlet"><img style="width: 35px; height: 35px" src="CSS/ShopBag2.svg"></a>
-                        <a href="MostraCarrelloServlet">Carrello(<%=nprod%>)</a>
+                        <a href=""><img style="width: 35px; height: 35px" src="CSS/ShopBag2.svg"></a>
+                        <a href="">Carrello(<span id="num_prod2"><%=nprod%></span>)</a>
                     </div>
                     <div>
                         <%
@@ -140,56 +149,100 @@
 
     </div>
 </header>
-<!-- Fine Header -->
-<div class="Slider">
-    <figure class="figure">
-        <div class="slide">
-            <img id="slide1" src="CSS/BookWallp.png" alt="BOOKSS">
-            <p class="slide-text1">Immergiti nel mondo dell'Arte</p>
-            <p class="slide-text2">Con la nostra selezione di libri</p>
-            <div class="InnerSlide">
-                <a class="linkButt" href="Registrazione.jsp"><button class="ScopriButt">Scopri</button></a>
-            </div>
+<div style="color: red" id="emptycart"></div>
+<%if(cart.getnLibri() == 0) {%>
+<div style="color: red" id="emptycart">Carrello vuoto</div>
+<%}%>
+<div>
+    <%  if(cartaceos != null) {
+        for (LibroCartaceo l : cartaceos){
+            for(ContenereC c : contenereC) {
+                 if(c.getLibroCartaceo().equals(l.getCodice())) {%>
+        <div class="libroCarrello">
+            <img class="imglib">
+            <%= l.getTitolo() %>
+            <%= "Copie :"%><span id="<%=l.getCodice()%>"> <%=c.getNumCopie()%> </span>
+            <button class="add" value= "<%=l.getCodice() %>">Aggiungi copia</button>
+            <button class="rem" value= "<%=l.getCodice() %>" >Rimuovi copia</button>
         </div>
-
-        <div class="slide">
-            <img id="slide2" src="CSS/wallpaperbetter.jpg" alt="BOOKSS">
-            <p class="slide-text">Testo per la seconda immagine</p>
-        </div>
-
-        <div class="slide">
-            <img id="slide3" src="CSS/BookWallp.png" alt="BOOKSS">
-            <p class="slide-text">Testo per la terza immagine</p>
-        </div>
-
-    </figure>
-    <div class="barContainer">
-        <div class="bar">
-            <div class="fillBar" id="bar1"></div>
-        </div>
-        <div class="bar">
-            <div class="fillBar" id="bar2"></div>
-        </div>
-        <div class="bar">
-            <div class="fillBar" id="bar3"></div>
-        </div>
+    <%
+               break;
+                 }
+            }
+        }
+    }
+      if(elettronicos != null) {
+        for (LibroElettronico l : elettronicos){
+            for(ContenereE c : contenereE) {
+                if(c.getLibroElettronico().equals(l.getCodice())) {%>
+    <div class="libroCarrello">
+        <img class="imglib">
+        <%= l.getTitolo() %>
+        <%= "Copie :"%><span id="<%=l.getCodice()%>"> <%=c.getNumCopie()%> </span>
+        <button class="add" value= "<%=l.getCodice() %>">Aggiungi copia</button>
+        <button class="rem" value= "<%=l.getCodice() %>" >Rimuovi copia</button>
     </div>
+    <%
+                        break;
+                    }
+                }
+            }
+        }
+    %>
 </div>
-
-
 </body>
 <script>
-    let hamburger = document.querySelector(".HambIcon");
-    let closeIcon = document.getElementById("closeMenu");
-    let mobileMenu = document.getElementById("mobileMenu");
+    $(".add").click(function addCart() {
+        let codice = $(this).val();
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.status == 200 && this.readyState == 4) {
+                let s = this.responseText;
+                if(s === "-2"){
+                    alert("Quantità non disponibile")
+                }
+                else {
+                    const array = s.split("-");
+                    document.getElementById("num_prod").innerHTML = array[0];
+                    document.getElementById("num_prod2").innerHTML = array[0];
+                    document.getElementById(codice).innerHTML = array[1];
+                }
+            }
+        }
+        xhttp.open("POST", "carrelloservlet");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send("codice=" + codice);
+    })
 
-    hamburger.addEventListener("click", function() {
-        mobileMenu.style.transform = 'translateX(0)'; // sposta il menu a destra
-    });
-
-    closeIcon.addEventListener("click", function() {
-        mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
-    });
+    $(".rem").click(function remCart() {
+        let codice = $(this).val();
+        let element = $(this);
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.status == 200 && this.readyState == 4) {
+                let s = this.responseText;
+                const array = s.split("-");
+                if(array[0] === "0"){
+                    element.parent().hide();
+                    document.getElementById("num_prod").innerHTML = array[0];
+                    document.getElementById("num_prod2").innerHTML = array[0];
+                    document.getElementById("emptycart").innerHTML = "Carrello vuoto";
+                }
+                else if(array[1] === "0"){
+                    element.parent().hide();
+                    document.getElementById("num_prod").innerHTML = array[0];
+                    document.getElementById("num_prod2").innerHTML = array[0];
+                }
+                else {
+                    document.getElementById("num_prod").innerHTML = array[0];
+                    document.getElementById("num_prod2").innerHTML = array[0];
+                    document.getElementById(codice).innerHTML = array[1];
+                }
+            }
+        }
+        xhttp.open("POST", "RimuoviCarrelloServlet");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send("codice=" + codice);
+    })
 </script>
-
 </html>
