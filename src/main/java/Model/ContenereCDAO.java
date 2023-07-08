@@ -78,4 +78,20 @@ public class ContenereCDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public void doRemove(ContenereC contenere){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "DELETE FROM Contenere_C WHERE carrello = ? AND libro_cartaceo = ?",
+                    Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, contenere.getCarrello());
+            ps.setString(2,contenere.getLibroCartaceo());
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("DELETE error.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

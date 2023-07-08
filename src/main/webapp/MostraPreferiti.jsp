@@ -88,7 +88,7 @@
           if(mode == 2 || mode == 1){%>
         <a style="text-decoration: none" href="LogOutServlet"><button class="forButton">LOG-OUT</button></a>
         <%}else{%><a style="text-decoration: none" href="Login.jsp"><button class="forButton">LOG-IN</button></a><%}%>
-        <a style="text-decoration: none" href="#"><button class="forButton">CARRELLO(<span id="num_prod"><%=nprod%></span>)</button></a>
+        <a style="text-decoration: none" href="MostraCarrelloServlet"><button class="forButton">CARRELLO(<span id="num_prod"><%=nprod%></span>)</button></a>
       </div>
 
       <div class="HeaderQuick2">
@@ -135,8 +135,8 @@
         </div>
         <div class="HeaderQuick3">
           <div>
-            <a href=""><img style="width: 35px; height: 35px" src="CSS/ShopBag2.svg"></a>
-            <a href="">Carrello(<span id="num_prod2"><%=nprod%></span>)</a>
+            <a href="MostraCarrelloServlet"><img style="width: 35px; height: 35px" src="CSS/ShopBag2.svg"></a>
+            <a href="MostraCarrelloServlet">Carrello(<span id="num_prod2"><%=nprod%></span>)</a>
           </div>
           <div>
             <%

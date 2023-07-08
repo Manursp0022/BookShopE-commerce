@@ -33,19 +33,10 @@
         nprod = cart.getnLibri();
     }
     int mode = (int) request.getSession(false).getAttribute("mode");
-    List<PreferitoC> prefC = (ArrayList<PreferitoC>) request.getSession().getAttribute("prefC");
-    List<PreferitoE> prefE = (ArrayList<PreferitoE>) request.getSession().getAttribute("prefE");
-    List<String> codiciPref = new ArrayList<>();
-    if(prefC != null){
-        for(PreferitoC pref : prefC){
-            codiciPref.add(pref.getLibroCartaceo());
-        }
-    }
-    if(prefE != null) {
-        for (PreferitoE pref : prefE) {
-            codiciPref.add(pref.getLibroElettronico());
-        }
-    }
+    List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
+    List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
+    List<ContenereE> contenereE = (List<ContenereE>) request.getSession().getAttribute("contenereE");
+    List<ContenereC> contenereC = (List<ContenereC>) request.getSession().getAttribute("contenereC");
 %>
 <header class="header">
 
@@ -88,7 +79,7 @@
                     if(mode == 2 || mode == 1){%>
                 <a style="text-decoration: none" href="LogOutServlet"><button class="forButton">LOG-OUT</button></a>
                 <%}else{%><a style="text-decoration: none" href="Login.jsp"><button class="forButton">LOG-IN</button></a><%}%>
-                <a style="text-decoration: none" href="MostraCarrelloServlet"><button class="forButton">CARRELLO(<span id="num_prod"><%=nprod%></span>)</button></a>
+                <a style="text-decoration: none" href="#"><button class="forButton">CARRELLO(<span id="num_prod"><%=nprod%></span>)</button></a>
             </div>
 
             <div class="HeaderQuick2">
@@ -135,8 +126,8 @@
                 </div>
                 <div class="HeaderQuick3">
                     <div>
-                        <a href="MostraCarrelloServlet"><img style="width: 35px; height: 35px" src="CSS/ShopBag2.svg"></a>
-                        <a href="MostraCarrelloServlet">Carrello(<span id="num_prod2"><%=nprod%></span>)</a>
+                        <a href=""><img style="width: 35px; height: 35px" src="CSS/ShopBag2.svg"></a>
+                        <a href="">Carrello(<span id="num_prod2"><%=nprod%></span>)</a>
                     </div>
                     <div>
                         <%
@@ -158,101 +149,46 @@
 
     </div>
 </header>
-<div class="libri">
-    <table>
-        <tr>
-            <% List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
-                List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
-                List<String> titoli= new ArrayList<>();
-                int i = 0;
-                if(cartaceos != null)
-                    for (LibroCartaceo c: cartaceos) {
-                        String codice = c.getCodice();
-                        String titolo = c.getTitolo();
-                        float prezzo = c.getPrezzo();
-                        titoli.add(titolo);
-                        if(i == 3) { %>
-        </tr>
-        <tr>
-            <%
-                    i = 0; }
-                i++;
-            %>
-            <td>
-    <span class="libro">
-        <%=titolo%>
-        <%=" "%>
-        <%=prezzo + "€"%>
-        <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
-        <%
-            if(codiciPref != null && codiciPref.contains(codice)){
-        %>
-        <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
-        <%
-        }
-        else{
-        %>
-        <button class="pref" value="<%=codice%>">Aggiungi ai preferiti</button>
-        <%
+<div style="color: red" id="emptycart"></div>
+<%if(cart.getnLibri() == 0) {%>
+<div style="color: red" id="emptycart">Carrello vuoto</div>
+<%}%>
+<div>
+    <%  if(cartaceos != null) {
+        for (LibroCartaceo l : cartaceos){
+            for(ContenereC c : contenereC) {
+                 if(c.getLibroCartaceo().equals(l.getCodice())) {%>
+        <div class="libroCarrello">
+            <img class="imglib">
+            <%= l.getTitolo() %>
+            <%= "Copie :"%><span id="<%=l.getCodice()%>"> <%=c.getNumCopie()%> </span>
+            <button class="add" value= "<%=l.getCodice() %>">Aggiungi copia</button>
+            <button class="rem" value= "<%=l.getCodice() %>" >Rimuovi copia</button>
+        </div>
+    <%
+               break;
+                 }
             }
-        %>
-    </span>
-            </td>
-            <%
-                    }
-            %>
-        </tr>
-        <%
-            i = 0;
-            if(elettronicos != null)
-                for (LibroElettronico c: elettronicos) {
-                    String codice = c.getCodice();
-                    String titolo = c.getTitolo();
-                    float prezzo = c.getPrezzo();
-                    if (titoli.contains(c.getTitolo())) {
-                    }
-                    else{
-                        if(i == 3) { %>
-        </tr>
-        <tr>
-                <%
-        i = 0;}
-            i++;
-    %>
-            <td>
-    <span class="libro">
-        <%=titolo%>
-        <%=" "%>
-        <%=prezzo + "€"%>
-        <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
-        <%
-            if(codiciPref != null && codiciPref.contains(codice)){
-        %>
-        <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
-        <%
         }
-        else{
-        %>
-        <button class="pref" value="<%=codice%>">Aggiungi ai preferiti</button>
-        <%
-            }
-        %>
-    </span>
-            </td>
-                <%
-                }
     }
-            if((elettronicos == null) && (cartaceos == null)){
-                %>
-            <div style="align-content: center; color: red; font-size: large">
-                Nessun libro trovato.
-            </div>
-                <% }
-
+      if(elettronicos != null) {
+        for (LibroElettronico l : elettronicos){
+            for(ContenereE c : contenereE) {
+                if(c.getLibroElettronico().equals(l.getCodice())) {%>
+    <div class="libroCarrello">
+        <img class="imglib">
+        <%= l.getTitolo() %>
+        <%= "Copie :"%><span id="<%=l.getCodice()%>"> <%=c.getNumCopie()%> </span>
+        <button class="add" value= "<%=l.getCodice() %>">Aggiungi copia</button>
+        <button class="rem" value= "<%=l.getCodice() %>" >Rimuovi copia</button>
+    </div>
+    <%
+                        break;
+                    }
+                }
+            }
+        }
     %>
-
-    </table>
-
 </div>
 </body>
 <script>
@@ -266,12 +202,10 @@
                     alert("Quantità non disponibile")
                 }
                 else {
-
                     const array = s.split("-");
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];
-
-
+                    document.getElementById(codice).innerHTML = array[1];
                 }
             }
         }
@@ -279,37 +213,34 @@
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhttp.send("codice=" + codice);
     })
-</script>
-<script>
-    let hamburger = document.querySelector(".HambIcon");
-    let closeIcon = document.getElementById("closeMenu");
-    let mobileMenu = document.getElementById("mobileMenu");
 
-    hamburger.addEventListener("click", function() {
-        mobileMenu.style.transform = 'translateX(0)'; // sposta il menu a destra
-    });
-
-    closeIcon.addEventListener("click", function() {
-        mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
-    });
-</script>
-<script>
-    $(".pref").click(function addPref() {
+    $(".rem").click(function remCart() {
         let codice = $(this).val();
-        let button = $(this);
+        let element = $(this);
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.status == 200 && this.readyState == 4) {
                 let s = this.responseText;
-                if(s === "1"){
-                    button.html("Rimuovi dai preferiti");
+                const array = s.split("-");
+                if(array[0] === "0"){
+                    element.parent().hide();
+                    document.getElementById("num_prod").innerHTML = array[0];
+                    document.getElementById("num_prod2").innerHTML = array[0];
+                    document.getElementById("emptycart").innerHTML = "Carrello vuoto";
                 }
-                else if (s === "-1-2"){
-                    button.html("Aggiungi ai preferiti");
+                else if(array[1] === "0"){
+                    element.parent().hide();
+                    document.getElementById("num_prod").innerHTML = array[0];
+                    document.getElementById("num_prod2").innerHTML = array[0];
+                }
+                else {
+                    document.getElementById("num_prod").innerHTML = array[0];
+                    document.getElementById("num_prod2").innerHTML = array[0];
+                    document.getElementById(codice).innerHTML = array[1];
                 }
             }
         }
-        xhttp.open("POST", "preferito-servlet");
+        xhttp.open("POST", "RimuoviCarrelloServlet");
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhttp.send("codice=" + codice);
     })
