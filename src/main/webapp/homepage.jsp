@@ -1,3 +1,4 @@
+
 <%@ page import="Model.Bean.Carrello" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -132,6 +133,22 @@
                         <a href="MostraPreferitiServlet"><img style="width: 35px; height: 40px" src="CSS/Heart3.svg"></a>
                         <a href="MostraPreferitiServlet">Preferiti</a>
                     </div>
+                        <div>
+                                <a href=""><img style="width: 35px; height: 35px" src="CSS/ShopBag2.svg"></a>
+                                <a href="">Carrello(<%=nprod%>)</a>
+                        </div>
+                        <div>
+                            <%
+                                if(mode == 2 || mode == 1){%>
+                            <a href="LogOutServlet"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
+                            <a href="LogOutServlet">Log-Out</a>
+                            <%}else{%><a style="text-decoration: none" href="Login.jsp"><img style="width: 35px; height:  35px;" src="CSS/Account.svg"></a>
+                            <a href="Login.jsp">Log-in/Sign-Up</a><%}%>
+                        </div>
+                        <div>
+                            <a href="MostraPreferitiServlet"><img style="width: 35px; height: 40px" src="CSS/Heart3.svg"></a>
+                            <a href="MostraPreferitiServlet">Preferiti</a>
+                        </div>
                 </div>
                 <div class="bluBan"></div>
             </div>
