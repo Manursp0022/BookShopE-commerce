@@ -1,5 +1,6 @@
 package Model;
 
+import Model.Bean.LibroCartaceo;
 import Model.Bean.LibroElettronico;
 
 import java.sql.*;
@@ -91,6 +92,35 @@ public class LibroElettronicoDAO {
                 libri.add(libro);
             }
             return libri;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void doUpdatePrezzo(double prezzo, String codice){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "UPDATE Libro_Elettronico SET prezzo = ? WHERE codice = ?",
+                    Statement.RETURN_GENERATED_KEYS);
+            ps.setDouble(1,prezzo);
+            ps.setString(2,codice);
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("Update error.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void doDelete(String codice){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "DELETE FROM Libro_Elettronico WHERE codice = ?",
+                    Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1,codice);
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("Delete error.");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

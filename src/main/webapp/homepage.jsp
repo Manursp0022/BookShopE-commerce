@@ -156,7 +156,9 @@
             <p class="slide-text1">Immergiti nel mondo dell'Arte</p>
             <p class="slide-text2">Con la nostra selezione di libri</p>
             <div class="InnerSlide">
+                <%if(mode == 3){%>
                 <a class="linkButt" href="Registrazione.jsp"><button class="ScopriButt">Scopri</button></a>
+                <%}else{%><a class="linkButt" href="MostraLibriServlet?id=7"><button class="ScopriButt">Scopri</button></a><%}%>
             </div>
         </div>
 

@@ -181,33 +181,33 @@
                         if(i == 3) { %>
         </tr>
         <tr>
-            <%
-                    i = 0; }
-                i++;
-            %>
-            <td>
-    <span class="libro">
-        <%=titolo%>
-        <%=" "%>
-        <%=prezzo + "€"%>
-        <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
-        <%
-            if(codiciPref != null && codiciPref.contains(codice)){
-        %>
-        <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
-        <%
-        }
-        else{
-        %>
-        <button class="pref" value="<%=codice%>">Aggiungi ai preferiti</button>
-        <%
-            }
-        %>
-    </span>
-            </td>
-            <%
+                        <%
+                            i = 0; }
+                        i++;
+                        %>
+        <td>
+            <span class="libro">
+                <%=titolo%>
+                <%=" "%>
+                <%=prezzo + "€"%>
+                <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
+                <%
+                    if(codiciPref != null && codiciPref.contains(codice)){
+                %>
+                <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
+                <%
+                }
+                else{
+                %>
+                <button class="pref" value="<%=codice%>">Aggiungi ai preferiti</button>
+                <%
                     }
-            %>
+                %>
+            </span>
+        </td>
+        <%
+                    }
+        %>
         </tr>
         <%
             i = 0;
@@ -222,39 +222,39 @@
                         if(i == 3) { %>
         </tr>
         <tr>
+                    <%
+                            i = 0;}
+                        i++;
+                    %>
+        <td>
+            <span class="libro">
+                <%=titolo%>
+                <%=" "%>
+                <%=prezzo + "€"%>
+                <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
                 <%
-        i = 0;}
-            i++;
-    %>
-            <td>
-    <span class="libro">
-        <%=titolo%>
-        <%=" "%>
-        <%=prezzo + "€"%>
-        <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
-        <%
-            if(codiciPref != null && codiciPref.contains(codice)){
-        %>
-        <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
-        <%
-        }
-        else{
-        %>
-        <button class="pref" value="<%=codice%>">Aggiungi ai preferiti</button>
-        <%
-            }
-        %>
-    </span>
-            </td>
+                    if(codiciPref != null && codiciPref.contains(codice)){
+                %>
+                <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
                 <%
                 }
-    }
-            if((elettronicos == null) && (cartaceos == null)){
+                else{
                 %>
-            <div style="align-content: center; color: red; font-size: large">
-                Nessun libro trovato.
-            </div>
-                <% }
+                <button class="pref" value="<%=codice%>">Aggiungi ai preferiti</button>
+                <%
+                    }
+                %>
+            </span>
+        </td>
+        <%
+                    }
+                }
+    if((elettronicos == null) && (cartaceos == null)){
+        %>
+    <div style="align-content: center; color: red; font-size: large">
+        Nessun libro trovato.
+    </div>
+        <% }
 
     %>
 
