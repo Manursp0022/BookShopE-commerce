@@ -55,6 +55,8 @@ public class LoginServlet extends HttpServlet {
             List<ContenereC> contenereC = contenereCDAO.doRetrieveByCart(utente.getEmail());
             ContenereEDAO contenereEDAO = new ContenereEDAO();
             List<ContenereE> contenereE = contenereEDAO.doRetrieveByCarrello(utente.getEmail());
+            OrdineDAO ordineDAO = new OrdineDAO();
+            List<Ordine> ordini = ordineDAO.doRetrieveAllByMail(utente.getEmail());
             synchronized (this) {
                 HttpSession session = request.getSession();
                 session.setAttribute("utente", utente);
@@ -63,6 +65,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("prefE", preferitiE);
                 session.setAttribute("contenereC",contenereC);
                 session.setAttribute("contenereE",contenereE);
+                session.setAttribute("ordini",ordini);
                 if (utente.isAdmin())
                     request.getSession().setAttribute("mode", 1);
                 else
