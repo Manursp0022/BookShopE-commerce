@@ -22,6 +22,16 @@ public class RegistrazioneServlet extends HttpServlet {
         if (request.getParameter("username") != null) {
             username = request.getParameter("username");
         }
+
+        String nome = null;
+        if (request.getParameter("name") != null) {
+            nome = request.getParameter("name");
+        }
+
+        String cognome = null;
+        if (request.getParameter("surname") != null) {
+            cognome = request.getParameter("surname");
+        }
         String password = null;
         if (request.getParameter("password") != null) {
             password = request.getParameter("password");
@@ -63,6 +73,8 @@ public class RegistrazioneServlet extends HttpServlet {
         List<Utente> utenti = utenteDAO.doRetrieveAll();
         Utente utente = new Utente();
         utente.setUsername(username);
+        utente.setNome(nome);
+        utente.setCognome(cognome);
         utente.setPassword(password);
         utente.setVia(via);
         utente.setCitta(citta);
@@ -71,7 +83,7 @@ public class RegistrazioneServlet extends HttpServlet {
         utente.setAdmin(admin);
         utente.setTelefono(telefono);
         String errore = "";
-        if((username.equals("")) || (passwordrep.equals("")) || (password.equals("")) || (email.equals("")) || (telefono.equals("")) || (citta.equals("")) || (CAP.equals("")) || (via.equals(""))){
+        if((username.equals("")) || (nome.equals("")) || (cognome.equals("")) || (passwordrep.equals("")) || (password.equals("")) || (email.equals("")) || (telefono.equals("")) || (citta.equals("")) || (CAP.equals("")) || (via.equals(""))){
             errore = errore + "6,";
         }
         if (!patternMatchCAP || !lengthMatchCAP) {

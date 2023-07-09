@@ -28,6 +28,16 @@
             <span>Username</span>
         </div>
         <div class="inputBox">
+            <input type="text" name="name" required="required">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>Nome</span>
+        </div>
+        <div class="inputBox">
+            <input type="text" name="surname" required="required">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>Cognome</span>
+        </div>
+        <div class="inputBox">
             <input type="email" name="email" required="required" >
             <ion-icon name="mail-outline"></ion-icon>
             <span>Indirizzo E-Mail</span>

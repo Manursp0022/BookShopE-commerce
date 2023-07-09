@@ -7,6 +7,10 @@ import java.security.NoSuchAlgorithmException;
 
 public class Utente {
     private String username;
+
+    private String nome;
+
+    private String cognome;
     private String email;
     private String via;
     private String città;
@@ -84,6 +88,14 @@ public class Utente {
     public boolean isAdmin() {
         return admin;
     }
+
+    public String getNome() {return nome;}
+
+    public void setNome(String nome) {this.nome = nome;}
+
+    public String getCognome() {return cognome;}
+
+    public void setCognome(String cognome) {this.cognome = cognome;}
 
     public void setAdmin(boolean admin) {
         this.admin = admin;

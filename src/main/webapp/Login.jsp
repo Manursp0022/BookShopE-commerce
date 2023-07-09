@@ -31,15 +31,20 @@
       <input type="submit"  value="Accedi">
     </div>
     <p>Non sei ancora registrato? <a href="Registrazione.jsp" class="login">Registrati</a></p>
-        <label for="password" id="confirm" style="color:red; display: none">
-            Email o password errate
-        </label>
-        <script>
-            let err = '${error}';
-            if (err === "utente not found"){
-                document.getElementById("confirm").style.display="block";
-            }
-        </script>
+        <p style="color: red">
+            <%
+                String errore = (String) request.getAttribute("error");
+                String risposta = "";
+                if((errore != null) && errore.equals("campo incompleto")) {
+                    risposta += "Campo/i nullo/i";
+                }
+                else if((errore != null) && errore.equals("utente not found")){
+                    risposta += "Email o password errate";
+                }
+                if(!risposta.equals("")){%>
+            <%=risposta%>
+            <%}%>
+        </p>
     </form>
 </div>
 

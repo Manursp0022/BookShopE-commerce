@@ -20,10 +20,25 @@ import java.util.List;
 @WebServlet (value = "/login-servlet")
 public class LoginServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String email = null;
+        if(request.getParameter("email") != null) {
+            email = request.getParameter("email");
+        }
+
+        String password = null;
+        if(request.getParameter("email") != null) {
+            password = request.getParameter("password");
+        }
+
+        if((email.equals("")) || (password.equals(""))){
+            request.setAttribute("error", "campo incompleto");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");
+            dispatcher.forward(request,response);
+        }
+
         UtenteDAO utenteDAO = new UtenteDAO();
         Utente utente = utenteDAO.doRetrieveByEmailPassword(email, password);
+
         if (utente == null){
             request.setAttribute("error","utente not found");
             RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");
