@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/visLibri.css">
+    <link rel="stylesheet" href="CSS/visPref.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>E-CommerceBook</title>
     <script src="JavaScript/jquery-3.7.0.js"></script>
@@ -162,17 +163,27 @@
 <%if(cart.getnLibri() == 0) {%>
 <div style="color: red" id="emptycart">Carrello vuoto</div>
 <%}%>
-<div>
+<div class="libriPref">
     <%  if(cartaceos != null) {
         for (LibroCartaceo l : cartaceos){
             for(ContenereC c : contenereC) {
                  if(c.getLibroCartaceo().equals(l.getCodice())) {%>
-        <div class="libroCarrello">
-            <img class="imglib">
-            <%= l.getTitolo() %>
-            <%= "Copie :"%><span id="<%=l.getCodice()%>"> <%=c.getNumCopie()%> </span>
-            <button class="add" value= "<%=l.getCodice() %>">Aggiungi copia</button>
-            <button class="rem" value= "<%=l.getCodice() %>" >Rimuovi copia</button>
+        <div class="libroPref">
+            <div class="ImageContainerPref">
+                <img class="imglib">
+            </div>
+            <div class="infoAndButton">
+                <div class="TitleBookPref">
+                    <p><%= l.getTitolo() %></p>
+                </div>
+                <div class="pricePref">
+                    <p id="<%=l.getCodice()%>"><%= "Copie :" + c.getNumCopie()%></p>
+                </div>
+                <div class="BookButtPref">
+                    <button class="add" value= "<%=l.getCodice() %>">Aggiungi Copia</button>
+                    <button class="rem" value= "<%=l.getCodice() %>" >Rimuovi copia</button>
+                </div>
+            </div>
         </div>
     <%
                break;
@@ -184,12 +195,22 @@
         for (LibroElettronico l : elettronicos){
             for(ContenereE c : contenereE) {
                 if(c.getLibroElettronico().equals(l.getCodice())) {%>
-    <div class="libroCarrello">
-        <img class="imglib">
-        <%= l.getTitolo() %>
-        <%= "Copie :"%><span id="<%=l.getCodice()%>"> <%=c.getNumCopie()%> </span>
-        <button class="add" value= "<%=l.getCodice() %>">Aggiungi copia</button>
-        <button class="rem" value= "<%=l.getCodice() %>" >Rimuovi copia</button>
+    <div class="libroPref">
+        <div class="ImageContainerPref">
+            <img class="imglib">
+        </div>
+        <div class="infoAndButton">
+            <div class="TitleBookPref">
+                <p><%= l.getTitolo() %></p>
+            </div>
+            <div class=pricePref">
+                <p id="<%=l.getCodice()%>"><%= "Copie :"%><%=c.getNumCopie()%></p>
+            </div>
+            <div class="BookButtPref">
+                <button class="add" value= "<%=l.getCodice() %>">Aggiungi Copia</button>
+                <button class="rem" value= "<%=l.getCodice() %>" >Rimuovi copia</button>
+            </div>
+        </div>
     </div>
     <%
                         break;
@@ -214,7 +235,7 @@
                     const array = s.split("-");
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];
-                    document.getElementById(codice).innerHTML = array[1];
+                    document.getElementById(codice).innerHTML = "Copie: " + array[1];
                 }
             }
         }
@@ -232,20 +253,20 @@
                 let s = this.responseText;
                 const array = s.split("-");
                 if(array[0] === "0"){
-                    element.parent().hide();
+                    element.parent().parent().parent().hide();
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];
                     document.getElementById("emptycart").innerHTML = "Carrello vuoto";
                 }
                 else if(array[1] === "0"){
-                    element.parent().hide();
+                    element.parent().parent().parent().hide();
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];
                 }
                 else {
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];
-                    document.getElementById(codice).innerHTML = array[1];
+                    document.getElementById(codice).innerHTML = "Copie: " + array[1];
                 }
             }
         }

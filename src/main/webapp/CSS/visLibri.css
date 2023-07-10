@@ -26,14 +26,12 @@
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    margin-top: 7px;
 }
 
 .BookButt button{
     background: transparent;
     border-radius: 20px;
     font-size: 10px;
-    color: white;
     width: 60px;
     height: 30px;
     border: transparent;
@@ -47,8 +45,8 @@
 .TitleBook{
     display: flex;
     justify-content: center;
-    border: 2px solid green;
     margin-top: 7px;
+    height: 40px;
 }
 
 .TitleBook p{
@@ -56,8 +54,7 @@
 }
 
 .price{
-    border: 2px solid red;
-    margin-top: 7px;
+    margin-top: 2px;
 }
 
 .price p{

@@ -11,6 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="CSS/styles.css">
   <link rel="stylesheet" href="CSS/visLibri.css">
+  <link rel="stylesheet" href="CSS/visPref.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <title>E-CommerceBook</title>
   <script src="JavaScript/jquery-3.7.0.js"></script>
@@ -165,126 +166,135 @@
 
   </div>
 </header>
-<div class="libri">
-  <table>
-    <tr>
-      <% List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
-        List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
-        List<String> titoli= new ArrayList<>();
-        int i = 0;
-        if(cartaceos != null)
-          for (LibroCartaceo c: cartaceos) {
-            String codice = c.getCodice();
-            String titolo = c.getTitolo();
-            float prezzo = c.getPrezzo();
-            titoli.add(titolo);
-            if(i == 3) { %>
-    </tr>
-    <tr>
-      <%
-          i = 0; }
-        i++;
-      %>
-      <td>
-    <span class="libro">
-        <%=titolo%>
-        <%=" "%>
-        <%=prezzo + "€"%>
-        <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
-        <%
-          if(codiciPref != null && codiciPref.contains(codice)){
-        %>
-        <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
-        <%
-        }
-        else{
-        %>
-        <button class="pref" value="<%=codice%>">Aggiungi ai preferiti</button>
-        <%
-          }
-        %>
-    </span>
-      </td>
-      <%
-          }
-      %>
-    </tr>
-    <%
-      i = 0;
-      if(elettronicos != null)
-        for (LibroElettronico c: elettronicos) {
-          String codice = c.getCodice();
-          String titolo = c.getTitolo();
-          float prezzo = c.getPrezzo();
-          if (titoli.contains(c.getTitolo())) {
-          }
-          else{
-            if(i == 3) { %>
-    </tr>
-    <tr>
-        <%
-        i = 0;}
-            i++;
-    %>
-      <td>
-    <span class="libro">
-        <%=titolo%>
-        <%=" "%>
-        <%=prezzo + "€"%>
-        <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
-        <%
-          if(codiciPref != null && codiciPref.contains(codice)){
-        %>
-        <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
-        <%
-        }
-        else{
-        %>
-        <button class="pref" value="<%=codice%>">Aggiungi ai preferiti</button>
-        <%
-          }
-        %>
-    </span>
-      </td>
-        <%
-                }
-    }
-            if(((elettronicos == null) && (cartaceos == null))){
-                %>
-      <div class="noLibri" style="align-content: center; color: red; font-size: large">
-        Nessun libro trovato.
-      </div>
-        <% }else {
-              boolean cvuoto = false;
-              boolean evuoto = false;
-              if (elettronicos != null && cartaceos == null) {
-                if(elettronicos.isEmpty()) {
-                  evuoto = true;
-                  cvuoto = true;
-                }
-              }else if(elettronicos == null && cartaceos != null){
-                if(cartaceos.isEmpty()){
-                  cvuoto = true;
-                  evuoto = true;
-                }
-              }
-              else if(elettronicos != null && cartaceos != null){
-                if(cartaceos.isEmpty() && elettronicos.isEmpty()){
-                  cvuoto = true;
-                  evuoto = true;
-                }
-              }
-              if((cvuoto) && (evuoto)){
-                %>
-            <div class="noLibri" style="align-content: center; color: red; font-size: large">
-            Nessun libro trovato.
-            </div>
-            <%}
-            }
-          %>
-          <div class="noLibri" id="ajaxRemove" style="align-content: center; color: red; font-size: large"></div>
-  </table>
 
+<div class="libriPref">
+
+  <% List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
+    List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
+    List<String> titoli= new ArrayList<>();
+
+    if(cartaceos != null)
+      for (LibroCartaceo c: cartaceos) {
+        String codice = c.getCodice();
+        String titolo = c.getTitolo();
+        float prezzo = c.getPrezzo();
+        titoli.add(titolo);
+
+  %>
+  <div class="libroPref">
+    <div class="ImageContainerPref">
+      <img src="">
+    </div>
+    <div class="infoAndButton">
+      <div class="TitleBookPref">
+        <p><%=titolo%></p>
+      </div>
+      <div class="pricePref">
+        <p><%=prezzo + "€"%></p>
+      </div>
+      <div class="BookButtPref">
+        <button class="add" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
+        <%
+          if(codiciPref != null && codiciPref.contains(codice)){
+        %>
+        <button class="pref" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/FullHeart.svg"></button>
+        <%
+        }
+        else{
+        %>
+        <button class="pref" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg"></button>
+        <%
+          }
+        %>
+      </div>
+    </div>
+  </div>
+
+  <%
+      }
+  %>
+
+  <%
+    if(elettronicos != null)
+      for (LibroElettronico c: elettronicos) {
+        String codice = c.getCodice();
+        String titolo = c.getTitolo();
+        float prezzo = c.getPrezzo();
+        if (!titoli.contains(c.getTitolo())) {
+
+
+  %>
+
+  <div class="libroPref">
+    <div class="ImageContainerPref">
+      <img src="">
+    </div>
+    <div class="infoAndButton">
+      <div class="TitleBookPref">
+        <p><%=titolo%></p>
+      </div>
+      <div class="pricePref">
+        <p><%=prezzo + "€"%></p>
+      </div>
+      <div class="BookButtPref">
+        <button class="add" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
+        <%
+          if(codiciPref != null && codiciPref.contains(codice)){
+        %>
+        <button class="pref" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/FullHeart.svg"></button>
+        <%
+        }
+        else{
+        %>
+        <button class="pref" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg"></button>
+        <%
+          }
+        %>
+      </div>
+    </div>
+  </div>
+  <%
+        }
+      }
+
+    if(((elettronicos == null) && (cartaceos == null))){ /* Non ci sono nella sessione */
+  %>
+  <div class="noLibri">
+    Nessun libro trovato.
+  </div>
+
+  <% }else {
+    boolean cvuoto = false;
+    boolean evuoto = false;
+    if (elettronicos != null && cartaceos == null) {
+      if(elettronicos.isEmpty()) {
+        evuoto = true;
+        cvuoto = true;
+      }
+    }else if(elettronicos == null && cartaceos != null){
+      if(cartaceos.isEmpty()){
+        cvuoto = true;
+        evuoto = true;
+      }
+    }
+    else if(elettronicos != null && cartaceos != null){
+      if(cartaceos.isEmpty() && elettronicos.isEmpty()){
+        cvuoto = true;
+        evuoto = true;
+      }
+    }
+    if((cvuoto) && (evuoto)){  /* Caso in cui lo rimuovo da MostraLibri*/
+  %>
+  <div class="noLibri" >
+    <p>Nessun libro trovato.</p>
+  </div>
+  <% } else { %>
+   <div style="display: none" class="noLibri" id="ajaxRemove" >
+        <p id="ajaxRemovep"></p>
+   </div> <!-- Caso in cui li rimuovo, da MostraPreferiti -->
+  <% }
+  }
+  %>
 </div>
 </body>
 <script>
@@ -331,14 +341,15 @@
       if (this.status == 200 && this.readyState == 4) {
         let s = this.responseText;
         if(s === "1"){
-          button.html("Rimuovi dai preferiti");
+          button.html('<img style="width: 15px; height: 15px; color: white" src="CSS/FullHeart.svg">');
         }
         else if (s === "-1"){
-          button.parent().hide();
+          button.parent().parent().parent().hide();
         }
         else if (s === "-1-2"){
-          button.parent().hide();
-          $("#ajaxRemove").html("Nessun libro trovato");
+          button.parent().parent().parent().hide();
+          $("#ajaxRemovep").html("Nessun Libro Trovato");
+          $("#ajaxRemove").css({ 'display': 'block'});
         }
       }
     }

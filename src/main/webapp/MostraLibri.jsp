@@ -327,10 +327,10 @@
             if (this.status == 200 && this.readyState == 4) {
                 let s = this.responseText;
                 if(s === "1"){
-                    button.html("Rimuovi dai preferiti");
+                    button.html('<img style="width: 15px; height: 15px; color: white" src="CSS/FullHeart.svg">');
                 }
-                else if (s === "-1-2"){
-                    button.html("Aggiungi ai preferiti");
+                else if (s === "-1-2" || s === "-1"){
+                    button.html('<img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg">');
                 }
             }
         }
