@@ -181,7 +181,7 @@
         %>
         <div class="libro">
             <div class="ImageContainer">
-                <img src="">
+                <img src="LibriIMG/<%=c.getCodice() + ".jpg"%>">
             </div>
             <div class="TitleBook">
                 <p><%=titolo%></p>
@@ -223,7 +223,7 @@
 
         <div class="libro">
             <div class="ImageContainer">
-                <img src="">
+                <img src="LibriIMG/<%=c.getCodice() + ".jpg"%>">
             </div>
             <div class="TitleBook">
                 <p><%=titolo%></p>

@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <script src="JavaScript/jquery-3.7.0.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/styles.css">
@@ -199,15 +200,15 @@
                         <button>1</button>
                     </div>
                     <div class="image">
-                        <img src="CSS/HarryPotter.jpg " alt=" ">
+                        <img src="LibriIMG/9788838945496.jpg " alt=" ">
                     </div>
                     <div class="nameBook">
-                        <span class="name">Harry-Potter</span>
-                        <span class="author">J.K Rowling</span>
+                            <span class="name">ELP</span>
+                        <span class="author">Antonio Manzini</span>
                     </div>
                     <div class="button">
-                        <button class="AddPrefers"><img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg"></button>
-                        <button class="AddCart"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
+                        <button class="AddPrefers" value="9788838945496"><img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg"></button>
+                        <button class="AddCart" value="9788838945496"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
                     </div>
                 </div>
             </div>
@@ -217,15 +218,15 @@
                         <button>2</button>
                     </div>
                     <div class="image">
-                        <img src="CSS/HarryPotter.jpg " alt=" ">
+                        <img src="LibriIMG/9788820007058.jpg " alt=" ">
                     </div>
                     <div class="nameBook">
-                        <span class="name">Harry-Potter</span>
-                        <span class="author">J.K Rowling</span>
+                        <span class="name">IT</span>
+                        <span class="author">Stephen King</span>
                     </div>
                     <div class="button">
-                        <button class="AddPrefers"><img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg"></button>
-                        <button class="AddCart"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
+                        <button class="AddPrefers" value="9788820007058"><img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg"></button>
+                        <button class="AddCart" value="9788820007058"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
                     </div>
                 </div>
             </div>
@@ -235,15 +236,15 @@
                         <button>3</button>
                     </div>
                     <div class="image">
-                        <img src="CSS/HarryPotter.jpg " alt=" ">
+                        <img src="LibriIMG/2000000114675.jpg " alt=" ">
                     </div>
                     <div class="nameBook">
-                        <span class="name">Harry-Potter e Il Prigioniero di Azkban</span>
-                        <span class="author">J.K Rowling</span>
+                        <span class="name">Violeta</span>
+                        <span class="author">Isabel Allende</span>
                     </div>
                     <div class="button">
-                        <button class="AddPrefers"><img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg"></button>
-                        <button class="AddCart"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
+                        <button class="AddPrefers" value="2000000114675"><img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg"></button>
+                        <button class="AddCart" value="2000000114675"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
                     </div>
                 </div>
             </div>
@@ -286,6 +287,54 @@
     });
 
     let image = document.querySelector("")
+</script>
+
+<script>
+    $(".AddPrefers").click(function addPref() {
+        let codice = $(this).val();
+        let button = $(this);
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.status == 200 && this.readyState == 4) {
+                let s = this.responseText;
+                if(s === "1"){
+                    button.html('<img style="width: 15px; height: 15px; color: white" src="CSS/FullHeart.svg">');
+                }
+                else if (s === "-1-2" || s === "-1"){
+                    button.html('<img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg">');
+                }
+            }
+        }
+        xhttp.open("POST", "preferito-servlet");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send("codice=" + codice);
+    })
+</script>
+
+<script>
+    $(".AddCart").click(function addCart() {
+        let codice = $(this).val();
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.status == 200 && this.readyState == 4) {
+                let s = this.responseText;
+                if(s === "-2"){
+                    alert("Quantità non disponibile")
+                }
+                else {
+
+                    const array = s.split("-");
+                    document.getElementById("num_prod").innerHTML = array[0];
+                    document.getElementById("num_prod2").innerHTML = array[0];
+
+
+                }
+            }
+        }
+        xhttp.open("POST", "carrelloservlet");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send("codice=" + codice);
+    })
 </script>
 
 </html>

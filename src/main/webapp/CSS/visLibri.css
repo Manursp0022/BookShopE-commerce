@@ -71,6 +71,11 @@
     width: 60%;
 }
 
+.ImageContainer img{
+    height: 270px;
+    width: 100%;
+}
+
 .finalInfo{
     bottom: 0;
     margin-bottom: 15%;

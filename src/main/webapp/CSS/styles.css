@@ -411,6 +411,7 @@ ul{
 .ButtonRank button{
     border-radius: 100px;
     border: 2px solid royalblue;
+    background-color: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     color: royalblue;
     width: 50px;
@@ -436,7 +437,7 @@ ul{
 }
 
 section .card .image{
-    height: 220px;
+    height: 260px;
     width: 170px;
     /* padding: 3px;*/
 }
@@ -456,7 +457,7 @@ section .card .image img{
 
 .card{
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    height: 380px;
+    height: 420px;
     border-radius: 20px;
     background: #f1f1f1;
     width: 235px;
