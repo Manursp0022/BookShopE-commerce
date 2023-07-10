@@ -165,100 +165,118 @@
 
     </div>
 </header>
-<div class="libri">
-    <table>
-        <tr>
-            <% List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
-                List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
-                List<String> titoli= new ArrayList<>();
-                int i = 0;
-                if(cartaceos != null)
-                    for (LibroCartaceo c: cartaceos) {
-                        String codice = c.getCodice();
-                        String titolo = c.getTitolo();
-                        float prezzo = c.getPrezzo();
-                        titoli.add(titolo);
-                        if(i == 3) { %>
-        </tr>
-        <tr>
-                        <%
-                            i = 0; }
-                        i++;
-                        %>
-        <td>
-            <span class="libro">
-                <%=titolo%>
-                <%=" "%>
-                <%=prezzo + "€"%>
-                <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
+    <div class="libri">
+
+        <% List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
+            List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
+            List<String> titoli= new ArrayList<>();
+
+            if(cartaceos != null)
+                for (LibroCartaceo c: cartaceos) {
+                    String codice = c.getCodice();
+                    String titolo = c.getTitolo();
+                    float prezzo = c.getPrezzo();
+                    titoli.add(titolo);
+
+        %>
+        <div class="libro">
+            <div class="ImageContainer">
+                <img src="">
+            </div>
+            <div class="TitleBook">
+                <p><%=titolo%></p>
+            </div>
+            <div class="price">
+                <p><%=prezzo + "€"%></p>
+            </div>
+            <div class="BookButt">
+                <button class="add" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
                 <%
                     if(codiciPref != null && codiciPref.contains(codice)){
                 %>
-                <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
+                <button class="pref" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/FullHeart.svg"></button>
                 <%
                 }
                 else{
                 %>
-                <button class="pref" value="<%=codice%>">Aggiungi ai preferiti</button>
+                <button class="pref" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg"></button>
                 <%
                     }
                 %>
-            </span>
-        </td>
+            </div>
+        </div>
+
         <%
-                    }
+                }
         %>
-        </tr>
+
         <%
-            i = 0;
             if(elettronicos != null)
                 for (LibroElettronico c: elettronicos) {
                     String codice = c.getCodice();
                     String titolo = c.getTitolo();
                     float prezzo = c.getPrezzo();
-                    if (titoli.contains(c.getTitolo())) {
-                    }
-                    else{
-                        if(i == 3) { %>
-        </tr>
-        <tr>
-                    <%
-                            i = 0;}
-                        i++;
-                    %>
-        <td>
-            <span class="libro">
-                <%=titolo%>
-                <%=" "%>
-                <%=prezzo + "€"%>
-                <button class="add" value="<%=codice%>">Aggiungi al carrello</button>
+                    if (!titoli.contains(c.getTitolo())) {
+
+
+        %>
+
+        <div class="libro">
+            <div class="ImageContainer">
+                <img src="">
+            </div>
+            <div class="TitleBook">
+                <p><%=titolo%></p>
+            </div>
+            <div class="price">
+                <p><%=prezzo + "€"%></p>
+            </div>
+            <div class="BookButt">
+                <button class="add" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
                 <%
                     if(codiciPref != null && codiciPref.contains(codice)){
                 %>
-                <button class="pref" value="<%=codice%>">Rimuovi dai preferiti</button>
+                <button class="pref" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/FullHeart.svg"></button>
                 <%
                 }
                 else{
                 %>
-                <button class="pref" value="<%=codice%>">Aggiungi ai preferiti</button>
+                <button class="pref" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg"></button>
                 <%
                     }
                 %>
-            </span>
-        </td>
+            </div>
+        </div>
         <%
                     }
                 }
-    if((elettronicos == null) && (cartaceos == null)){
+
+            if((elettronicos == null) && (cartaceos == null)){
         %>
-    <div style="align-content: center; color: red; font-size: large">
-        Nessun libro trovato.
-    </div>
+        <div style="align-content: center; color: red; font-size: large">
+            Nessun libro trovato.
+        </div>
         <% }
 
-    %>
+        %>
 
-    </table>
+    </div>
+
+<div class="finalInfo">
+    <div class="Icone">
+        <div>
+            <img style="width: 30px; height: 30px" src="CSS/FaceBookImg.svg" alt="Checkk">
+            <p>BookShopPage</p>
+        </div>
+        <div>
+            <img style="width: 30px; height: 30px" src="CSS/InstaImg.svg" alt="Checkk">
+            <p>@BookShop</p>
+        </div>
+        <div>
+            <img style="width: 30px; height: 30px" src="CSS/Twitter.svg" alt="Checkk">
+            <p>BookShopTW</p>
+        </div>
+    </div>
 
 </div>
 </body>

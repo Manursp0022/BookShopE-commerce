@@ -141,13 +141,14 @@
                         <a href="MostraPreferitiServlet">Preferiti</a>
                     </div>
                 </div>
-                <div class="bluBan"></div>
             </div>
 
         </div>
 
     </div>
 </header>
+
+
 <!-- Fine Header -->
 <div class="Slider">
     <figure class="figure">
@@ -163,7 +164,7 @@
         </div>
 
         <div class="slide">
-            <img id="slide2" src="CSS/wallpaperbetter.jpg" alt="BOOKSS">
+            <img id="slide2" src="CSS/Gialli2.jpeg" alt="BOOKSS">
             <p class="slide-text">Testo per la seconda immagine</p>
         </div>
 
@@ -186,6 +187,89 @@
     </div>
 </div>
 
+<section> <!-- Definisce una sezione in un documento. Rappresenta un insieme coerente di contenuti che hanno un tema comune o un flusso logico -->
+    <div class="containerTopTen">
+        <div class="TitoloClassifica">
+            <p>La Top 3 dei Libri più venduti</p>
+        </div>
+        <div class="content">
+            <div  class="card">
+                <div class="card-Content">
+                    <div class="ButtonRank">
+                        <button>1</button>
+                    </div>
+                    <div class="image">
+                        <img src="CSS/HarryPotter.jpg " alt=" ">
+                    </div>
+                    <div class="nameBook">
+                        <span class="name">Harry-Potter</span>
+                        <span class="author">J.K Rowling</span>
+                    </div>
+                    <div class="button">
+                        <button class="AddPrefers"><img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg"></button>
+                        <button class="AddCart"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
+                    </div>
+                </div>
+            </div>
+            <div  class="card">
+                <div class="card-Content">
+                    <div class="ButtonRank">
+                        <button>2</button>
+                    </div>
+                    <div class="image">
+                        <img src="CSS/HarryPotter.jpg " alt=" ">
+                    </div>
+                    <div class="nameBook">
+                        <span class="name">Harry-Potter</span>
+                        <span class="author">J.K Rowling</span>
+                    </div>
+                    <div class="button">
+                        <button class="AddPrefers"><img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg"></button>
+                        <button class="AddCart"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
+                    </div>
+                </div>
+            </div>
+            <div  class="card">
+                <div class="card-Content">
+                    <div class="ButtonRank">
+                        <button>3</button>
+                    </div>
+                    <div class="image">
+                        <img src="CSS/HarryPotter.jpg " alt=" ">
+                    </div>
+                    <div class="nameBook">
+                        <span class="name">Harry-Potter e Il Prigioniero di Azkban</span>
+                        <span class="author">J.K Rowling</span>
+                    </div>
+                    <div class="button">
+                        <button class="AddPrefers"><img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg"></button>
+                        <button class="AddCart"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<div class="finalInfo">
+    <div class="Icone">
+        <div>
+                <img style="width: 30px; height: 30px" src="CSS/FaceBookImg.svg" alt="Checkk">
+                <p>BookShopPage</p>
+        </div>
+        <div>
+                <img style="width: 30px; height: 30px" src="CSS/InstaImg.svg" alt="Checkk">
+                <p>@BookShop</p>
+        </div>
+        <div>
+                <img style="width: 30px; height: 30px" src="CSS/Twitter.svg" alt="Checkk">
+                <p>BookShopTW</p>
+        </div>
+    </div>
+
+</div>
+
 
 </body>
 <script>
@@ -200,6 +284,8 @@
     closeIcon.addEventListener("click", function() {
         mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
     });
+
+    let image = document.querySelector("")
 </script>
 
 </html>
