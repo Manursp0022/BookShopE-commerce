@@ -1,5 +1,7 @@
 <%@ page import="Model.Bean.Carrello" %>
 <%@ page import="Model.Bean.Utente" %>
+<%@ page import="Model.Bean.Ordine" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="it">
@@ -150,8 +152,31 @@
 </header>
 <%
   Utente utente = (Utente) request.getSession().getAttribute("utente");
+  List<Ordine> ordini = (List<Ordine>) request.getSession().getAttribute("ordini");
 %>
 <div style="margin-top: 50px">
+  <div>
+    <div>Informazioni per l'utente:</div>
+    <div>Nome utente: <%=utente.getUsername()%></div>
+    <div>Nome: <%=utente.getNome()%></div>
+    <div>Cognome: <%=utente.getCognome()%></div>
+    <div>E-mail: <%=utente.getEmail()%></div>
+  </div>
+  <div>
+    <div>Lista ordini:</div>
+    <%
+      if(ordini.isEmpty()){%>
+        <div style="color: red">Nessun ordine effettuato</div>
+      <%}
+      else{
+        for(Ordine o: ordini){%>
+          <div>Data ordine: <%=o.getDataOrdine()%></div>
+          <div>Numero di libri comprati: <%=o.getNumLibri()%></div>
+          <div>Prezzo totale: <%=o.getTotale()%></div>
+        <%}
+      }
+    %>
+  </div>
   <div><a href="LogOutServlet"><button>Log-out</button></a></div>
 </div>
 </body>
