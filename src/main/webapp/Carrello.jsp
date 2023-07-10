@@ -170,7 +170,7 @@
                  if(c.getLibroCartaceo().equals(l.getCodice())) {%>
         <div class="libroPref">
             <div class="ImageContainerPref">
-                <img class="imglib">
+                <img src="LibriIMG/<%=l.getCodice() + ".jpg"%>">
             </div>
             <div class="infoAndButton">
                 <div class="TitleBookPref">
@@ -197,7 +197,7 @@
                 if(c.getLibroElettronico().equals(l.getCodice())) {%>
     <div class="libroPref">
         <div class="ImageContainerPref">
-            <img class="imglib">
+            <img src="LibriIMG/<%=l.getCodice() + ".jpg"%>">
         </div>
         <div class="infoAndButton">
             <div class="TitleBookPref">
