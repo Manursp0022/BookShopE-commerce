@@ -170,11 +170,11 @@
                  if(c.getLibroCartaceo().equals(l.getCodice())) {%>
         <div class="libroPref">
             <div class="ImageContainerPref">
-                <img src="LibriIMG/<%=l.getCodice() + ".jpg"%>">
+                <a href="LibroServlet?codice=<%=l.getCodice()%>"><img src="LibriIMG/<%=l.getCodice() + ".jpg"%>"></a>
             </div>
             <div class="infoAndButton">
                 <div class="TitleBookPref">
-                    <p><%= l.getTitolo() %></p>
+                    <a href="LibroServlet?codice=<%=l.getCodice()%>"><p><%= l.getTitolo() %></p></a>
                 </div>
                 <div class="pricePref">
                     <p id="<%=l.getCodice()%>"><%= "Copie :" + c.getNumCopie()%></p>
@@ -197,11 +197,11 @@
                 if(c.getLibroElettronico().equals(l.getCodice())) {%>
     <div class="libroPref">
         <div class="ImageContainerPref">
-            <img src="LibriIMG/<%=l.getCodice() + ".jpg"%>">
+            <a href="LibroServlet?codice=<%=l.getCodice()%>"><img src="LibriIMG/<%=l.getCodice() + ".jpg"%>"></a>
         </div>
         <div class="infoAndButton">
             <div class="TitleBookPref">
-                <p><%= l.getTitolo() %></p>
+                <a href="LibroServlet?codice=<%=l.getCodice()%>"><p><%= l.getTitolo() %></p></a>
             </div>
             <div class=pricePref">
                 <p id="<%=l.getCodice()%>"><%= "Copie :"%><%=c.getNumCopie()%></p>
