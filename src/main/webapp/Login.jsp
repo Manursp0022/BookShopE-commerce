@@ -48,9 +48,10 @@
             </p>
         </form>
     </div>
-    <div class="returnDiv">
-        <a class="noDec2" href="homepage.jsp"><button class="forButton2">Home</button></a>
-    </div>
+</div>
+
+<div class="returnDiv">
+    <a class="noDec2" href="homepage.jsp"><button class="forButton2">Home</button></a>
 </div>
 
 

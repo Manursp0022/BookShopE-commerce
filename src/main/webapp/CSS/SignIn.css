@@ -30,7 +30,7 @@ body{
 }
 
 .UpperContainer {
-    height: 700px;
+    height: 70%;
     background-color: rgb(240, 240, 240);
     width: 100%;
     display: flex;
@@ -133,7 +133,7 @@ specificato solo quando clicco su gli elementi e quindi li "valido" , ma l'eleme
     display: flex;
     height: 40px;
     position: absolute;
-    bottom: 3%;
+    bottom: 9%;
     justify-content: center;
 }
 
