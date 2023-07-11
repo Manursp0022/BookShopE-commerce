@@ -66,6 +66,13 @@ public class MostraLibriServlet extends HttpServlet {
                 request.setAttribute("libriE", libriE);
                 break;
             }
+            case 8:{
+                List<LibroCartaceo> libri = libroCartaceoDAO.doRetrieveAllByGender("Gialli");
+                List<LibroElettronico> libriE = libroElettronicoDAO.doRetrieveAllByGender("Gialli");
+                request.setAttribute("libri", libri);
+                request.setAttribute("libriE", libriE);
+                break;
+            }
             default:{
                 break;
             }
