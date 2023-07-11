@@ -284,7 +284,6 @@ ul{
 /* BANNER CSS */
 
 .Slider{
-    position: relative;
     margin-top: 0;
     width: 100%;
     height: 600px;
@@ -294,13 +293,13 @@ ul{
 .figure{
     position: relative;
     display: flex;
-    width: 300%;
+    width: 300%; /* Questa figure dovra contenere tutte le immagine ( 3 ) ognuna che dovrà occupare il 100% della larghezza del cpntenitore quindi -> 300%*/
     animation: 45s slide infinite; /* 15s * numero di immaggini*/
     height: 100%;
 }
 
 .slide{
-    flex: 1;
+    flex: 1; /* indica che ogni slide deve occupare una parte uguale dello spazio nel contenitore flex, cioè un terzo dello spazio, perché ci sono tre slide. */
     position: relative;
 }
 
@@ -336,6 +335,24 @@ ul{
     font-size: 2.7vw;
 }
 
+.slide-text3{
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 6.8%;
+    top: 30%;
+    color: white;
+    font-size: 3vw;
+}
+
+.slide-text4{
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 9%;
+    top: 40%;
+    color: white;
+    font-size: 2.7vw;
+}
+
 .linkButt{
     position: relative;
     width: 100%;
@@ -356,7 +373,22 @@ ul{
 
 .ScopriButt:hover{
     background-color: rgb(62, 63, 64);
+}
+
+.ScopriButtYell{
+    position: relative;
+    width: 100%;
+    height: 100%;
     color: white;
+    border: 2px solid white;
+    background-color: transparent;
+    border-radius: 13px;
+    transition: .4s;
+    font-size: 15px;
+}
+
+.ScopriButtYell:hover{
+    background-color: rgb(181, 157, 2);
 }
 
 .InnerSlide{
@@ -368,7 +400,6 @@ ul{
 
 }
 
-
 @keyframes slide {
     0%, 100% { left: 0; } /* allo 0% del tempo(45s) e al 100% ritorna alla left 0, cioe vedremo la prima immagine */
     28% { left: 0; } /* per il 28% vedremo la prima immagine perche la left è a 0 */
@@ -377,6 +408,8 @@ ul{
     66% { left: -200%; } /* al 66% shifeteremo verso sinistra questa volta di 200 (Grandezza di due slide) per vedere la terza (slide)*/
     94% { left: -200%; }
 }
+
+
 
 .HeaderQuick2{
     display: none;
@@ -686,7 +719,7 @@ div p{
     /* Slider Banner */
 
     .Slider{
-        height: 400px;
+        height: 360px;
     }
 
     .Slider, .slide img {
@@ -706,6 +739,16 @@ div p{
     .slide-text2{
         font-size: 25px;
         left: 10%;
+    }
+
+    .slide-text3{
+        font-size: 25px;
+        left: 4%;
+    }
+
+    .slide-text4{
+        font-size: 25px;
+        left: 6%;
     }
 
     /* SearchPanel in tablet*/

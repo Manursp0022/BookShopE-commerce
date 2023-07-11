@@ -24,11 +24,13 @@ body{
     overflow-y: scroll;
     display: flex;
     justify-content: center;
-    width: 350px;
+    position: relative;
+    width: 330px;
+    height: 90%;
 }
 
 .UpperContainer {
-    height: 80%;
+    height: 700px;
     background-color: rgb(240, 240, 240);
     width: 100%;
     display: flex;
@@ -42,6 +44,7 @@ body{
     align-items: center;
     flex-direction: column;
     gap: 20px;
+    position: absolute;
 }
 
 .container h2 {
@@ -130,7 +133,7 @@ specificato solo quando clicco su gli elementi e quindi li "valido" , ma l'eleme
     display: flex;
     height: 40px;
     position: absolute;
-    bottom: 21%;
+    bottom: 3%;
     justify-content: center;
 }
 
@@ -160,9 +163,6 @@ specificato solo quando clicco su gli elementi e quindi li "valido" , ma l'eleme
     padding-right: 7%;
     align-self: flex-end; /* proprietà che viene data agli elementi all'interno */
 }
-
-
-
 
 
 

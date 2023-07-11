@@ -153,6 +153,7 @@
 <!-- Fine Header -->
 <div class="Slider">
     <figure class="figure">
+
         <div class="slide">
             <img id="slide1" src="CSS/BookWallp.png" alt="BOOKSS">
             <p class="slide-text1">Immergiti nel mondo dell'Arte</p>
@@ -166,7 +167,13 @@
 
         <div class="slide">
             <img id="slide2" src="CSS/Gialli2.jpeg" alt="BOOKSS">
-            <p class="slide-text">Testo per la seconda immagine</p>
+            <p class="slide-text3">Scopri la nostra collezione</p>
+            <p class="slide-text4">dei migliori libri Gialli!</p>
+            <div class="InnerSlide">
+                <%if(mode == 3){%>
+                <a class="linkButt" href="Registrazione.jsp"><button class="ScopriButtYell">Scopri</button></a>
+                <%}else{%><a class="linkButt" href="MostraLibriServlet?id=7"><button class="ScopriButtYell">Scopri</button></a><%}%>
+            </div>
         </div>
 
         <div class="slide">

@@ -2,10 +2,8 @@ package Controller;
 
 import Model.Bean.LibroCartaceo;
 import Model.Bean.LibroElettronico;
-import Model.Bean.Recensione;
 import Model.LibroCartaceoDAO;
 import Model.LibroElettronicoDAO;
-import Model.RecensioneDAO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

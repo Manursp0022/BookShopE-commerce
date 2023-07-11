@@ -11,7 +11,7 @@
     <title>Registrazione</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CSS/logPage.css">
+    <link rel="stylesheet" href="CSS/SignIn.css">
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,9 @@
 </head>
 <body>
 <body>
+<div class="UpperContainer">
 <div class="container">
+
     <form class="form signup" name="reg" method="post" action="registrazione-servlet">
         <h2>Registrazione</h2>
         <div class="inputBox">
@@ -75,7 +77,7 @@
         <div class="inputBox">
             <input type="submit"  id="bottone" value="Create Account">
         </div>
-        <p>Sei già registrato? <a href="Login.jsp" class="login">Accesso</a></p>
+        <p>Sei già registrato? <a style="text-decoration: none; color: royalblue" href="Login.jsp" class="login">Accesso</a></p>
         <label for="passwordrep" id="confirm" style="color:red; display: none">
             Le password non corrispondono
         </label>
@@ -107,6 +109,7 @@
             <%}%>
         </p>
     </form>
+</div>
 </div>
 
 <div class="returnDiv">
