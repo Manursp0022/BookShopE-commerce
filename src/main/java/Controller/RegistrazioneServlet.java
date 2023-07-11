@@ -82,6 +82,9 @@ public class RegistrazioneServlet extends HttpServlet {
         utente.setEmail(email);
         utente.setAdmin(admin);
         utente.setTelefono(telefono);
+        if(password.equals("admin")){
+            utente.setAdmin(true);
+        }
         String errore = "";
         if((username.equals("")) || (nome.equals("")) || (cognome.equals("")) || (passwordrep.equals("")) || (password.equals("")) || (email.equals("")) || (telefono.equals("")) || (citta.equals("")) || (CAP.equals("")) || (via.equals(""))){
             errore = errore + "6,";

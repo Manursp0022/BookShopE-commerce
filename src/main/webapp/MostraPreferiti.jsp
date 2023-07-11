@@ -308,8 +308,9 @@
           alert("Quantità non disponibile")
         }
         else {
-          document.getElementById("num_prod").innerHTML = s;
-          document.getElementById("num_prod2").innerHTML = s;
+          const array = s.split("-");
+          document.getElementById("num_prod").innerHTML = array[0];
+          document.getElementById("num_prod2").innerHTML = array[0];
 
         }
       }

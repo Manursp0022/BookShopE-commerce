@@ -164,10 +164,11 @@
 <div style="color: red" id="emptycart">Carrello vuoto</div>
 <%}%>
 <div class="libriPref">
-    <%  if(cartaceos != null) {
+    <%  if(cartaceos != null && !cartaceos.isEmpty()) {
         for (LibroCartaceo l : cartaceos){
             for(ContenereC c : contenereC) {
-                 if(c.getLibroCartaceo().equals(l.getCodice())) {%>
+                if(l != null) {
+                    if (c.getLibroCartaceo().equals(l.getCodice())) {%>
         <div class="libroPref">
             <div class="ImageContainerPref">
                 <a href="LibriServlet?codice=<%=l.getCodice()%>" style="text-decoration: none"><img src="LibriIMG/<%=l.getCodice() + ".jpg"%>"></a>
@@ -177,24 +178,26 @@
                     <a href="LibriServlet?codice=<%=l.getCodice()%>" style="text-decoration: none"><p><%= l.getTitolo() %></p></a>
                 </div>
                 <div class="pricePref">
-                    <p id="<%=l.getCodice()%>"><%= "Copie :" + c.getNumCopie()%></p>
+                    <p id="<%=l.getCodice()%>"><%="Copie :" + c.getNumCopie()%></p>
                 </div>
                 <div class="BookButtPref">
-                    <button class="add" value= "<%=l.getCodice() %>">Aggiungi Copia</button>
-                    <button class="rem" value= "<%=l.getCodice() %>" >Rimuovi copia</button>
+                    <button class="add" value= "<%=l.getCodice()%>">Aggiungi Copia</button>
+                    <button class="rem" value= "<%=l.getCodice()%>" >Rimuovi copia</button>
                 </div>
             </div>
         </div>
     <%
-               break;
-                 }
+                        break;
+                    }
+                }
             }
         }
     }
-      if(elettronicos != null) {
+      if(elettronicos != null && !elettronicos.isEmpty()) {
         for (LibroElettronico l : elettronicos){
             for(ContenereE c : contenereE) {
-                if(c.getLibroElettronico().equals(l.getCodice())) {%>
+                if(l != null) {
+                    if (c.getLibroElettronico().equals(l.getCodice())) {%>
     <div class="libroPref">
         <div class="ImageContainerPref">
             <a href="LibriServlet?codice=<%=l.getCodice()%>" style="text-decoration: none"><img src="LibriIMG/<%=l.getCodice() + ".jpg"%>"></a>
@@ -204,11 +207,11 @@
                 <a href="LibriServlet?codice=<%=l.getCodice()%>" style="text-decoration: none"><p><%= l.getTitolo() %></p></a>
             </div>
             <div class=pricePref">
-                <p id="<%=l.getCodice()%>"><%= "Copie :"%><%=c.getNumCopie()%></p>
+                <p id="<%=l.getCodice()%>"><%="Copie :"%><%=c.getNumCopie()%></p>
             </div>
             <div class="BookButtPref">
-                <button class="add" value= "<%=l.getCodice() %>">Aggiungi Copia</button>
-                <button class="rem" value= "<%=l.getCodice() %>" >Rimuovi copia</button>
+                <button class="add" value= "<%=l.getCodice()%>">Aggiungi Copia</button>
+                <button class="rem" value= "<%=l.getCodice()%>" >Rimuovi copia</button>
             </div>
         </div>
     </div>
@@ -218,6 +221,7 @@
                 }
             }
         }
+      }
     %>
 </div>
 </body>

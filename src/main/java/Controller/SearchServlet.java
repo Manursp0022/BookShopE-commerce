@@ -25,24 +25,27 @@ public class SearchServlet extends HttpServlet {
         List<LibroElettronico> elettronicosret = new ArrayList<>();
         if(nome != null) {
             for (LibroCartaceo c : libroCartaceos) {
-                if (nome.equals(c.getTitolo())) {
+                if (nome.equalsIgnoreCase(c.getTitolo()) || c.getTitolo().toLowerCase().contains(nome.toLowerCase())) {
                     cartaceosret.add(c);
-                    break;
-                } else if (nome.equals(c.getAutore())) {
+                } else if (nome.equalsIgnoreCase(c.getAutore()) || c.getAutore().toLowerCase().contains(nome.toLowerCase())) {
                     cartaceosret.add(c);
-                } else if (nome.equals(c.getGenere())) {
+                } else if (nome.equalsIgnoreCase(c.getGenere()) || c.getGenere().toLowerCase().contains(nome.toLowerCase())) {
+                    cartaceosret.add(c);
+                } else if(nome.equals(c.getCodice())){
                     cartaceosret.add(c);
                 }
             }
 
             for (LibroElettronico e : libroElettronicos) {
-                if (nome.equals(e.getTitolo())) {
+                if (nome.equalsIgnoreCase(e.getTitolo())) {
                     elettronicosret.add(e);
                     break;
-                } else if (nome.equals(e.getAutore())) {
+                } else if (nome.equalsIgnoreCase(e.getAutore())) {
                     elettronicosret.add(e);
-                } else if (nome.equals(e.getGenere())) {
+                } else if (nome.equalsIgnoreCase(e.getGenere())) {
                     elettronicosret.add(e);
+                } else if (nome.equals(e.getCodice())) {
+                    elettronicosret.add((e));
                 }
             }
         }

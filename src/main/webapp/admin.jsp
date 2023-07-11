@@ -147,43 +147,96 @@
 
   </div>
 </header>
+<%
+  String errore = (String) request.getAttribute("errore");
+%>
 <div style="margin-top: 50px">
+  <%
+    if(errore != null) {
+      if (errore.equals("No-error")) {%>
+        <div>Operazione completata con successo</div>
+      <%} else {%>
+        <div><%=errore%></div>
+      <%}
+    }
+  %>
   <div><button id="edit" onclick="showEditForm()">Modifica</button></div>
   <div style="display: none" id="edit-forms">
     <span>Form modifica libri cartacei</span>
     <form action="ModificaCartaceoServlet" method="get">
       <label for="codiceCartaceo">Codice del libro da modificare:</label>
-      <input type="text" id="codiceCartaceo"><br>
+      <input type="text" id="codiceCartaceo" name="code"><br>
       <label for="nuovaDisp">Nuova quantità disponibile:</label>
-      <input type="text" id="nuovaDisp"><br>
+      <input type="text" id="nuovaDisp" name="newStock"><br>
       <label for="nuovoPrezzo">Nuovo prezzo:</label>
-      <input type="text" id="nuovoPrezzo"><br>
-      <input type="submit" value="Edit">
+      <input type="text" id="nuovoPrezzo" name="newPrice"><br>
+      <input type="submit" value="Edit" name="operation">
     </form>
     <span>Form modifica libri elettronici</span>
     <form action="ModificaElettronicoServlet" method="get">
       <label for="codiceElettronico">Codice del libro da modificare:</label>
-      <input type="text" id="codiceElettronico"><br>
-      <label for="nuovaDispE">Nuova quantità disponibile:</label>
-      <input type="text" id="nuovaDispE"><br>
+      <input type="text" id="codiceElettronico" name="code"><br>
       <label for="nuovoPrezzoE">Nuovo prezzo:</label>
-      <input type="text" id="nuovoPrezzoE"><br>
-      <input type="submit" value="Edit">
+      <input type="text" id="nuovoPrezzoE" name="newPrice"><br>
+      <input type="submit" value="Edit" name="operation">
     </form>
   </div>
   <div><button id="delete" onclick="showDeleteForm()">Elimina</button></div>
   <div style="display: none" id="delete-forms">
     <span>Form elimina libri cartacei</span>
     <form action="ModificaCartaceoServlet" method="get">
-      <label for="delcodiceCartaceo">Codice del libro da modificare:</label>
-      <input type="text" id="delcodiceCartaceo"><br>
-      <input type="submit" value="Delete">
+      <label for="delcodiceCartaceo">Codice del libro da eliminare:</label>
+      <input type="text" id="delcodiceCartaceo" name="code"><br>
+      <input type="submit" value="Delete" name="operation">
     </form>
     <span>Form elimina libri elettronici</span>
     <form action="ModificaElettronicoServlet" method="get">
-      <label for="delcodiceElettronico">Codice del libro da modificare:</label>
-      <input type="text" id="delcodiceElettronico"><br>
-      <input type="submit" value="Delete">
+      <label for="delcodiceElettronico">Codice del libro da eliminare:</label>
+      <input type="text" id="delcodiceElettronico" name="code"><br>
+      <input type="submit" value="Delete" name="operation">
+    </form>
+  </div>
+  <div><button id="add" onclick="showAddForm()">Aggiungi</button></div>
+  <div style="display: none" id="add-forms">
+    <span>Form elimina libri cartacei</span>
+    <form action="AggiungiCartaceoServlet" method="post" enctype="multipart/form-data">
+      <label for="addcodiceCartaceo">Codice del libro da aggiungere:</label>
+      <input type="text" id="addcodiceCartaceo" name="code" required="required"><br>
+      <label for="addTitoloCartaceo">Titolo del libro da aggiungere:</label>
+      <input type="text" id="addtitoloCartaceo" name="titolo" required="required"><br>
+      <label for="addAutoreCartaceo">Autore del libro da aggiungere:</label>
+      <input type="text" id="addAutoreCartaceo" name="autore" required="required"><br>
+      <label for="addDescrizioneCartaceo">Descrizione del libro da aggiungere:</label>
+      <input type="text" id="addDescrizioneCartaceo" name="descrizione"><br>
+      <label for="addGenereCartaceo">Genere del libro da aggiungere:</label>
+      <input type="text" id="addGenereCartaceo" name="genere" required="required"><br>
+      <label for="addPrezzoCartaceo">Prezzo del libro da aggiungere:</label>
+      <input type="text" id="addPrezzoCartaceo" name="prezzo" required="required"><br>
+      <label for="addQuantDispCartaceo">Numero di copie disponibili di questo libro:</label>
+      <input type="text" id="addQuantDispCartaceo" name="quantDisp" required="required"><br>
+      <label for="addImgCartaceo">Copertina del libro da aggiungere:</label>
+      <input type="file" id="addImgCartaceo" name="img" required="required"><br>
+      <input type="submit" value="Add" name="operation">
+    </form>
+    <span>Form elimina libri elettronici</span>
+    <form action="AggiungiElettronicoServlet" method="post" enctype="multipart/form-data">
+      <label for="addcodiceElettronico">Codice del libro da aggiungere:</label>
+      <input type="text" id="addcodiceElettronico" name="code" required="required"><br>
+      <label for="addtitoloElettronico">Titolo del libro da aggiungere:</label>
+      <input type="text" id="addtitoloElettronico" name="titolo" required="required"><br>
+      <label for="addAutoreElettronico">Autore del libro da aggiungere:</label>
+      <input type="text" id="addAutoreElettronico" name="autore" required="required"><br>
+      <label for="addDescrizioneElettronico">Descrizione del libro da aggiungere:</label>
+      <input type="text" id="addDescrizioneElettronico" name="descrizione" required="required"><br>
+      <label for="addGenereElettronico">Genere del libro da aggiungere:</label>
+      <input type="text" id="addGenereElettronico" name="genere" required="required"><br>
+      <label for="addPrezzoElettronico">Prezzo del libro da aggiungere:</label>
+      <input type="text" id="addPrezzoElettronico" name="prezzo" required="required"><br>
+      <label for="addFormatoElettronico">Prezzo del libro da aggiungere:</label>
+      <input type="text" id="addFormatoElettronico" name="formato" required="required"><br>
+      <label for="addImgElettronico">Codice del libro da aggiungere:</label>
+      <input type="file" id="addImgElettronico" name="img" required="required"><br>
+      <input type="submit" value="Add" name="operation">
     </form>
   </div>
   <div><a href="LogOutServlet"><button>Log-out</button></a></div>
@@ -206,6 +259,15 @@
     } else {
       deleteForm.style.display = "none";
     }  }
+
+  function showAddForm(){
+    let addForm = document.getElementById("add-forms");
+    if (addForm.style.display === "none") {
+      addForm.style.display = "block";
+    } else {
+      addForm.style.display = "none";
+    }
+  }
 </script>
 <script>
   let hamburger = document.querySelector(".HambIcon");
