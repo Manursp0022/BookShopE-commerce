@@ -8,6 +8,18 @@ public class LibroElettronico {
     private String genere;
     private String formato;
 
+    private String descrizione;
+
+    public LibroElettronico(){}
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
     public String getCodice() {
         return codice;
     }

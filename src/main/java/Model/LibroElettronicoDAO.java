@@ -11,7 +11,7 @@ public class LibroElettronicoDAO {
     public LibroElettronico doRetrieveByCode(String codice){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT codice,titolo,autore,prezzo,genere,formato FROM Libro_Elettronico WHERE codice = ?");
+                    con.prepareStatement("SELECT codice,titolo,autore,prezzo,genere,formato,descrizione FROM Libro_Elettronico WHERE codice = ?");
             ps.setString(1, codice);
 
             ResultSet rs = ps.executeQuery();
@@ -23,7 +23,7 @@ public class LibroElettronicoDAO {
                 libro.setPrezzo(rs.getFloat(4));
                 libro.setGenere(rs.getString(5));
                 libro.setFormato(rs.getString(6));
-
+                libro.setDescrizione(rs.getString(7));
                 return libro;
             }else
                 return null;
@@ -35,7 +35,7 @@ public class LibroElettronicoDAO {
     public void doSave(LibroElettronico libro){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Libro_Elettronico(codice,titolo,autore,prezzo,genere,formato) VALUES(?,?,?,?,?,?)",
+                    "INSERT INTO Libro_Elettronico(codice,titolo,autore,prezzo,genere,formato,descrizione) VALUES(?,?,?,?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, libro.getCodice() );
             ps.setString(2, libro.getTitolo());
@@ -43,7 +43,7 @@ public class LibroElettronicoDAO {
             ps.setDouble(4, libro.getPrezzo());
             ps.setString(5, libro.getGenere());
             ps.setString(6, libro.getFormato());
-
+            ps.setString(7,libro.getDescrizione());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
@@ -66,6 +66,7 @@ public class LibroElettronicoDAO {
                 libro.setPrezzo(rs.getFloat(4));
                 libro.setGenere(rs.getString(5));
                 libro.setFormato(rs.getString(6));
+                libro.setDescrizione(rs.getString(7));
                 libri.add(libro);
             }
             return libri;
@@ -89,6 +90,7 @@ public class LibroElettronicoDAO {
                 libro.setPrezzo(rs.getFloat(4));
                 libro.setGenere(rs.getString(5));
                 libro.setFormato(rs.getString(6));
+                libro.setDescrizione(rs.getString(7));
                 libri.add(libro);
             }
             return libri;

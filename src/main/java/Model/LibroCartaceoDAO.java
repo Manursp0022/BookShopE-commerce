@@ -11,7 +11,7 @@ public class LibroCartaceoDAO {
     public LibroCartaceo doRetrieveByCode(String code){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT codice,titolo,autore,prezzo,genere,quantita_disp FROM Libro_Cartaceo WHERE codice = ?");
+                    con.prepareStatement("SELECT codice,titolo,autore,prezzo,genere,quantita_disp,descrizione FROM Libro_Cartaceo WHERE codice = ?");
             ps.setString(1,code);
             ResultSet rs = ps.executeQuery();
             if(rs.next()) {
@@ -22,6 +22,7 @@ public class LibroCartaceoDAO {
                 cartaceo.setPrezzo(rs.getFloat(4));
                 cartaceo.setGenere(rs.getString(5));
                 cartaceo.setQuantitaDisp(rs.getInt(6));
+                cartaceo.setDescrizione(rs.getString(7));
                 return cartaceo;
             }else
                 return null;
@@ -33,7 +34,7 @@ public class LibroCartaceoDAO {
     public void doSave(LibroCartaceo cartaceo){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Libro_Cartaceo (codice,titolo,autore,prezzo,genere,quantita_disp) VALUES(?,?,?,?,?,?)",
+                    "INSERT INTO Libro_Cartaceo (codice,titolo,autore,prezzo,genere,quantita_disp,descrizione) VALUES(?,?,?,?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, cartaceo.getCodice());
             ps.setString(2,cartaceo.getTitolo());
@@ -41,6 +42,7 @@ public class LibroCartaceoDAO {
             ps.setDouble(4, cartaceo.getPrezzo());
             ps.setString(5, cartaceo.getGenere());
             ps.setInt(6, cartaceo.getQuantitaDisp());
+            ps.setString(7,cartaceo.getDescrizione());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
@@ -64,6 +66,7 @@ public class LibroCartaceoDAO {
                 cartaceo.setPrezzo(rs.getFloat(4));
                 cartaceo.setGenere(rs.getString(5));
                 cartaceo.setQuantitaDisp(rs.getInt(6));
+                cartaceo.setDescrizione(rs.getString(7));
                 cartacei.add(cartaceo);
             }
             return cartacei;
@@ -86,6 +89,7 @@ public class LibroCartaceoDAO {
                 libro.setPrezzo(rs.getFloat(4));
                 libro.setGenere(rs.getString(5));
                 libro.setQuantitaDisp(rs.getInt(6));
+                libro.setDescrizione(rs.getString(7));
                 libri.add(libro);
             }
             return libri;

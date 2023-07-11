@@ -9,8 +9,18 @@ public class LibroCartaceo {
     private String genere;
     private int quantitaDisp;
 
+    private String descrizione;
+
     public LibroCartaceo() {
 
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
 
     public String getCodice() {

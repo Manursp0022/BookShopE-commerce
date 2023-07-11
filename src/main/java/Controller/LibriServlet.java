@@ -17,8 +17,6 @@ public class LibriServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String codice = request.getParameter("codice");
-        RecensioneDAO recensioneDAO = new RecensioneDAO();
-        List<Recensione> recensioni = new ArrayList<>();
         LibroCartaceoDAO libroCartaceoDAO = new LibroCartaceoDAO();
         LibroElettronicoDAO libroElettronicoDAO = new LibroElettronicoDAO();
         List<LibroCartaceo> libriC = libroCartaceoDAO.doRetrieveAll();
@@ -26,7 +24,6 @@ public class LibriServlet extends HttpServlet {
         if (codice != null) {
             for (LibroCartaceo c : libriC) {
                 if (c.getCodice().equals(codice)) {
-                    recensioni = recensioneDAO.doRetrieveByTitolo(c.getTitolo());
                     request.setAttribute("libro", c);
                     request.setAttribute("tipo", "cartaceo");
                     break;
@@ -34,13 +31,11 @@ public class LibriServlet extends HttpServlet {
             }
             for (LibroElettronico e : libriE) {
                 if (e.getCodice().equals(codice)) {
-                    recensioni = recensioneDAO.doRetrieveByTitolo(e.getTitolo());
                     request.setAttribute("libro", e);
                     request.setAttribute("tipo", "elettronico");
                     break;
                 }
             }
-            request.setAttribute("recensioni", recensioni);
             RequestDispatcher rd = request.getRequestDispatcher("Libro.jsp");
             rd.forward(request,response);
         }
