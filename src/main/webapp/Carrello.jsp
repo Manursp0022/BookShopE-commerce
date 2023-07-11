@@ -206,8 +206,8 @@
             <div class="TitleBookPref">
                 <a href="LibriServlet?codice=<%=l.getCodice()%>" style="text-decoration: none"><p><%= l.getTitolo() %></p></a>
             </div>
-            <div class=pricePref">
-                <p id="<%=l.getCodice()%>"><%="Copie :"%><%=c.getNumCopie()%></p>
+            <div class="pricePref">
+                <p id="<%=l.getCodice()%>"><%="Copie :" + c.getNumCopie()%></p>
             </div>
             <div class="BookButtPref">
                 <button class="add" value= "<%=l.getCodice()%>">Aggiungi Copia</button>
@@ -220,9 +220,14 @@
                     }
                 }
             }
-        }
-      }
-    %>
+        }%>
+    <%}
+    if(cart.getnLibri() != 0){%>
+    <div class="acquista">
+        <div><p id="totale">Totale: <%=cart.getTotale()%>€</p></div>
+        <div><a href="AcquistoServlet" style="text-decoration: none"><button>Acquista ora</button></a></div>
+    </div>
+    <%}%>
 </div>
 </body>
 <script>
@@ -240,6 +245,7 @@
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];
                     document.getElementById(codice).innerHTML = "Copie: " + array[1];
+                    document.getElementById("totale").innerHTML = "Totale: " + array[2];
                 }
             }
         }
@@ -271,6 +277,7 @@
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];
                     document.getElementById(codice).innerHTML = "Copie: " + array[1];
+                    document.getElementById("totale").innerHTML = "Totale: " + 0;
                 }
             }
         }
