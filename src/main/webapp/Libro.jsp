@@ -1,27 +1,31 @@
+<%@ page import="Model.Bean.Carrello" %>
+<%@ page import="Model.Bean.PreferitoC" %>
+<%@ page import="Model.Bean.PreferitoE" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="javax.swing.*" %>
-<%@ page import="Model.Bean.*" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html lang="it">
+<%@ page import="java.util.ArrayList" %><%--
+  Created by IntelliJ IDEA.
+  User: deeecaaa
+  Date: 11/07/23
+  Time: 13:15
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
+    <script src="JavaScript/jquery-3.7.0.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/styles.css">
-    <link rel="stylesheet" href="CSS/visLibri.css">
-    <link rel="stylesheet" href="CSS/visPref.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>E-CommerceBook</title>
-    <script src="JavaScript/jquery-3.7.0.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@1,700&family=Rubik:ital,wght@1,300&display=swap" rel="stylesheet">
+
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@1,700&family=Rubik:ital,wght@1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
 </head>
 <body>
 <%
@@ -33,7 +37,7 @@
     else{
         nprod = cart.getnLibri();
     }
-    int mode = (int) request.getSession(false).getAttribute("mode");
+    int mode = (int) request.getSession().getAttribute("mode");
 %>
 <header class="header">
 
@@ -146,135 +150,32 @@
                         <a href="MostraPreferitiServlet">Preferiti</a>
                     </div>
                 </div>
-                <div class="bluBan"></div>
             </div>
 
         </div>
 
     </div>
 </header>
-<%
-    List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
-    List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
-    List<ContenereE> contenereE = (List<ContenereE>) request.getSession().getAttribute("contenereE");
-    List<ContenereC> contenereC = (List<ContenereC>) request.getSession().getAttribute("contenereC");
-%>
-<div style="color: red" id="emptycart"></div>
-<%if(cart.getnLibri() == 0) {%>
-<div style="color: red" id="emptycart">Carrello vuoto</div>
-<%}%>
-<div class="libriPref">
-    <%  if(cartaceos != null) {
-        for (LibroCartaceo l : cartaceos){
-            for(ContenereC c : contenereC) {
-                 if(c.getLibroCartaceo().equals(l.getCodice())) {%>
-        <div class="libroPref">
-            <div class="ImageContainerPref">
-                <a href="LibriServlet?codice=<%=l.getCodice()%>" style="text-decoration: none"><img src="LibriIMG/<%=l.getCodice() + ".jpg"%>"></a>
-            </div>
-            <div class="infoAndButton">
-                <div class="TitleBookPref">
-                    <a href="LibriServlet?codice=<%=l.getCodice()%>" style="text-decoration: none"><p><%= l.getTitolo() %></p></a>
-                </div>
-                <div class="pricePref">
-                    <p id="<%=l.getCodice()%>"><%= "Copie :" + c.getNumCopie()%></p>
-                </div>
-                <div class="BookButtPref">
-                    <button class="add" value= "<%=l.getCodice() %>">Aggiungi Copia</button>
-                    <button class="rem" value= "<%=l.getCodice() %>" >Rimuovi copia</button>
-                </div>
-            </div>
+
+<div class="finalInfo">
+    <div class="Icone">
+        <div>
+            <img style="width: 30px; height: 30px" src="CSS/FaceBookImg.svg" alt="Checkk">
+            <p>BookShopPage</p>
         </div>
-    <%
-               break;
-                 }
-            }
-        }
-    }
-      if(elettronicos != null) {
-        for (LibroElettronico l : elettronicos){
-            for(ContenereE c : contenereE) {
-                if(c.getLibroElettronico().equals(l.getCodice())) {%>
-    <div class="libroPref">
-        <div class="ImageContainerPref">
-            <a href="LibriServlet?codice=<%=l.getCodice()%>" style="text-decoration: none"><img src="LibriIMG/<%=l.getCodice() + ".jpg"%>"></a>
+        <div>
+            <img style="width: 30px; height: 30px" src="CSS/InstaImg.svg" alt="Checkk">
+            <p>@BookShop</p>
         </div>
-        <div class="infoAndButton">
-            <div class="TitleBookPref">
-                <a href="LibriServlet?codice=<%=l.getCodice()%>" style="text-decoration: none"><p><%= l.getTitolo() %></p></a>
-            </div>
-            <div class=pricePref">
-                <p id="<%=l.getCodice()%>"><%= "Copie :"%><%=c.getNumCopie()%></p>
-            </div>
-            <div class="BookButtPref">
-                <button class="add" value= "<%=l.getCodice() %>">Aggiungi Copia</button>
-                <button class="rem" value= "<%=l.getCodice() %>" >Rimuovi copia</button>
-            </div>
+        <div>
+            <img style="width: 30px; height: 30px" src="CSS/Twitter.svg" alt="Checkk">
+            <p>BookShopTW</p>
         </div>
     </div>
-    <%
-                        break;
-                    }
-                }
-            }
-        }
-    %>
+
 </div>
 </body>
-<script>
-    $(".add").click(function addCart() {
-        let codice = $(this).val();
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.status == 200 && this.readyState == 4) {
-                let s = this.responseText;
-                if(s === "-2"){
-                    alert("Quantità non disponibile")
-                }
-                else {
-                    const array = s.split("-");
-                    document.getElementById("num_prod").innerHTML = array[0];
-                    document.getElementById("num_prod2").innerHTML = array[0];
-                    document.getElementById(codice).innerHTML = "Copie: " + array[1];
-                }
-            }
-        }
-        xhttp.open("POST", "carrelloservlet");
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhttp.send("codice=" + codice);
-    })
 
-    $(".rem").click(function remCart() {
-        let codice = $(this).val();
-        let element = $(this);
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.status == 200 && this.readyState == 4) {
-                let s = this.responseText;
-                const array = s.split("-");
-                if(array[0] === "0"){
-                    element.parent().parent().parent().hide();
-                    document.getElementById("num_prod").innerHTML = array[0];
-                    document.getElementById("num_prod2").innerHTML = array[0];
-                    document.getElementById("emptycart").innerHTML = "Carrello vuoto";
-                }
-                else if(array[1] === "0"){
-                    element.parent().parent().parent().hide();
-                    document.getElementById("num_prod").innerHTML = array[0];
-                    document.getElementById("num_prod2").innerHTML = array[0];
-                }
-                else {
-                    document.getElementById("num_prod").innerHTML = array[0];
-                    document.getElementById("num_prod2").innerHTML = array[0];
-                    document.getElementById(codice).innerHTML = "Copie: " + array[1];
-                }
-            }
-        }
-        xhttp.open("POST", "RimuoviCarrelloServlet");
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhttp.send("codice=" + codice);
-    })
-</script>
 <script>
     let hamburger = document.querySelector(".HambIcon");
     let closeIcon = document.getElementById("closeMenu");
@@ -287,5 +188,56 @@
     closeIcon.addEventListener("click", function() {
         mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
     });
+
+    let image = document.querySelector("")
 </script>
+
+<script>
+    $(".AddPrefers").click(function addPref() {
+        let codice = $(this).val();
+        let button = $(this);
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.status == 200 && this.readyState == 4) {
+                let s = this.responseText;
+                if(s === "1"){
+                    button.html('<img style="width: 15px; height: 15px; color: white" src="CSS/FullHeart.svg">');
+                }
+                else if (s === "-1-2" || s === "-1"){
+                    button.html('<img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg">');
+                }
+            }
+        }
+        xhttp.open("POST", "preferito-servlet");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send("codice=" + codice);
+    })
+</script>
+
+<script>
+    $(".AddCart").click(function addCart() {
+        let codice = $(this).val();
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.status == 200 && this.readyState == 4) {
+                let s = this.responseText;
+                if(s === "-2"){
+                    alert("Quantità non disponibile")
+                }
+                else {
+
+                    const array = s.split("-");
+                    document.getElementById("num_prod").innerHTML = array[0];
+                    document.getElementById("num_prod2").innerHTML = array[0];
+
+
+                }
+            }
+        }
+        xhttp.open("POST", "carrelloservlet");
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send("codice=" + codice);
+    })
+</script>
+
 </html>

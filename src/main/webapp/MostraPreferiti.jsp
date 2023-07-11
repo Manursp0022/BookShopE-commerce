@@ -183,11 +183,11 @@
   %>
   <div class="libroPref">
     <div class="ImageContainerPref">
-      <a href="LibroServlet?codice=<%=c.getCodice()%>"><img src="LibriIMG/<%=c.getCodice() + ".jpg"%>"></a>
+      <a href="LibriServlet?codice=<%=c.getCodice()%>" style="text-decoration: none"><img src="LibriIMG/<%=c.getCodice() + ".jpg"%>"></a>
     </div>
     <div class="infoAndButton">
       <div class="TitleBookPref">
-        <a href="LibroServlet?codice=<%=c.getCodice()%>"><p><%=titolo%></p></a>
+        <a href="LibriServlet?codice=<%=c.getCodice()%>" style="text-decoration: none"><p><%=titolo%></p></a>
       </div>
       <div class="pricePref">
         <p><%=prezzo + "€"%></p>
@@ -227,11 +227,11 @@
 
   <div class="libroPref">
     <div class="ImageContainerPref">
-      <a href="LibroServlet?codice=<%=c.getCodice()%>"><img src="LibriIMG/<%=c.getCodice() + ".jpg"%>"></a>
+      <a href="LibriServlet?codice=<%=c.getCodice()%>" style="text-decoration: none"><img src="LibriIMG/<%=c.getCodice() + ".jpg"%>"></a>
     </div>
     <div class="infoAndButton">
       <div class="TitleBookPref">
-        <a href="LibroServlet?codice=<%=c.getCodice()%>"><p><%=titolo%></p></a>
+        <a href="LibriServlet?codice=<%=c.getCodice()%>" style="text-decoration: none"><p><%=titolo%></p></a>
       </div>
       <div class="pricePref">
         <p><%=prezzo + "€"%></p>

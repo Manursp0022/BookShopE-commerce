@@ -200,10 +200,10 @@
                         <button>1</button>
                     </div>
                     <div class="image">
-                        <a href="LibroServlet?codice=9788838945496"><img src="LibriIMG/9788838945496.jpg " alt=" "></a>
+                        <a href="LibriServlet?codice=9788838945496" style="text-decoration: none"><img src="LibriIMG/9788838945496.jpg " alt=" "></a>
                     </div>
                     <div class="nameBook">
-                           <a href="LibroServlet?codice=9788838945496"> <span class="name">ELP</span> </a>
+                           <a href="LibriServlet?codice=9788838945496" style="text-decoration: none"> <span class="name">ELP</span> </a>
                         <span class="author">Antonio Manzini</span>
                     </div>
                     <div class="button">
@@ -218,10 +218,10 @@
                         <button>2</button>
                     </div>
                     <div class="image">
-                        <a href="LibroServlet?codice=9788820007058"><img src="LibriIMG/9788820007058.jpg " alt=" "></a>
+                        <a href="LibriServlet?codice=9788820007058" style="text-decoration: none"><img src="LibriIMG/9788820007058.jpg " alt=" "></a>
                     </div>
                     <div class="nameBook">
-                        <a href="LibroServlet?codice=9788820007058"><span class="name">IT</span></a>
+                        <a href="LibriServlet?codice=9788820007058" style="text-decoration: none"><span class="name">IT</span></a>
                         <span class="author">Stephen King</span>
                     </div>
                     <div class="button">
@@ -236,10 +236,10 @@
                         <button>3</button>
                     </div>
                     <div class="image">
-                        <a href="LibroServlet?codice=2000000114675"><img src="LibriIMG/2000000114675.jpg " alt=" "></a>
+                        <a href="LibriServlet?codice=2000000114675" style="text-decoration: none"><img src="LibriIMG/2000000114675.jpg " alt=" "></a>
                     </div>
                     <div class="nameBook">
-                        <a href="LibroServlet?codice=2000000114675"><span class="name">Violeta</span></a>
+                        <a href="LibriServlet?codice=2000000114675" style="text-decoration: none"><span class="name">Violeta</span></a>
                         <span class="author">Isabel Allende</span>
                     </div>
                     <div class="button">

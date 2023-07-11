@@ -2,7 +2,7 @@ package Model.Bean;
 
 public class Recensione {
     private String emailUtente;
-    private String codiceLibroCartaceo;
+    private String titolo;
     private String descrizione;
 
     public String getEmailUtente() {
@@ -13,12 +13,12 @@ public class Recensione {
         this.emailUtente = emailUtente;
     }
 
-    public String getCodiceLibroCartaceo() {
-        return codiceLibroCartaceo;
+    public String getTitolo() {
+        return titolo;
     }
 
-    public void setCodiceLibroCartaceo(String codiceLibroCartaceo) {
-        this.codiceLibroCartaceo = codiceLibroCartaceo;
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
     }
 
     public String getDescrizione() {
