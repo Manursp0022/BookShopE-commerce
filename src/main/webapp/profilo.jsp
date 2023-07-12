@@ -162,6 +162,10 @@
     <div><h3>Nome: <%=utente.getNome()%></h3></div>
     <div><h3>Cognome: <%=utente.getCognome()%></h3></div>
     <div><h3>E-mail: <%=utente.getEmail()%></h3></div>
+    <div><h3>Telefono: <%=utente.getTelefono()%></h3></div>
+    <div><h3>Città: <%=utente.getCitta()%></h3></div>
+    <div><h3>CAP: <%=utente.getCAP()%></h3></div>
+    <div><h3>Via: <%=utente.getVia()%></h3></div>
   </div>
   <div class="Ordini">
     <div><h2>Lista ordini:</h2></div>
@@ -170,7 +174,11 @@
     <div style="color: red"><h4>Nessun ordine effettuato</h4></div>
       <%}
       else{
-        for(Ordine o: ordini){%>
+        int contatore = 0;
+        for(Ordine o: ordini){
+          contatore++;
+          %>
+          <div><h3 style="color: red">ORDINE n. <%=contatore%>: </h3></div>
           <div><h3>Data ordine: <%=o.getDataOrdine()%></h3></div>
     <div><h3>Numero di libri comprati: <%=o.getNumLibri()%></h3></div>
           <div><h3>Prezzo totale: <%=o.getTotale()%></h3></div>
@@ -179,6 +187,24 @@
     %>
   </div>
   <div><a href="LogOutServlet"><button>Log-out</button></a></div>
+</div>
+
+<div class="finalInfo">
+  <div class="Icone">
+    <div>
+      <img style="width: 30px; height: 30px" src="CSS/FaceBookImg.svg" alt="Checkk">
+      <p>BookShopPage</p>
+    </div>
+    <div>
+      <img style="width: 30px; height: 30px" src="CSS/InstaImg.svg" alt="Checkk">
+      <p>@BookShop</p>
+    </div>
+    <div>
+      <img style="width: 30px; height: 30px" src="CSS/Twitter.svg" alt="Checkk">
+      <p>BookShopTW</p>
+    </div>
+  </div>
+
 </div>
 </body>
 <script>

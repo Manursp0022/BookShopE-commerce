@@ -30,7 +30,7 @@ body{
 }
 
 .UpperContainer {
-    height: 70%;
+    height: 45vw;
     background-color: rgb(240, 240, 240);
     width: 100%;
     display: flex;
@@ -164,6 +164,11 @@ specificato solo quando clicco su gli elementi e quindi li "valido" , ma l'eleme
     align-self: flex-end; /* proprietà che viene data agli elementi all'interno */
 }
 
+@media screen and (max-width: 1180px){
+    .UpperContainer{
+        height: 70vw;
+    }
+}
 
 
 
