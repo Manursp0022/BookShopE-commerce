@@ -289,7 +289,7 @@
             if (this.status == 200 && this.readyState == 4) {
                 let s = this.responseText;
                 if(s === "-2"){
-                    alert("Quantità non disponibile")
+                    alert("Quantità non disponibile");
                 }
                 else {
 

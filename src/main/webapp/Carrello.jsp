@@ -288,7 +288,6 @@
                 }
                 else if(array[1] === "0"){
                     let totale = parseFloat(array[2]);
-                    totale.toFixed(2);
                     element.parent().parent().parent().hide();
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];
@@ -296,7 +295,6 @@
                 }
                 else{
                     let totale = parseFloat(array[2]);
-                    totale.toFixed(2);
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];
                     document.getElementById(codice).innerHTML = "Copie: " + array[1];

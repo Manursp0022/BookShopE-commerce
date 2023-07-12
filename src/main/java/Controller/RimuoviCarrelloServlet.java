@@ -92,7 +92,7 @@ public class RimuoviCarrelloServlet extends HttpServlet {
                     }
                 }
                 if (outOfStock) {
-                    scrivi.print(cart.getnLibri() + "-" + "0");
+                    scrivi.print(cart.getnLibri() + "-" + "0" + "-" + cart.getTotale());
                 }else {
                     String risposta = cart.getnLibri() + "-" + numCopie + "-" + cart.getTotale();
                     scrivi.print(risposta);
@@ -170,7 +170,7 @@ public class RimuoviCarrelloServlet extends HttpServlet {
                     }
                 }
                  if (outOfStock) {
-                    scrivi.print(cart.getnLibri() + "-" + "0");
+                    scrivi.print(cart.getnLibri() + "-" + "0" + "-" + cart.getTotale());
 
                 }else {
                     String risposta = cart.getnLibri() + "-" + numCopie + "-" + cart.getTotale();
