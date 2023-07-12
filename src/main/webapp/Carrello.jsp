@@ -230,7 +230,7 @@
             }
         }%>
     <%}
-    if(cart.getnLibri() != 0){%>
+    if(cart.getnLibri() != 0){ //faccio la chiamata ad acquisto servlet%>
     <div class="acquista" id="acquista">
         <div><p id="totale">Totale: <%=cart.getTotale()%>€</p></div>
         <div><a href="AcquistoServlet" style="text-decoration: none"><button>Acquista ora</button></a></div>
@@ -272,12 +272,12 @@
             if (this.status == 200 && this.readyState == 4) {
                 let s = this.responseText;
                 const array = s.split("-");
-                if(array[0] === "0" && array[1] === "0") {
+                if(array[0] === "0" && array[1] === "0") {//controllo la quantità del carrello = 0 e il numero di copie di quel libro = 0
                     element.parent().parent().parent().hide();
                     document.getElementById("num_prod").innerHTML = array[0];
-                    document.getElementById("num_prod2").innerHTML = array[0];
-                    document.getElementById("emptycart").innerHTML = "Carrello vuoto";
-                    $("#acquista").hide();
+                    document.getElementById("num_prod2").innerHTML = array[0];//scrivono 0
+                    document.getElementById("emptycart").innerHTML = "Carrello vuoto";//scrive il carrello è vuoto
+                    $("#acquista").hide();//nasconde il div di acquisto
                 }
                 else if(array[0] === "0"){
                     element.parent().parent().parent().hide();
@@ -286,8 +286,8 @@
                     document.getElementById("emptycart").innerHTML = "Carrello vuoto";
                     $("#acquista").hide();
                 }
-                else if(array[1] === "0"){
-                    let totale = parseFloat(array[2]);
+                else if(array[1] === "0"){//controlla se ho rimosso l'ultima copia di quel libro
+                    let totale = parseFloat(array[2]);//prende il totale del carrello
                     element.parent().parent().parent().hide();
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];

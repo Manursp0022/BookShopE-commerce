@@ -120,8 +120,8 @@ public class RegistrazioneServlet extends HttpServlet {
             ContenereEDAO contenereEDAO = new ContenereEDAO();
             synchronized (this) {
                 Carrello guestCart = (Carrello) session.getAttribute("cart");
-                guestCart.setUtente(email);
-                carrelloDAO.doSave(guestCart);
+                guestCart.setUtente(email);//collega il carrello con l'utente
+                carrelloDAO.doSave(guestCart);//salviamo nel db
                 List<ContenereC> contenereC = (List<ContenereC>)session.getAttribute("contenereC");
                 for(ContenereC c: contenereC){
                     c.setCarrello(email);
