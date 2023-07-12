@@ -12,6 +12,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 
@@ -36,6 +37,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .container .form {
@@ -132,9 +134,9 @@ specificato solo quando clicco su gli elementi e quindi li "valido" , ma l'eleme
 .returnDiv{
     display: flex;
     height: 40px;
-    position: absolute;
     bottom: 5%;
     justify-content: center;
+    position: relative;
 }
 
 .forButton2 {
