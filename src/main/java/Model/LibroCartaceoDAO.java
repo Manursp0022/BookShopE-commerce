@@ -98,9 +98,9 @@ public class LibroCartaceoDAO {
         }
     }
 
-    public void doUpdateQuantitaDisp(int disponibili, String codice){
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement(
+    public void doUpdateQuantitaDisp(int disponibili, String codice, Connection connection){
+        try{
+            PreparedStatement ps = connection.prepareStatement(
                     "UPDATE Libro_Cartaceo SET quantita_disp = ? WHERE codice = ?",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,disponibili);

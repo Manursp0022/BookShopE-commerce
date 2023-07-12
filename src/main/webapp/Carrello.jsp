@@ -3,6 +3,7 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="javax.swing.*" %>
 <%@ page import="Model.Bean.*" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="it">
@@ -34,6 +35,7 @@
         nprod = cart.getnLibri();
     }
     int mode = (int) request.getSession(false).getAttribute("mode");
+    DecimalFormat df = new DecimalFormat("#.00");
 %>
 <header class="header">
 
@@ -178,7 +180,13 @@
                     <a href="LibriServlet?codice=<%=l.getCodice()%>" style="text-decoration: none"><p><%= l.getTitolo() %></p></a>
                 </div>
                 <div class="pricePref">
-                    <p id="<%=l.getCodice()%>"><%="Copie :" + c.getNumCopie()%></p>
+                    <p id="<%=l.getCodice()%>"><%="Copie :" + c.getNumCopie() + " "%>
+                    <p style="color: red"><%
+                    String errore = (String) request.getAttribute("errore");
+                    if(errore != null) {
+                        String[] array = errore.split("-");
+                        if (array[0].equals("Quantità non disponibile") && array[1].equals(l.getCodice())) {%>
+                    Diminuire le quantità di questo libro<%}}%></p></p>
                 </div>
                 <div class="BookButtPref">
                     <button class="add" value= "<%=l.getCodice()%>">Aggiungi Copia</button>
@@ -223,7 +231,7 @@
         }%>
     <%}
     if(cart.getnLibri() != 0){%>
-    <div class="acquista">
+    <div class="acquista" id="acquista">
         <div><p id="totale">Totale: <%=cart.getTotale()%>€</p></div>
         <div><a href="AcquistoServlet" style="text-decoration: none"><button>Acquista ora</button></a></div>
     </div>
@@ -242,10 +250,12 @@
                 }
                 else {
                     const array = s.split("-");
+                    let totale = parseFloat(array[2]);
+                    totale.toFixed(2);
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];
                     document.getElementById(codice).innerHTML = "Copie: " + array[1];
-                    document.getElementById("totale").innerHTML = "Totale: " + array[2];
+                    document.getElementById("totale").innerHTML = "Totale: " + totale + "€";
                 }
             }
         }
@@ -262,22 +272,35 @@
             if (this.status == 200 && this.readyState == 4) {
                 let s = this.responseText;
                 const array = s.split("-");
-                if(array[0] === "0"){
+                if(array[0] === "0" && array[1] === "0") {
                     element.parent().parent().parent().hide();
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];
                     document.getElementById("emptycart").innerHTML = "Carrello vuoto";
+                    $("#acquista").hide();
                 }
-                else if(array[1] === "0"){
+                else if(array[0] === "0"){
                     element.parent().parent().parent().hide();
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];
+                    document.getElementById("emptycart").innerHTML = "Carrello vuoto";
+                    $("#acquista").hide();
                 }
-                else {
+                else if(array[1] === "0"){
+                    let totale = parseFloat(array[2]);
+                    totale.toFixed(2);
+                    element.parent().parent().parent().hide();
+                    document.getElementById("num_prod").innerHTML = array[0];
+                    document.getElementById("num_prod2").innerHTML = array[0];
+                    document.getElementById("totale").innerHTML = "Totale: " + totale + "€";
+                }
+                else{
+                    let totale = parseFloat(array[2]);
+                    totale.toFixed(2);
                     document.getElementById("num_prod").innerHTML = array[0];
                     document.getElementById("num_prod2").innerHTML = array[0];
                     document.getElementById(codice).innerHTML = "Copie: " + array[1];
-                    document.getElementById("totale").innerHTML = "Totale: " + 0;
+                    document.getElementById("totale").innerHTML = "Totale: " + totale + "€";
                 }
             }
         }

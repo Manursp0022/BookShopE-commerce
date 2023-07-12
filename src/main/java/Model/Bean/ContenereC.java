@@ -32,4 +32,13 @@ public class ContenereC {
     public void setNumCopie(int numCopie) {
         this.numCopie = numCopie;
     }
+
+    @Override
+    public String toString() {
+        return "ContenereC{" +
+                "carrello='" + carrello + '\'' +
+                ", libroCartaceo='" + libroCartaceo + '\'' +
+                ", numCopie=" + numCopie +
+                '}';
+    }
 }

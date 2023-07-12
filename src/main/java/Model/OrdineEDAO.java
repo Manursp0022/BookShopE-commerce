@@ -15,15 +15,14 @@ public class OrdineEDAO {
     public List<OrdineE> doRetrieveAllByOrdine(Ordine ordine){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT utente_ordine, data_ordine, libro_elettronico,n_copie FROM Ordine_E WHERE utente_ordine = ? AND data_ordine = ?");
-            ps.setString(1, ordine.getEmail());
-            ps.setObject(2,ordine.getDataOrdine());
+                    con.prepareStatement("SELECT id_ordine,utente_ordine, libro_elettronico,n_copie FROM Ordine_E WHERE id_ordine = ?");
+            ps.setInt(1, ordine.getId());
             ResultSet rs = ps.executeQuery();
             ArrayList<OrdineE> ordineE = new ArrayList<>();
             while(rs.next()) {
                 OrdineE o = new OrdineE();
-                o.setOrdine(rs.getString(1));
-                o.setDataOrdine(rs.getDate(2));
+                o.setId(rs.getInt(1));
+                o.setOrdine(rs.getString(2));
                 o.setLibroElettronico(rs.getString(3));
                 o.setNumCopie(rs.getInt(4));
                 ordineE.add(o);
@@ -37,10 +36,10 @@ public class OrdineEDAO {
     public void doSave(OrdineE ordineE){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Ordine_E (utente_ordine,data_ordine,libro_elettronico,n_copie) VALUES (?,?,?,?)",
+                    "INSERT INTO Ordine_E (id_ordine,utente_ordine,libro_elettronico,n_copie) VALUES (?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, ordineE.getOrdine());
-            ps.setObject(2,ordineE.getDataOrdine());
+            ps.setInt(1,ordineE.getId());
+            ps.setString(2, ordineE.getOrdine());
             ps.setString(3,ordineE.getLibroElettronico());
             ps.setInt(4, ordineE.getNumCopie());
 

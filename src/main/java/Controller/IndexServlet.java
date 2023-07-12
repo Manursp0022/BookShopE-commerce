@@ -17,14 +17,17 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         synchronized (this){
-            session.setAttribute("mode",3);
-            Carrello cart = new Carrello();
-            List<ContenereC> contenereC = new ArrayList<>();
-            List<ContenereE> contenereE = new ArrayList<>();
-            session.setAttribute("contenereC",contenereC);
-            session.setAttribute("contenereE",contenereE);
-            cart.setUtente("NULL");
-            session.setAttribute("cart", cart);
+            Integer mode = (Integer) session.getAttribute("mode");
+            if(mode == null) {
+                session.setAttribute("mode", 3);
+                Carrello cart = new Carrello();
+                List<ContenereC> contenereC = new ArrayList<>();
+                List<ContenereE> contenereE = new ArrayList<>();
+                session.setAttribute("contenereC", contenereC);
+                session.setAttribute("contenereE", contenereE);
+                cart.setUtente("NULL");
+                session.setAttribute("cart", cart);
+            }
         }
         RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
         rd.forward(request,response);

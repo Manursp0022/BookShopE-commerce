@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -93,7 +94,7 @@ public class RimuoviCarrelloServlet extends HttpServlet {
                 if (outOfStock) {
                     scrivi.print(cart.getnLibri() + "-" + "0");
                 }else {
-                    String risposta = cart.getnLibri() + "-" + numCopie;
+                    String risposta = cart.getnLibri() + "-" + numCopie + "-" + cart.getTotale();
                     scrivi.print(risposta);
                 }
             }else {
@@ -108,7 +109,12 @@ public class RimuoviCarrelloServlet extends HttpServlet {
                                         if (c.getNumCopie() - 1 == 0) {
                                             outOfStock = true;
                                             contenereC.remove(c);
-                                            contenereCDAO.doRemove(c);
+                                            try{
+                                                Connection con = ConPool.getConnection();
+                                                contenereCDAO.doRemove(c,con);
+                                            }catch (Exception e){
+                                                e.printStackTrace();
+                                            }
                                             sessione.setAttribute("contenereC", contenereC);
                                             cart.setnLibri(cart.getnLibri() - 1);
                                             cart.setTotale(cart.getTotale() - l.getPrezzo());
@@ -167,7 +173,7 @@ public class RimuoviCarrelloServlet extends HttpServlet {
                     scrivi.print(cart.getnLibri() + "-" + "0");
 
                 }else {
-                    String risposta = cart.getnLibri() + "-" + numCopie;
+                    String risposta = cart.getnLibri() + "-" + numCopie + "-" + cart.getTotale();
                     scrivi.print(risposta);
                 }
             }

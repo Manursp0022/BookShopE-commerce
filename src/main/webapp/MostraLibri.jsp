@@ -3,6 +3,7 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="javax.swing.*" %>
 <%@ page import="Model.Bean.*" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="it">
@@ -170,7 +171,7 @@
         <% List<LibroElettronico> elettronicos = (List<LibroElettronico>) request.getAttribute("libriE");
             List<LibroCartaceo> cartaceos = (List<LibroCartaceo>) request.getAttribute("libri");
             List<String> titoli= new ArrayList<>();
-
+            DecimalFormat df = new DecimalFormat("#.00");
             if(cartaceos != null)
                 for (LibroCartaceo c: cartaceos) {
                     String codice = c.getCodice();
@@ -187,7 +188,7 @@
                 <a href="LibriServlet?codice=<%=c.getCodice()%>" style="text-decoration: none"> <p><%=titolo%></p></a>
             </div>
             <div class="price">
-                <p><%=prezzo + "€"%></p>
+                <p><%=df.format(prezzo) + "€"%></p>
             </div>
             <div class="BookButt">
                 <button class="add" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>
@@ -229,7 +230,7 @@
                 <a href="LibriServlet?codice=<%=c.getCodice()%>" style="text-decoration: none"><p><%=titolo%></p></a>
             </div>
             <div class="price">
-                <p><%=prezzo + "€"%></p>
+                <p><%=df.format(prezzo) + "€"%></p>
             </div>
             <div class="BookButt">
                 <button class="add" value="<%=codice%>"><img style="width: 15px; height: 15px; color: white" src="CSS/ShopBag2.svg"></button>

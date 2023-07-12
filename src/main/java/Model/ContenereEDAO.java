@@ -81,7 +81,7 @@ public class ContenereEDAO {
     public void doRemove(ContenereE contenere){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "DELETE FROM Contenere_E WHERE carrello = ? AND libro_cartaceo = ?",
+                    "DELETE FROM Contenere_E WHERE carrello = ? AND libro_elettronico = ?",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, contenere.getCarrello());
             ps.setString(2,contenere.getLibroElettronico());

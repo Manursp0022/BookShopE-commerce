@@ -1,15 +1,13 @@
 package Controller;
 
+import Model.*;
 import Model.Bean.*;
-import Model.CarrelloDAO;
-import Model.ContenereCDAO;
-import Model.ContenereEDAO;
-import Model.LibroCartaceoDAO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -60,7 +58,12 @@ public class ModificaCartaceoServlet extends HttpServlet {
                                 }
                             }
                             libroCartaceoDAO.doUpdatePrezzo(newPrice, code);
-                            libroCartaceoDAO.doUpdateQuantitaDisp(newStock, code);
+                            try{
+                                Connection connection = ConPool.getConnection();
+                                libroCartaceoDAO.doUpdateQuantitaDisp(newStock, code, connection);
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
                         } else {
                             request.setAttribute("errore", "Valori negativi");
                             RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
@@ -69,7 +72,12 @@ public class ModificaCartaceoServlet extends HttpServlet {
                     } else if (newPriceS.isEmpty() && !newStockS.isEmpty()) {
                         newStock = Integer.parseInt(newStockS);
                         if (newStock >= 0) {
-                            libroCartaceoDAO.doUpdateQuantitaDisp(newStock, code);
+                            try{
+                                Connection connection = ConPool.getConnection();
+                                libroCartaceoDAO.doUpdateQuantitaDisp(newStock, code, connection);
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
                         } else {
                             request.setAttribute("errore", "Valori negativi");
                             RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");

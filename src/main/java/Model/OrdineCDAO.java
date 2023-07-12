@@ -14,15 +14,14 @@ public class OrdineCDAO {
     public List<OrdineC> doRetrieveAllByOrdine(Ordine ordine){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT utente_ordine, data_ordine, libro_cartaceo,n_copie FROM Ordine_C WHERE utente_ordine = ? AND data_ordine = ?");
-            ps.setString(1, ordine.getEmail());
-            ps.setObject(2,ordine.getDataOrdine());
+                    con.prepareStatement("SELECT id_ordine,utente_ordine, libro_cartaceo,n_copie FROM Ordine_C WHERE id_ordine = ?");
+            ps.setInt(1, ordine.getId());
             ResultSet rs = ps.executeQuery();
             ArrayList<OrdineC> ordineC = new ArrayList<>();
             while(rs.next()) {
                 OrdineC o = new OrdineC();
-                o.setOrdine(rs.getString(1));
-                o.setDataOrdine(rs.getDate(2));
+                o.setId(rs.getInt(1));
+                o.setOrdine(rs.getString(2));
                 o.setLibroCartaceo(rs.getString(3));
                 o.setNumCopie(rs.getInt(4));
                 ordineC.add(o);
@@ -33,13 +32,13 @@ public class OrdineCDAO {
         }
     }
 
-    public void doSave(OrdineC ordineC){
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Ordine_C (utente_ordine,data_ordine,libro_cartaceo,n_copie) VALUES (?,?,?,?)",
+    public void doSave(OrdineC ordineC, Connection connection){
+        try{
+            PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO Ordine_C (id_ordine,utente_ordine,libro_cartaceo,n_copie) VALUES (?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, ordineC.getOrdine());
-            ps.setObject(2,ordineC.getDataOrdine());
+            ps.setInt(1,ordineC.getId());
+            ps.setString(2, ordineC.getOrdine());
             ps.setString(3,ordineC.getLibroCartaceo());
             ps.setInt(4, ordineC.getNumCopie());
 

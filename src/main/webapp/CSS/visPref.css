@@ -15,7 +15,7 @@
     border-radius: 20px;
 }
 .acquista {
-    border: solid 2px red;
+    border: transparent;
     display: flex;
     bottom: 0px;
     justify-content: center;

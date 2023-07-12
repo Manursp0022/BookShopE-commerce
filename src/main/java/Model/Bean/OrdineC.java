@@ -3,12 +3,20 @@ package Model.Bean;
 import java.util.Date;
 
 public class OrdineC {
+    private int id;
     private String ordine;
-    private Date dataOrdine;
     private String libroCartaceo;
     private int numCopie;
     public OrdineC(){
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getOrdine() {
@@ -19,13 +27,6 @@ public class OrdineC {
         this.ordine = ordine;
     }
 
-    public Date getDataOrdine() {
-        return dataOrdine;
-    }
-
-    public void setDataOrdine(Date dataOrdine) {
-        this.dataOrdine = dataOrdine;
-    }
 
     public String getLibroCartaceo() {
         return libroCartaceo;

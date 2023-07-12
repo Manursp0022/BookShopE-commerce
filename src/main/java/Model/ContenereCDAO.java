@@ -79,9 +79,9 @@ public class ContenereCDAO {
         }
     }
 
-    public void doRemove(ContenereC contenere){
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement(
+    public void doRemove(ContenereC contenere, Connection connection){
+        try {
+            PreparedStatement ps = connection.prepareStatement(
                     "DELETE FROM Contenere_C WHERE carrello = ? AND libro_cartaceo = ?",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, contenere.getCarrello());

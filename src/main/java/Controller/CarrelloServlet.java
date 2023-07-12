@@ -145,7 +145,7 @@ public class CarrelloServlet extends HttpServlet {
                 if (outOfStock) {
                     scrivi.print("-2");
                 }else {
-                    String risposta = cart.getnLibri() + "-" + numCopie;
+                    String risposta = cart.getnLibri() + "-" + numCopie + "-" + cart.getTotale();
                     scrivi.print(risposta);
                 }
             }else {
