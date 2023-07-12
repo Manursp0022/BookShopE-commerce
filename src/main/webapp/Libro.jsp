@@ -1,8 +1,6 @@
-<%@ page import="Model.Bean.Carrello" %>
-<%@ page import="Model.Bean.PreferitoC" %>
-<%@ page import="Model.Bean.PreferitoE" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Model.Bean.*" %><%--
   Created by IntelliJ IDEA.
   User: deeecaaa
   Date: 11/07/23
@@ -16,16 +14,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="CSS/ShowBook.css">
     <title>E-CommerceBook</title>
-
-    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@1,700&family=Rubik:ital,wght@1,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
 <%
@@ -157,6 +148,44 @@
     </div>
 </header>
 
+<% String tipo = (String) request.getAttribute("tipo"); %>
+
+<%if(tipo.equals("cartaceo")){
+    LibroCartaceo libro = (LibroCartaceo) request.getAttribute("libro");
+    String codice = libro.getCodice();
+    String titolo = libro.getTitolo();
+    float prezzo = libro.getPrezzo();
+    String autore = libro.getAutore();
+    String descrizione = libro.getDescrizione();
+     %>
+<div class="ShowBook">
+    <div class="BookImg">
+        <div><img src="LibriIMG/<%=codice + ".jpg"%>"></div>
+    </div>
+    <div class="infoBook">
+        <div class="TotalInfo">
+            <div><h1><%="Titolo: " + titolo%></h1></div>
+            <div><h2><%="Autore: " + autore%></h2></div>
+            <div><p><%="Prezzo: " + prezzo + "€"%></p></div>
+        </div>
+        <div class="Buttons">
+            <div class="CartOrPref">
+                <button><img src="CSS/Heart3.svg"></button>
+                <button><img src="CSS/ShopBag2.svg"></button>
+            </div>
+            <div class="ElCa">
+                <button><p>Cartaceo</p></button>
+                <button><p>Elettronico</p></button>
+            </div>
+        </div>
+
+    </div>
+    <div class="Description">
+        <div><p><%=descrizione%></p></div>
+    </div>
+</div>
+
+<% } %>
 <div class="finalInfo">
     <div class="Icone">
         <div>
@@ -213,7 +242,7 @@
         xhttp.send("codice=" + codice);
     })
 </script>
-
+<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 <script>
     $(".AddCart").click(function addCart() {
         let codice = $(this).val();
@@ -239,5 +268,4 @@
         xhttp.send("codice=" + codice);
     })
 </script>
-
 </html>

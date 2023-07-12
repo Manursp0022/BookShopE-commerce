@@ -9,6 +9,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="CSS/styles.css">
+  <link rel="stylesheet" href="CSS/Profilo.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <title>E-CommerceBook</title>
 
@@ -154,25 +155,25 @@
   Utente utente = (Utente) request.getSession().getAttribute("utente");
   List<Ordine> ordini = (List<Ordine>) request.getSession().getAttribute("ordini");
 %>
-<div style="margin-top: 50px">
-  <div>
-    <div>Informazioni per l'utente:</div>
-    <div>Nome utente: <%=utente.getUsername()%></div>
-    <div>Nome: <%=utente.getNome()%></div>
-    <div>Cognome: <%=utente.getCognome()%></div>
-    <div>E-mail: <%=utente.getEmail()%></div>
+<div class="ContProfilo">
+  <div class="ProfiloInfoDiv">
+    <div><h1>Informazioni per l'utente:</h1></div>
+    <div><h3>Nome utente: <%=utente.getUsername()%></h3></div>
+    <div><h3>Nome: <%=utente.getNome()%></h3></div>
+    <div><h3>Cognome: <%=utente.getCognome()%></h3></div>
+    <div><h3>E-mail: <%=utente.getEmail()%></h3></div>
   </div>
-  <div>
-    <div>Lista ordini:</div>
+  <div class="Ordini">
+    <div><h2>Lista ordini:</h2></div>
     <%
       if(ordini.isEmpty()){%>
-        <div style="color: red">Nessun ordine effettuato</div>
+    <div style="color: red"><h4>Nessun ordine effettuato</h4></div>
       <%}
       else{
         for(Ordine o: ordini){%>
-          <div>Data ordine: <%=o.getDataOrdine()%></div>
-          <div>Numero di libri comprati: <%=o.getNumLibri()%></div>
-          <div>Prezzo totale: <%=o.getTotale()%></div>
+          <div><h3>Data ordine: <%=o.getDataOrdine()%></h3></div>
+    <div><h3>Numero di libri comprati: <%=o.getNumLibri()%></h3></div>
+          <div><h3>Prezzo totale: <%=o.getTotale()%></h3></div>
         <%}
       }
     %>

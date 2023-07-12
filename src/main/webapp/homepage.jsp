@@ -8,15 +8,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>E-CommerceBook</title>
-
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@1,700&family=Rubik:ital,wght@1,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
 </head>
 <body>
@@ -156,8 +150,8 @@
 
         <div class="slide">
             <img id="slide1" src="CSS/BookWallp.png" alt="BOOKSS">
-            <p class="slide-text1">Immergiti nel mondo dell'Arte</p>
-            <p class="slide-text2">Con la nostra selezione di libri</p>
+            <h2 class="slide-text1">Immergiti nel mondo dell'Arte</h2>
+            <h3 class="slide-text2">Con la nostra selezione di libri</h3>
             <div class="InnerSlide">
                 <%if(mode == 3){%>
                 <a class="linkButt" href="Registrazione.jsp"><button class="ScopriButt">Scopri</button></a>
@@ -167,18 +161,24 @@
 
         <div class="slide">
             <img id="slide2" src="CSS/Gialli2.jpeg" alt="BOOKSS">
-            <p class="slide-text3">Scopri la nostra collezione</p>
-            <p class="slide-text4">dei migliori libri Gialli!</p>
+            <h2 class="slide-text3">Scopri la nostra collezione</h2>
+            <h3 class="slide-text4">dei migliori libri Gialli!</h3>
             <div class="InnerSlide">
                 <%if(mode == 3){%>
-                <a class="linkButt" href="Registrazione.jsp"><button class="ScopriButtYell">Scopri</button></a>
-                <%}else{%><a class="linkButt" href="MostraLibriServlet?id=7"><button class="ScopriButtYell">Scopri</button></a><%}%>
+                <a class="linkButt" href="Registrazione.jsp"><button class="ScopriButt">Scopri</button></a>
+                <%}else{%><a class="linkButt" href="MostraLibriServlet?id=8"><button class="ScopriButtYell">Scopri</button></a><%}%>
             </div>
         </div>
 
-        <div class="slide">
-            <img id="slide3" src="CSS/BookWallp.png" alt="BOOKSS">
-            <p class="slide-text">Testo per la terza immagine</p>
+        <div class="slide Shadow">
+            <img id="slide3" src="CSS/EnsglishBooks.jpeg" alt="BOOKSS">
+            <h2 class="slide-text5">Immergiti in storie affascinanti</h2>
+            <h3 class="slide-text6">Scritte in Lingua Inglese!</h3>
+            <div class="InnerSlide2">
+                <%if(mode == 3){%>
+                <a class="linkButt" href="Registrazione.jsp"><button class="ScopriButt">Scopri</button></a>
+                <%}else{%><a class="linkButt" href="MostraLibriServlet?id=6"><button class="ScopriButtYell">Scopri</button></a><%}%>
+            </div>
         </div>
 
     </figure>
