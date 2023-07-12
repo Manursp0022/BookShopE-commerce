@@ -12,6 +12,7 @@
     justify-content: center;
     align-items: center;
     height: 500px;
+    border-bottom: 2px solid royalblue;
 }
 
 .BookImg div{
@@ -39,6 +40,7 @@
     flex-direction: column;
     justify-content: center;
     padding: 5px;
+    border-bottom: 2px solid royalblue;
 }
 
 .TotalInfo{
@@ -137,9 +139,24 @@
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    flex-wrap: wrap;
 }
+
+.Description > :first-child{
+    width: 100%;
+}
+
+.Description > :nth-child(2){
+    width: 100%;
+    margin-top: 20px;
+}
+
 
 .Description div p{
     font-size: 17px;
+    color: royalblue;
+}
+
+.Description h2{
     color: royalblue;
 }

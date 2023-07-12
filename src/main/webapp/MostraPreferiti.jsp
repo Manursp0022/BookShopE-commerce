@@ -318,6 +318,13 @@
   })
 </script>
 <script>
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 1180) {
+      mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
+    }
+  });
+</script>
+<script>
   let hamburger = document.querySelector(".HambIcon");
   let closeIcon = document.getElementById("closeMenu");
   let mobileMenu = document.getElementById("mobileMenu");

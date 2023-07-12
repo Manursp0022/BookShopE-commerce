@@ -320,6 +320,13 @@
     });
 </script>
 <script>
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 1180) {
+            mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
+        }
+    });
+</script>
+<script>
     $(".pref").click(function addPref() {
         let codice = $(this).val();
         let button = $(this);

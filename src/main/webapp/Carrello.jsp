@@ -320,4 +320,11 @@
         mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
     });
 </script>
+<script>
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 1180) {
+            mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
+        }
+    });
+</script>
 </html>

@@ -16,6 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="CSS/ShowBook.css">
     <title>E-CommerceBook</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -243,6 +244,7 @@
 
     </div>
     <div class="Description">
+        <div><h2>Descrizione</h2></div>
         <div><p><%=descrizione%></p></div>
     </div>
 </div>
@@ -278,6 +280,14 @@
 
     closeIcon.addEventListener("click", function() {
         mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
+    });
+</script>
+
+<script>
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 1180) {
+            mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
+        }
     });
 </script>
 
