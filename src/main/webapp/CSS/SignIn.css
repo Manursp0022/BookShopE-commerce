@@ -133,7 +133,7 @@ specificato solo quando clicco su gli elementi e quindi li "valido" , ma l'eleme
     display: flex;
     height: 40px;
     position: absolute;
-    bottom: 9%;
+    bottom: 5%;
     justify-content: center;
 }
 
