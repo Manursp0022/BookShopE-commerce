@@ -153,6 +153,11 @@
 
 <% String tipo = (String) request.getAttribute("tipo");
     String visualize = (String) request.getAttribute("visualize");
+    String pref = "false";
+    String p = (String) request.getAttribute("pref");
+    if(p != null){
+        pref = p;
+    }
     DecimalFormat df = new DecimalFormat("#.00");
     if(tipo != null){
         LibroCartaceo libro = new LibroCartaceo();
@@ -221,9 +226,21 @@
             <div class="CartOrPref">
                 <%
                     if(visualize.equals("cartaceo")){%>
-                        <button id="addPref" value="<%=libro.getCodice()%>"><img src="CSS/Heart3.svg"></button>
+                        <%
+                            if(pref.equals("true")){%>
+                                <button id="addPref" value="<%=libro.getCodice()%>"><img src="CSS/FullHeart.svg"></button>
+                            <%}else{%>
+                                <button id="addPref" value="<%=libro.getCodice()%>"><img src="CSS/Heart3.svg"></button>
+                            <%}
+                        %>
                     <%} else{%>
-                        <button id="addPref" value="<%=libroE.getCodice()%>"><img src="CSS/Heart3.svg"></button>
+                        <%
+                            if(pref.equals("true")){%>
+                                <button id="addPref" value="<%=libroE.getCodice()%>"><img src="CSS/FullHeart.svg"></button>
+                            <%}else{%>
+                                <button id="addPref" value="<%=libroE.getCodice()%>"><img src="CSS/Heart3.svg"></button>
+                            <%}
+                        %>
                     <%}
                     if(visualize.equals("cartaceo")){%>
                         <button id="addCart" value="<%=libro.getCodice()%>"><img src="CSS/ShopBag2.svg"></button>
