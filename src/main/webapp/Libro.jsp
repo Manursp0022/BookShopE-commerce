@@ -154,50 +154,50 @@
     String visualize = (String) request.getAttribute("visualize");
     DecimalFormat df = new DecimalFormat("#.00");
     if(tipo != null){
-    LibroCartaceo libro = new LibroCartaceo();
-    LibroElettronico libroE = new LibroElettronico();
-    String codice = "";
-    String titolo = "";
-    float prezzo = 0;
-    String autore = "";
-    String descrizione = "";
-    int quantDisp = 0;
-    String formato = "";
-    if(tipo.equals("bi-tipo") && visualize.equals("cartaceo")){
-        libroE = (LibroElettronico) request.getAttribute("libroE");
-        libro = (LibroCartaceo) request.getAttribute("libro");
-        codice = libro.getCodice();
-        titolo = libro.getTitolo();
-        prezzo = libro.getPrezzo();
-        autore = libro.getAutore();
-        descrizione = libro.getDescrizione();
-        quantDisp = libro.getQuantitaDisp();
-    } else if (tipo.equals("bi-tipo") && visualize.equals("elettronico")) {
-        libroE = (LibroElettronico) request.getAttribute("libroE");
-        libro = (LibroCartaceo) request.getAttribute("libro");
-        codice = libroE.getCodice();
-        titolo = libroE.getTitolo();
-        prezzo = libroE.getPrezzo();
-        autore = libroE.getAutore();
-        descrizione = libroE.getDescrizione();
-        formato = libroE.getFormato();
-    } else if(tipo.equals("cartaceo")) {
-        libro = (LibroCartaceo) request.getAttribute("libro");
-        codice = libro.getCodice();
-        titolo = libro.getTitolo();
-        prezzo = libro.getPrezzo();
-        autore = libro.getAutore();
-        descrizione = libro.getDescrizione();
-        quantDisp = libro.getQuantitaDisp();
-    }else if(tipo.equals("elettronico")){
-        libroE = (LibroElettronico) request.getAttribute("libroE");
-        codice = libroE.getCodice();
-        titolo = libroE.getTitolo();
-        prezzo = libroE.getPrezzo();
-        autore = libroE.getAutore();
-        descrizione = libroE.getDescrizione();
-        formato = libroE.getFormato();
-    }
+        LibroCartaceo libro = new LibroCartaceo();
+        LibroElettronico libroE = new LibroElettronico();
+        String codice = "";
+        String titolo = "";
+        float prezzo = 0;
+        String autore = "";
+        String descrizione = "";
+        int quantDisp = 0;
+        String formato = "";
+        if(tipo.equals("bi-tipo") && visualize.equals("cartaceo")){
+            libroE = (LibroElettronico) request.getAttribute("libroE");
+            libro = (LibroCartaceo) request.getAttribute("libro");
+            codice = libro.getCodice();
+            titolo = libro.getTitolo();
+            prezzo = libro.getPrezzo();
+            autore = libro.getAutore();
+            descrizione = libro.getDescrizione();
+            quantDisp = libro.getQuantitaDisp();
+        } else if (tipo.equals("bi-tipo") && visualize.equals("elettronico")) {
+            libroE = (LibroElettronico) request.getAttribute("libroE");
+            libro = (LibroCartaceo) request.getAttribute("libro");
+            codice = libroE.getCodice();
+            titolo = libroE.getTitolo();
+            prezzo = libroE.getPrezzo();
+            autore = libroE.getAutore();
+            descrizione = libroE.getDescrizione();
+            formato = libroE.getFormato();
+        } else if(tipo.equals("cartaceo")) {
+            libro = (LibroCartaceo) request.getAttribute("libro");
+            codice = libro.getCodice();
+            titolo = libro.getTitolo();
+            prezzo = libro.getPrezzo();
+            autore = libro.getAutore();
+            descrizione = libro.getDescrizione();
+            quantDisp = libro.getQuantitaDisp();
+        }else if(tipo.equals("elettronico")){
+            libroE = (LibroElettronico) request.getAttribute("libroE");
+            codice = libroE.getCodice();
+            titolo = libroE.getTitolo();
+            prezzo = libroE.getPrezzo();
+            autore = libroE.getAutore();
+            descrizione = libroE.getDescrizione();
+            formato = libroE.getFormato();
+        }
      %>
 <div class="ShowBook">
     <div class="BookImg">
@@ -218,8 +218,18 @@
         </div>
         <div class="Buttons">
             <div class="CartOrPref">
-                <button id="addPref" value="<%=libro.getCodice()%>"><img src="CSS/Heart3.svg"></button>
-                <button id="addCart" value="<%=libro.getCodice()%>"><img src="CSS/ShopBag2.svg"></button>
+                <%
+                    if(visualize.equals("cartaceo")){%>
+                        <button id="addPref" value="<%=libro.getCodice()%>"><img src="CSS/Heart3.svg"></button>
+                    <%} else{%>
+                        <button id="addPref" value="<%=libroE.getCodice()%>"><img src="CSS/Heart3.svg"></button>
+                    <%}
+                    if(visualize.equals("cartaceo")){%>
+                        <button id="addCart" value="<%=libro.getCodice()%>"><img src="CSS/ShopBag2.svg"></button>
+                    <%} else{%>
+                        <button id="addCart" value="<%=libroE.getCodice()%>"><img src="CSS/ShopBag2.svg"></button>
+                    <%}
+                %>
             </div>
             <div class="ElCa">
                 <%
