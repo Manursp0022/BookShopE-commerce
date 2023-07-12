@@ -2,6 +2,7 @@
 <%@ page import="Model.Bean.Utente" %>
 <%@ page import="Model.Bean.Ordine" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="it">
@@ -170,6 +171,7 @@
   <div class="Ordini">
     <div><h2>Lista ordini:</h2></div>
     <%
+      DecimalFormat df = new DecimalFormat("#.00");
       if(ordini.isEmpty()){%>
     <div style="color: red"><h4>Nessun ordine effettuato</h4></div>
       <%}
@@ -181,7 +183,7 @@
           <div><h3 style="color: red">ORDINE n. <%=contatore%>: </h3></div>
           <div><h3>Data ordine: <%=o.getDataOrdine()%></h3></div>
     <div><h3>Numero di libri comprati: <%=o.getNumLibri()%></h3></div>
-          <div><h3>Prezzo totale: <%=o.getTotale()%></h3></div>
+          <div><h3>Prezzo totale: <%=df.format(o.getTotale())%> €</h3></div>
         <%}
       }
     %>
