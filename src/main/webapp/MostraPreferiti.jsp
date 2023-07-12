@@ -221,9 +221,6 @@
         String codice = c.getCodice();
         String titolo = c.getTitolo();
         float prezzo = c.getPrezzo();
-        if (!titoli.contains(c.getTitolo())) {
-
-
   %>
 
   <div class="libroPref">
@@ -255,7 +252,6 @@
     </div>
   </div>
   <%
-        }
       }
 
     if(((elettronicos == null) && (cartaceos == null))){ /* Non ci sono nella sessione */
