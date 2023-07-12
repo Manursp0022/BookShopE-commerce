@@ -292,8 +292,6 @@
     closeIcon.addEventListener("click", function() {
         mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
     });
-
-    let image = document.querySelector("")
 </script>
 
 <script>

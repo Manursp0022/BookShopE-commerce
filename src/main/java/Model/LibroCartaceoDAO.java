@@ -30,6 +30,28 @@ public class LibroCartaceoDAO {
             throw new RuntimeException(e);
         }
     }
+    public LibroCartaceo doRetrieveByTitle(String titolo){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT codice,titolo,autore,prezzo,genere,quantita_disp,descrizione FROM Libro_Cartaceo WHERE titolo = ?");
+            ps.setString(1,titolo);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                LibroCartaceo cartaceo = new LibroCartaceo();
+                cartaceo.setCodice(rs.getString(1));
+                cartaceo.setTitolo(rs.getString(2));
+                cartaceo.setAutore(rs.getString(3));
+                cartaceo.setPrezzo(rs.getFloat(4));
+                cartaceo.setGenere(rs.getString(5));
+                cartaceo.setQuantitaDisp(rs.getInt(6));
+                cartaceo.setDescrizione(rs.getString(7));
+                return cartaceo;
+            }else
+                return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void doSave(LibroCartaceo cartaceo){
         try (Connection con = ConPool.getConnection()) {

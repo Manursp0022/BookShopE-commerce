@@ -19,30 +19,38 @@ public class LibriServlet extends HttpServlet {
         String codice = request.getParameter("codice");
         LibroCartaceoDAO libroCartaceoDAO = new LibroCartaceoDAO();
         LibroElettronicoDAO libroElettronicoDAO = new LibroElettronicoDAO();
-        List<LibroCartaceo> libriC = libroCartaceoDAO.doRetrieveAll();
-        List<LibroElettronico> libriE = libroElettronicoDAO.doRetrieveAll();
         if (codice != null) {
-            for (LibroCartaceo c : libriC) {
-                if (c.getCodice().equals(codice)) {
-                    request.setAttribute("libro", c);
-                    request.setAttribute("tipo", "cartaceo");
-                    break;
+            LibroCartaceo l = libroCartaceoDAO.doRetrieveByCode(codice);
+            LibroElettronico e = libroElettronicoDAO.doRetrieveByCode(codice);
+            if(l != null){
+                request.setAttribute("libro",l);
+                request.setAttribute("visualize", "cartaceo");
+                LibroElettronico e_book = libroElettronicoDAO.doRetrieveByTitle(l.getTitolo());
+                if(e_book != null){
+                    request.setAttribute("libroE",e_book);
+                    request.setAttribute("tipo", "bi-tipo");
+                }else{
+                    request.setAttribute("tipo","cartaceo");
                 }
-            }
-            for (LibroElettronico e : libriE) {
-                if (e.getCodice().equals(codice)) {
-                    request.setAttribute("libro", e);
-                    request.setAttribute("tipo", "elettronico");
-                    break;
+                RequestDispatcher rd = request.getRequestDispatcher("Libro.jsp");
+                rd.forward(request,response);
+            }else if(e != null){
+                    request.setAttribute("libroE",e);
+                    request.setAttribute("visualize", "elettronico");
+                    LibroCartaceo book = libroCartaceoDAO.doRetrieveByTitle(e.getTitolo());
+                    if(book != null) {
+                        request.setAttribute("libro", book);
+                        request.setAttribute("tipo", "bi-tipo");
+                    }else {
+                        request.setAttribute("tipo","elettronico");
+                    }
                 }
-            }
-            RequestDispatcher rd = request.getRequestDispatcher("Libro.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("Libro.jsp");
+                rd.forward(request,response);
+            }else{
+            RequestDispatcher rd = request.getRequestDispatcher("MostraLibri.jsp");
             rd.forward(request,response);
         }
-
-        RequestDispatcher rd = request.getRequestDispatcher("MostraLibri.jsp");
-        rd.forward(request,response);
-
     }
 
     @Override

@@ -31,6 +31,29 @@ public class LibroElettronicoDAO {
             throw new RuntimeException(e);
         }
     }
+    public LibroElettronico doRetrieveByTitle(String titolo){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT codice,titolo,autore,prezzo,genere,formato,descrizione FROM Libro_Elettronico WHERE titolo = ?");
+            ps.setString(1, titolo);
+
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                LibroElettronico libro = new LibroElettronico();
+                libro.setCodice(rs.getString(1));
+                libro.setTitolo(rs.getString(2));
+                libro.setAutore(rs.getString(3));
+                libro.setPrezzo(rs.getFloat(4));
+                libro.setGenere(rs.getString(5));
+                libro.setFormato(rs.getString(6));
+                libro.setDescrizione(rs.getString(7));
+                return libro;
+            }else
+                return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void doSave(LibroElettronico libro){
         try (Connection con = ConPool.getConnection()) {

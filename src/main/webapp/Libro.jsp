@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Model.Bean.*" %><%--
+<%@ page import="Model.Bean.*" %>
+<%@ page import="java.text.DecimalFormat" %><%--
   Created by IntelliJ IDEA.
   User: deeecaaa
   Date: 11/07/23
@@ -8,6 +9,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <script src="JavaScript/jquery-3.7.0.js"></script>
@@ -148,15 +150,54 @@
     </div>
 </header>
 
-<% String tipo = (String) request.getAttribute("tipo"); %>
-
-<%if(tipo.equals("cartaceo")){
-    LibroCartaceo libro = (LibroCartaceo) request.getAttribute("libro");
-    String codice = libro.getCodice();
-    String titolo = libro.getTitolo();
-    float prezzo = libro.getPrezzo();
-    String autore = libro.getAutore();
-    String descrizione = libro.getDescrizione();
+<% String tipo = (String) request.getAttribute("tipo");
+    String visualize = (String) request.getAttribute("visualize");
+    DecimalFormat df = new DecimalFormat("#.00");
+    if(tipo != null){
+    LibroCartaceo libro = new LibroCartaceo();
+    LibroElettronico libroE = new LibroElettronico();
+    String codice = "";
+    String titolo = "";
+    float prezzo = 0;
+    String autore = "";
+    String descrizione = "";
+    int quantDisp = 0;
+    String formato = "";
+    if(tipo.equals("bi-tipo") && visualize.equals("cartaceo")){
+        libroE = (LibroElettronico) request.getAttribute("libroE");
+        libro = (LibroCartaceo) request.getAttribute("libro");
+        codice = libro.getCodice();
+        titolo = libro.getTitolo();
+        prezzo = libro.getPrezzo();
+        autore = libro.getAutore();
+        descrizione = libro.getDescrizione();
+        quantDisp = libro.getQuantitaDisp();
+    } else if (tipo.equals("bi-tipo") && visualize.equals("elettronico")) {
+        libroE = (LibroElettronico) request.getAttribute("libroE");
+        libro = (LibroCartaceo) request.getAttribute("libro");
+        codice = libroE.getCodice();
+        titolo = libroE.getTitolo();
+        prezzo = libroE.getPrezzo();
+        autore = libroE.getAutore();
+        descrizione = libroE.getDescrizione();
+        formato = libroE.getFormato();
+    } else if(tipo.equals("cartaceo")) {
+        libro = (LibroCartaceo) request.getAttribute("libro");
+        codice = libro.getCodice();
+        titolo = libro.getTitolo();
+        prezzo = libro.getPrezzo();
+        autore = libro.getAutore();
+        descrizione = libro.getDescrizione();
+        quantDisp = libro.getQuantitaDisp();
+    }else if(tipo.equals("elettronico")){
+        libroE = (LibroElettronico) request.getAttribute("libroE");
+        codice = libroE.getCodice();
+        titolo = libroE.getTitolo();
+        prezzo = libroE.getPrezzo();
+        autore = libroE.getAutore();
+        descrizione = libroE.getDescrizione();
+        formato = libroE.getFormato();
+    }
      %>
 <div class="ShowBook">
     <div class="BookImg">
@@ -166,16 +207,27 @@
         <div class="TotalInfo">
             <div><h1><%="Titolo: " + titolo%></h1></div>
             <div><h2><%="Autore: " + autore%></h2></div>
-            <div><p><%="Prezzo: " + prezzo + "€"%></p></div>
+            <div><p><%="Prezzo: " + df.format(prezzo) + "€"%></p></div>
+            <%
+                if(tipo.equals("cartaceo") || (tipo.equals("bi-tipo") && visualize.equals("cartaceo"))){%>
+                    <div><p><%="Quantità: " + quantDisp%></p></div>
+                <%}else{%>
+                    <div><p><%="Formato: " + formato%></p></div>
+                <%}
+            %>
         </div>
         <div class="Buttons">
             <div class="CartOrPref">
-                <button><img src="CSS/Heart3.svg"></button>
-                <button><img src="CSS/ShopBag2.svg"></button>
+                <button id="addPref" value="<%=libro.getCodice()%>"><img src="CSS/Heart3.svg"></button>
+                <button id="addCart" value="<%=libro.getCodice()%>"><img src="CSS/ShopBag2.svg"></button>
             </div>
             <div class="ElCa">
-                <button><p>Cartaceo</p></button>
-                <button><p>Elettronico</p></button>
+                <%
+                    if(tipo.equals("bi-tipo")){%>
+                        <a href="LibriServlet?codice=<%=libro.getCodice()%>"><button><p>Cartaceo</p></button></a>
+                        <a href="LibriServlet?codice=<%=libroE.getCodice()%>"><button><p>Elettronico</p></button></a>
+                    <%}
+                %>
             </div>
         </div>
 
@@ -217,55 +269,52 @@
     closeIcon.addEventListener("click", function() {
         mobileMenu.style.transform = 'translateX(-100%)'; // sposta il menu a sinistra
     });
-
-    let image = document.querySelector("")
 </script>
 
 <script>
-    $(".AddPrefers").click(function addPref() {
-        let codice = $(this).val();
-        let button = $(this);
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.status == 200 && this.readyState == 4) {
-                let s = this.responseText;
-                if(s === "1"){
-                    button.html('<img style="width: 15px; height: 15px; color: white" src="CSS/FullHeart.svg">');
-                }
-                else if (s === "-1-2" || s === "-1"){
-                    button.html('<img style="width: 15px; height: 15px; color: white" src="CSS/Heart3.svg">');
+    $(document).ready(function (){
+        $("#addCart").click(function addCart() {
+            let codice = $(this).val();
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.status == 200 && this.readyState == 4) {
+                    let s = this.responseText;
+                    if(s === "-2"){
+                        alert("Quantità non disponibile")
+                    }
+                    else {
+
+                        const array = s.split("-");
+                        document.getElementById("num_prod").innerHTML = array[0];
+                        document.getElementById("num_prod2").innerHTML = array[0];
+
+
+                    }
                 }
             }
-        }
-        xhttp.open("POST", "preferito-servlet");
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhttp.send("codice=" + codice);
-    })
-</script>
-<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-<script>
-    $(".AddCart").click(function addCart() {
-        let codice = $(this).val();
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.status == 200 && this.readyState == 4) {
-                let s = this.responseText;
-                if(s === "-2"){
-                    alert("Quantità non disponibile")
-                }
-                else {
-
-                    const array = s.split("-");
-                    document.getElementById("num_prod").innerHTML = array[0];
-                    document.getElementById("num_prod2").innerHTML = array[0];
-
-
+            xhttp.open("POST", "carrelloservlet");
+            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhttp.send("codice=" + codice);
+        })
+        $("#addPref").click(function addPref() {
+            let codice = $(this).val();
+            let button = $(this);
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.status == 200 && this.readyState == 4) {
+                    let s = this.responseText;
+                    if(s === "1"){
+                        button.html('<img src="CSS/FullHeart.svg">');
+                    }
+                    else if (s === "-1-2" || s === "-1"){
+                        button.html('<img src="CSS/Heart3.svg">');
+                    }
                 }
             }
-        }
-        xhttp.open("POST", "carrelloservlet");
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhttp.send("codice=" + codice);
+            xhttp.open("POST", "preferito-servlet");
+            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhttp.send("codice=" + codice);
+        })
     })
 </script>
 </html>
